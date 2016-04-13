@@ -15,6 +15,30 @@
     <orderEntry type="library" scope="TEST" name="Gradle: junit-4.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: hamcrest-core-1.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: MonteScreenRecorder" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: gson-2.3.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-leg-rc-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: httpcore-4.4.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-firefox-driver-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-remote-driver-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-io-2.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenide-3.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: jna-4.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-logging-1.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-support-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-edge-driver-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-codec-1.10" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-exec-1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-ie-driver-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: httpclient-4.5.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: jna-platform-4.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: guava-19.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: phantomjsdriver-1.2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-chrome-driver-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-java-2.52.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: selenium-api-2.52.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: jcommander-1.48" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: testng-6.9.10" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: bsh-2.0b4" level="project" />
   </component>
 </module>
 
