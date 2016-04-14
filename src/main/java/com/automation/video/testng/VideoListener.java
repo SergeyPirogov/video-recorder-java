@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class VideoListener implements IInvokedMethodListener {
 
-    VideoRecorder recorder;
+    private VideoRecorder recorder;
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         boolean testMethod = method.isTestMethod();
         Video video = getAnnotation(method);
-        if (video == null || !testMethod) {
+        if (video == null || !testMethod || !VideoRecorder.videoEnabled()) {
             return;
         }
         String fileName = getFileName(method, video);

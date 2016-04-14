@@ -1,6 +1,6 @@
 package com.automation.video.recorder;
 
-import com.automation.video.Configuration;
+import com.automation.video.VideoConfiguration;
 import com.automation.video.exception.RecordingException;
 import org.monte.media.Format;
 import org.monte.media.math.Rational;
@@ -31,25 +31,25 @@ public class VideoRecorder {
 
     public VideoRecorder(String fileName) {
         this.fileName = fileName;
-        this.folder = new File(Configuration.VIDEO_FOLDER);
+        this.folder = new File(VideoConfiguration.VIDEO_FOLDER);
         this.gc = getGraphicConfig();
         this.screenRecorder = getScreenRecorder();
     }
 
     public void start() {
-        try {
-            screenRecorder.start();
-        } catch (IOException e) {
-            throw new RecordingException(e);
-        }
+        screenRecorder.start();
     }
 
     public List<File> stop() {
+        screenRecorder.stop();
+        return screenRecorder.getCreatedMovieFiles();
+    }
+
+    public static boolean videoEnabled() {
         try {
-            screenRecorder.stop();
-            return screenRecorder.getCreatedMovieFiles();
-        } catch (IOException e) {
-            throw new RecordingException(e);
+            return Boolean.valueOf(VideoConfiguration.VIDEO_ENABLED);
+        } catch (Exception e) {
+            return false;
         }
     }
 

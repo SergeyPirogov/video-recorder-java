@@ -1,5 +1,6 @@
 package com.automation.video.recorder;
 
+import com.automation.video.exception.RecordingException;
 import org.monte.media.Format;
 import org.monte.media.Registry;
 import org.monte.screenrecorder.ScreenRecorder;
@@ -53,5 +54,23 @@ public class SpecializedScreenRecorder extends ScreenRecorder {
 
     public void setMovieFolder(File movieFolder) {
         this.movieFolder = movieFolder;
+    }
+
+    @Override
+    public void start() {
+        try {
+            super.start();
+        } catch (IOException e) {
+            throw new RecordingException(e);
+        }
+    }
+
+    @Override
+    public void stop() {
+        try {
+            super.stop();
+        } catch (IOException e) {
+            throw new RecordingException(e);
+        }
     }
 }
