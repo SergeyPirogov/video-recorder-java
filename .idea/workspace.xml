@@ -63,46 +63,7 @@
     <favorites_list name="VideoRecorder" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="VideoListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/testng/VideoListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="19" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0" vertical-offset="130" max-vertical-offset="1176">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Video.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/annotations/Video.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="35" selection-start="401" selection-end="401" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoRecorder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/recorder/VideoRecorder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="8" selection-start="1257" selection-end="1257" vertical-scroll-proportion="0.0" vertical-offset="256" max-vertical-offset="1554">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestVideoRecording.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/automation/video/test/TestVideoRecording.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="9" selection-start="430" selection-end="430" vertical-scroll-proportion="0.18446602" vertical-offset="222" max-vertical-offset="840">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -237,11 +198,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/SpecializedScreenRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/GeneralScreenRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/ScreenRecorderBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/GeneralScreenRecorderBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/VideoRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/automation/video/annotations/Video.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/automation/video/testng/VideoListener.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/automation/video/test/TestVideoRecording.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/GeneralScreenRecorderBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/automation/video/recorder/VideoRecorder.java" />
       </list>
     </option>
   </component>
@@ -410,36 +371,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="testng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoRecorder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoRecorder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="video" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="recorder" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -491,7 +422,7 @@
       <recent name="com.automation.video" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG./home/sergey/VideoRecorder/testng.xml (1)">
+  <component name="RunManager" selected="TestNG./home/sergey/VideoRecorder/testng.xml (2)">
     <configuration default="false" name="TestVideoRecording.testName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="VideoRecorder" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -515,6 +446,35 @@
       <method />
     </configuration>
     <configuration default="false" name="$PROJECT_DIR$/testng.xml (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="VideoRecorder" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="$PROJECT_DIR$/testng.xml (2)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="VideoRecorder" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -683,6 +643,15 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method />
+    </configuration>
     <configuration default="false" name="TestVideoRecording" type="TestNG" factoryName="TestNG" nameIsGenerated="true">
       <module name="VideoRecorder" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -739,16 +708,18 @@
       <listeners />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.TestVideoRecording.testName" />
       <item index="1" class="java.lang.String" itemvalue="TestNG.TestVideoRecording" />
       <item index="2" class="java.lang.String" itemvalue="TestNG./home/sergey/VideoRecorder/testng.xml" />
       <item index="3" class="java.lang.String" itemvalue="TestNG./home/sergey/VideoRecorder/testng.xml (1)" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG./home/sergey/VideoRecorder/testng.xml (2)" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="TestNG./home/sergey/VideoRecorder/testng.xml (1)" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestVideoRecording.testName" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="TestNG./home/sergey/VideoRecorder/testng.xml (2)" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG./home/sergey/VideoRecorder/testng.xml (1)" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestVideoRecording.testName" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -767,7 +738,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -778,12 +749,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45987654" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48919752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -899,13 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/org/monte/media/FormatKeys.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="81" selection-start="931" selection-end="931" vertical-scroll-proportion="0.3525" vertical-offset="174" max-vertical-offset="735">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/VideoConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="0" selection-start="560" selection-end="560" vertical-scroll-proportion="0.59008265" vertical-offset="0" max-vertical-offset="605">
@@ -920,9 +884,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/org/monte/media/math/Rational.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="-2.2586207" vertical-offset="1415" max-vertical-offset="1995">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/automation/video/test/TestVideoRecording.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="917" selection-end="917" vertical-scroll-proportion="0.55825245" vertical-offset="348" max-vertical-offset="1029">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/annotations/Video.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="35" selection-start="401" selection-end="401" vertical-scroll-proportion="0.37378642" vertical-offset="0" max-vertical-offset="618">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/awt/GraphicsConfigTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="22" selection-start="884" selection-end="884" vertical-scroll-proportion="0.17706576" vertical-offset="315" max-vertical-offset="1974">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/awt/GraphicsEnvironment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="244" column="35" selection-start="8422" selection-end="8422" vertical-scroll-proportion="0.33275864" vertical-offset="4259" max-vertical-offset="9093">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/org/monte/media/Format.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="11" selection-start="506" selection-end="506" vertical-scroll-proportion="0.34774774" vertical-offset="59" max-vertical-offset="1071">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/org/monte/media/FormatKeys.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="88" selection-start="259" selection-end="259" vertical-scroll-proportion="0.22702703" vertical-offset="0" max-vertical-offset="735">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/awt/GraphicsDevice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="204" column="39" selection-start="7058" selection-end="7058" vertical-scroll-proportion="2.1888702" vertical-offset="2419" max-vertical-offset="12033">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/recorder/GeneralScreenRecorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="19" selection-start="710" selection-end="710" vertical-scroll-proportion="0.8264463" vertical-offset="25" max-vertical-offset="1638">
+        <state line="61" column="0" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.27107438" vertical-offset="1033" max-vertical-offset="1638">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -931,7 +953,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/recorder/GeneralScreenRecorderBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="195" selection-end="195" vertical-scroll-proportion="-1.4126214" vertical-offset="1104" max-vertical-offset="1722">
+        <state line="32" column="23" selection-start="772" selection-end="772" vertical-scroll-proportion="0.37055016" vertical-offset="443" max-vertical-offset="1764">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#setGraphicConfig#0;class#Builder#0;class#GeneralScreenRecorderBuilder#0" expanded="true" />
@@ -945,40 +967,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/org/monte/media/math/Rational.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="-2.2586207" vertical-offset="1415" max-vertical-offset="1995">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/testng/VideoListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="19" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0" vertical-offset="130" max-vertical-offset="1176">
+        <state line="27" column="0" selection-start="821" selection-end="821" vertical-scroll-proportion="0.47933885" vertical-offset="130" max-vertical-offset="1176">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/annotations/Video.java">
+    <entry file="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/org/monte/media/VideoFormatKeys.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="35" selection-start="401" selection-end="401" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
+        <state line="34" column="67" selection-start="2482" selection-end="2482" vertical-scroll-proportion="1.1517241" vertical-offset="25" max-vertical-offset="882">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/automation/video/recorder/VideoRecorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="8" selection-start="1257" selection-end="1257" vertical-scroll-proportion="0.0" vertical-offset="256" max-vertical-offset="1554">
+        <state line="76" column="16" selection-start="2549" selection-end="2549" vertical-scroll-proportion="2.1173553" vertical-offset="0" max-vertical-offset="1575">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/automation/video/test/TestVideoRecording.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="9" selection-start="430" selection-end="430" vertical-scroll-proportion="0.18446602" vertical-offset="222" max-vertical-offset="840">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

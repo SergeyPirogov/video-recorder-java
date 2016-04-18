@@ -31,4 +31,13 @@ public class TestVideoRecording {
         $(".password > input").val("User");
         $(".submit > button").click();
     }
+
+    @Test
+    @Video()
+    public void testName3() throws Exception {
+        open("http://ukr.net");
+        $(".login > input").val("Hello");
+        $(".password > input").val("test");
+        $(".submit > bu").click();
+    }
 }

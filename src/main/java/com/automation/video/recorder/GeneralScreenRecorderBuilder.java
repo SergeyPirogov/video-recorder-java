@@ -66,7 +66,9 @@ public class GeneralScreenRecorderBuilder {
                         fileFormat,
                         screenFormat,
                         mouseFormat,
-                        audioFormat, folder, fileName);
+                        audioFormat,
+                        folder,
+                        fileName);
             } catch (IOException | AWTException e) {
                 throw new RuntimeException(e);
             }

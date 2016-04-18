@@ -11,11 +11,11 @@ import java.util.List;
 import static org.monte.media.FormatKeys.EncodingKey;
 import static org.monte.media.FormatKeys.FrameRateKey;
 import static org.monte.media.FormatKeys.KeyFrameIntervalKey;
-import static org.monte.media.FormatKeys.MIME_AVI;
 import static org.monte.media.FormatKeys.MediaType;
 import static org.monte.media.FormatKeys.MediaTypeKey;
 import static org.monte.media.FormatKeys.MimeTypeKey;
 import static org.monte.media.VideoFormatKeys.*;
+import static org.monte.media.VideoFormatKeys.MIME_AVI;
 
 /**
  * Created by sergey on 13.04.16.
@@ -73,11 +73,12 @@ public class VideoRecorder {
                 FrameRateKey, Rational.valueOf(30));
 
         return GeneralScreenRecorderBuilder
-                .builder().setGraphicConfig(gc)
+                .builder()
+                .setGraphicConfig(gc)
                 .setFileFormat(fileFormat)
                 .setScreenFormat(screenFormat)
-                .setMouseFormat(mouseFormat)
                 .setFolder(folder)
+                .setMouseFormat(mouseFormat)
                 .setFileName(fileName).build();
     }
 }
