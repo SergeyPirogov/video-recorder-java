@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class TestVideoRecording {
 
     @Test
-    @Video
+    @Video(enabled = false)
     public void testName() throws Exception {
         open("http://ukr.net");
         $(".login > input").val("Hello");

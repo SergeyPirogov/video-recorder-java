@@ -16,16 +16,16 @@ import java.util.List;
 /**
  * Created by sergey on 13.04.16.
  */
-public class SpecializedScreenRecorder extends ScreenRecorder {
+public class GeneralScreenRecorder extends ScreenRecorder {
 
     private String fileName;
     private List<File> createdFiles = new ArrayList<>();
 
-    public SpecializedScreenRecorder(GraphicsConfiguration cfg,
-                                     Format fileFormat,
-                                     Format screenFormat,
-                                     Format mouseFormat,
-                                     Format audioFormat, File folder, String fileName) throws IOException, AWTException {
+    public GeneralScreenRecorder(GraphicsConfiguration cfg,
+                                 Format fileFormat,
+                                 Format screenFormat,
+                                 Format mouseFormat,
+                                 Format audioFormat, File folder, String fileName) throws IOException, AWTException {
         super(cfg, fileFormat, screenFormat, mouseFormat, audioFormat);
         this.fileName = fileName;
         setMovieFolder(folder);

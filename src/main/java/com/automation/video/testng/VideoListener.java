@@ -20,7 +20,7 @@ public class VideoListener implements IInvokedMethodListener {
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         boolean testMethod = method.isTestMethod();
         Video video = getAnnotation(method);
-        if (video == null || !testMethod || !VideoRecorder.videoEnabled()) {
+        if (video == null || !testMethod || !video.enabled()) {
             return;
         }
         String fileName = getFileName(method, video);
@@ -32,8 +32,15 @@ public class VideoListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         if (recorder != null) {
             List<File> recordings = recorder.stop();
-            System.err.println(recordings);
+            deleteRecordingOnSuccess(testResult, recordings);
         }
+    }
+
+    private void deleteRecordingOnSuccess(ITestResult testResult, List<File> recordings) {
+        if (testResult.isSuccess()) {
+            recordings.get(0).delete();
+        }
+        System.err.println(recordings);
     }
 
     public String getFileName(IInvokedMethod method, Video video) {

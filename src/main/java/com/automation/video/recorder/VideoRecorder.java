@@ -1,13 +1,11 @@
 package com.automation.video.recorder;
 
 import com.automation.video.VideoConfiguration;
-import com.automation.video.exception.RecordingException;
 import org.monte.media.Format;
 import org.monte.media.math.Rational;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import static org.monte.media.FormatKeys.EncodingKey;
@@ -25,7 +23,7 @@ import static org.monte.media.VideoFormatKeys.*;
 public class VideoRecorder {
 
     private String fileName;
-    private SpecializedScreenRecorder screenRecorder;
+    private GeneralScreenRecorder screenRecorder;
     private GraphicsConfiguration gc;
     private File folder;
 
@@ -37,11 +35,15 @@ public class VideoRecorder {
     }
 
     public void start() {
-        screenRecorder.start();
+        if (videoEnabled()) {
+            screenRecorder.start();
+        }
     }
 
     public List<File> stop() {
-        screenRecorder.stop();
+        if (videoEnabled()) {
+            screenRecorder.stop();
+        }
         return screenRecorder.getCreatedMovieFiles();
     }
 
@@ -59,21 +61,23 @@ public class VideoRecorder {
                 .getDefaultConfiguration();
     }
 
-    private SpecializedScreenRecorder getScreenRecorder() {
-        try {
-            return new SpecializedScreenRecorder(gc,
-                    new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI),
-                    new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey,
-                            ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
-                            CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
-                            DepthKey, 24, FrameRateKey, Rational.valueOf(15),
-                            QualityKey, 1.0f,
-                            KeyFrameIntervalKey, 15 * 60),
-                    new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
-                            FrameRateKey, Rational.valueOf(30)),
-                    null, folder, fileName);
-        } catch (IOException | AWTException e) {
-            throw new RecordingException(e);
-        }
+    private GeneralScreenRecorder getScreenRecorder() {
+        Format fileFormat = new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI);
+        Format screenFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey,
+                ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
+                CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
+                DepthKey, 24, FrameRateKey, Rational.valueOf(15),
+                QualityKey, 1.0f,
+                KeyFrameIntervalKey, 15 * 60);
+        Format mouseFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
+                FrameRateKey, Rational.valueOf(30));
+
+        return GeneralScreenRecorderBuilder
+                .builder().setGraphicConfig(gc)
+                .setFileFormat(fileFormat)
+                .setScreenFormat(screenFormat)
+                .setMouseFormat(mouseFormat)
+                .setFolder(folder)
+                .setFileName(fileName).build();
     }
 }

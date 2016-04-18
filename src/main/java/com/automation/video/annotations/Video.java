@@ -12,4 +12,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Video {
     String name() default "";
+    boolean enabled() default true;
 }
