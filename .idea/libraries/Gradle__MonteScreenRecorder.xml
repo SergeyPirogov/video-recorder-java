@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: MonteScreenRecorder">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/MonteScreenRecorder.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
