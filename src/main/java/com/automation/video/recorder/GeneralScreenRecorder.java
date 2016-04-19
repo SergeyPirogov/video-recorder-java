@@ -9,9 +9,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Created by sergey on 13.04.16.
@@ -19,7 +18,7 @@ import java.util.List;
 public class GeneralScreenRecorder extends ScreenRecorder {
 
     private String fileName;
-    private List<File> createdFiles = new ArrayList<>();
+    private LinkedList<File> createdFiles = new LinkedList<>();
 
     public GeneralScreenRecorder(GraphicsConfiguration cfg,
                                  Format fileFormat,
@@ -39,7 +38,7 @@ public class GeneralScreenRecorder extends ScreenRecorder {
             throw new IOException("[" + movieFolder + "] is not a directory.");
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy_MM_dd_HH_mm_ss");
+                "yyyy_dd_MM_HH_mm_ss");
         fileName = fileName + "_recording_" + dateFormat.format(new Date());
         File file = new File(movieFolder, fileName + "."
                 + Registry.getInstance().getExtension(fileFormat));
@@ -48,7 +47,7 @@ public class GeneralScreenRecorder extends ScreenRecorder {
     }
 
     @Override
-    public java.util.List<File> getCreatedMovieFiles() {
+    public LinkedList<File> getCreatedMovieFiles() {
         return createdFiles;
     }
 

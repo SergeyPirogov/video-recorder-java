@@ -6,6 +6,7 @@ import org.monte.media.math.Rational;
 
 import java.awt.*;
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.monte.media.FormatKeys.EncodingKey;
@@ -40,7 +41,7 @@ public class VideoRecorder {
         }
     }
 
-    public List<File> stop() {
+    public LinkedList<File> stop() {
         if (videoEnabled()) {
             screenRecorder.stop();
         }

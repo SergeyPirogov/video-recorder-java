@@ -7,6 +7,8 @@ import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public class VideoListener implements IInvokedMethodListener {
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         boolean testMethod = method.isTestMethod();
-        Video video = getAnnotation(method);
+        Video video = getVideoAnnotation(method);
         if (video == null || !testMethod || !video.enabled()) {
             return;
         }
@@ -31,16 +33,17 @@ public class VideoListener implements IInvokedMethodListener {
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         if (recorder != null) {
-            List<File> recordings = recorder.stop();
+            LinkedList<File> recordings = recorder.stop();
             deleteRecordingOnSuccess(testResult, recordings);
         }
     }
 
-    private void deleteRecordingOnSuccess(ITestResult testResult, List<File> recordings) {
+    private void deleteRecordingOnSuccess(ITestResult testResult, LinkedList<File> recordings) {
         if (testResult.isSuccess()) {
-            recordings.get(0).delete();
+            recordings.getFirst().delete();
+        } else {
+            System.err.println(recordings);
         }
-        System.err.println(recordings);
     }
 
     public String getFileName(IInvokedMethod method, Video video) {
@@ -51,7 +54,13 @@ public class VideoListener implements IInvokedMethodListener {
         return name;
     }
 
-    private Video getAnnotation(IInvokedMethod method) {
-        return method.getTestMethod().getConstructorOrMethod().getMethod().getDeclaredAnnotation(Video.class);
+    private Video getVideoAnnotation(IInvokedMethod method) {
+        Annotation[] declaredAnnotations = method.getTestMethod().getConstructorOrMethod().getMethod().getDeclaredAnnotations();
+        for (Annotation declaredAnnotation : declaredAnnotations) {
+            if (declaredAnnotation.annotationType().equals(Video.class)) {
+                return (Video) declaredAnnotation;
+            }
+        }
+        return null;
     }
 }
