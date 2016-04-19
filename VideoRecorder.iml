@@ -17,7 +17,7 @@
     <orderEntry type="library" exported="" name="Gradle: org.testng:testng:6.9.10" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.beanshell:bsh:2.0b4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.beust:jcommander:1.48" level="project" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="Gradle: MonteScreenRecorder">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/MonteScreenRecorder.jar!/" />

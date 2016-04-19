@@ -1,13 +1,12 @@
-package com.automation.video.recorder;
+package com.qa.automation.video.recorder;
 
-import com.automation.video.VideoConfiguration;
+import com.qa.automation.video.VideoConfiguration;
 import org.monte.media.Format;
 import org.monte.media.math.Rational;
 
 import java.awt.*;
 import java.io.File;
 import java.util.LinkedList;
-import java.util.List;
 
 import static org.monte.media.FormatKeys.EncodingKey;
 import static org.monte.media.FormatKeys.FrameRateKey;

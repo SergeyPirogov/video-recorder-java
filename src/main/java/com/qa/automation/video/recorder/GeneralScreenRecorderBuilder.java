@@ -1,4 +1,4 @@
-package com.automation.video.recorder;
+package com.qa.automation.video.recorder;
 
 import org.monte.media.Format;
 

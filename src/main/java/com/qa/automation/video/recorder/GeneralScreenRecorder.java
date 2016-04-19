@@ -1,6 +1,6 @@
-package com.automation.video.recorder;
+package com.qa.automation.video.recorder;
 
-import com.automation.video.exception.RecordingException;
+import com.qa.automation.video.exception.RecordingException;
 import org.monte.media.Format;
 import org.monte.media.Registry;
 import org.monte.screenrecorder.ScreenRecorder;

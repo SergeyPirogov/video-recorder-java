@@ -1,7 +1,7 @@
-package com.automation.video.testng;
+package com.qa.automation.video.testng;
 
-import com.automation.video.annotations.Video;
-import com.automation.video.recorder.VideoRecorder;
+import com.qa.automation.video.annotations.Video;
+import com.qa.automation.video.recorder.VideoRecorder;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -9,7 +9,6 @@ import org.testng.ITestResult;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by sergey on 4/13/16.
