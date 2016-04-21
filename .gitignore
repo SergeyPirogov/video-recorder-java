@@ -57,6 +57,8 @@ gradle-app.setting
 ### Example user template template
 ### Example user template
 
+recordings
+
 # IntelliJ project files
 .idea
 out

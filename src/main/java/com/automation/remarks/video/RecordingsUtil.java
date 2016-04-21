@@ -14,8 +14,6 @@ public class RecordingsUtil {
     public static void deleteRecordingOnSuccess(LinkedList<File> recordings) {
         if (recordings.size() > 0) {
             recordings.getFirst().delete();
-        } else {
-            System.err.println(recordings);
         }
     }
 }

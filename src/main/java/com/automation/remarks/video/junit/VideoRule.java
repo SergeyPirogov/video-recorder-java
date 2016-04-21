@@ -1,5 +1,7 @@
 package com.automation.remarks.video.junit;
 
+import com.automation.remarks.video.VideoConfiguration;
+import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -21,7 +23,15 @@ public class VideoRule implements TestRule {
             @Override
             public void evaluate() throws Throwable {
                 boolean successful = false;
-                VideoRecorder recorder = new VideoRecorder(description.getMethodName());
+                Video video = description.getAnnotation(Video.class);
+                String name = description.getMethodName();
+                if (video != null) {
+                    VideoConfiguration.VIDEO_ENABLED = Boolean.toString(video.enabled());
+                    String videoName = video.name();
+                    name = videoName.length() < 3 ? name : videoName;
+                }
+
+                VideoRecorder recorder = new VideoRecorder(name);
                 recorder.start();
                 try {
                     base.evaluate();
