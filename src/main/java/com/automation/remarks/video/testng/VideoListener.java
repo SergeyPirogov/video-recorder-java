@@ -10,7 +10,7 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.LinkedList;
 
-import static com.automation.remarks.video.RecordingsUtil.deleteRecordingOnSuccess;
+import static com.automation.remarks.video.RecordingUtils.deleteRecordingOnSuccess;
 
 /**
  * Created by sergey on 4/13/16.

@@ -6,9 +6,9 @@ import java.util.LinkedList;
 /**
  * Created by sergey on 4/21/16.
  */
-public class RecordingsUtil {
+public class RecordingUtils {
 
-    private RecordingsUtil() {
+    private RecordingUtils() {
     }
 
     public static void deleteRecordingOnSuccess(LinkedList<File> recordings) {
