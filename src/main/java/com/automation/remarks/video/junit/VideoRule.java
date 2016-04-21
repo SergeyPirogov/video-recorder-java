@@ -27,8 +27,7 @@ public class VideoRule implements TestRule {
                 String name = description.getMethodName();
                 if (video != null) {
                     VideoConfiguration.VIDEO_ENABLED = Boolean.toString(video.enabled());
-                    String videoName = video.name();
-                    name = videoName.length() < 3 ? name : videoName;
+                    name = getName(video, description);
                 }
 
                 VideoRecorder recorder = new VideoRecorder(name);
@@ -42,6 +41,12 @@ public class VideoRule implements TestRule {
                         deleteRecordingOnSuccess(files);
                     }
                 }
+            }
+
+            private String getName(Video video, Description description) {
+                String name = description.getMethodName();
+                String videoName = video.name();
+                return videoName.length() < 3 ? name : videoName;
             }
         };
     }

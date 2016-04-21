@@ -21,7 +21,7 @@ public class JUnitVideoRecording {
     }
 
     @Test
-    @Video(name = "second_test", enabled = false)
+    @Video(name = "second_test")
     public void shouldFail() throws Exception {
         Thread.sleep(5000);
         assertTrue(false);
