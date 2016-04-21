@@ -28,7 +28,7 @@ dependencies {
     compile 'org.testng:testng:6.9.10'
     compile files('libs/MonteScreenRecorder.jar')
     testCompile 'com.codeborne:selenide:3.4'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'junit', name: 'junit', version: '4.11'
 }
 
 modifyPom {
@@ -36,12 +36,12 @@ modifyPom {
         name 'video-recorder'
         packaging 'jar'
         description 'Video Recorder is a library that allows to record selenium tests'
-        url 'https://github.com/SergeyPirogov/VideoRecorder'
+        url 'https://github.com/SergeyPirogov/VideoRule'
 
         scm {
-            url 'scm:git@github.com:SergeyPirogov/VideoRecorder.git'
-            connection 'scm:git@github.com:SergeyPirogov/VideoRecorder.git'
-            developerConnection 'scm:git@github.com:SergeyPirogov/VideoRecorder.git'
+            url 'scm:git@github.com:SergeyPirogov/VideoRule.git'
+            connection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
+            developerConnection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
         }
 
         licenses {
@@ -75,14 +75,4 @@ jar{
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
-}
-
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
 }

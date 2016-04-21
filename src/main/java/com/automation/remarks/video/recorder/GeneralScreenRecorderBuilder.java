@@ -1,5 +1,6 @@
 package com.automation.remarks.video.recorder;
 
+import com.automation.remarks.video.exception.RecordingException;
 import org.monte.media.Format;
 
 import java.awt.*;
@@ -70,7 +71,7 @@ public class GeneralScreenRecorderBuilder {
                         folder,
                         fileName);
             } catch (IOException | AWTException e) {
-                throw new RuntimeException(e);
+                throw new RecordingException(e);
             }
         }
 

@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.open;
  * Created by sergey on 3/27/16.
  */
 @Listeners(VideoListener.class)
-public class TestVideoRecording {
+public class TestNGVideoRecording {
 
     @Test
     @Video(enabled = false)

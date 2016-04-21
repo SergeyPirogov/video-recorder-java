@@ -10,6 +10,8 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.LinkedList;
 
+import static com.automation.remarks.video.RecordingsUtil.deleteRecordingOnSuccess;
+
 /**
  * Created by sergey on 4/13/16.
  */
@@ -33,15 +35,9 @@ public class VideoListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         if (recorder != null) {
             LinkedList<File> recordings = recorder.stop();
-            deleteRecordingOnSuccess(testResult, recordings);
-        }
-    }
-
-    private void deleteRecordingOnSuccess(ITestResult testResult, LinkedList<File> recordings) {
-        if (testResult.isSuccess()) {
-            recordings.getFirst().delete();
-        } else {
-            System.err.println(recordings);
+            if (testResult.isSuccess()) {
+                deleteRecordingOnSuccess(recordings);
+            }
         }
     }
 
