@@ -1,6 +1,6 @@
-package com.qa.automation.video.recorder;
+package com.automation.remarks.video.recorder;
 
-import com.qa.automation.video.VideoConfiguration;
+import com.automation.remarks.video.VideoConfiguration;
 import org.monte.media.Format;
 import org.monte.media.math.Rational;
 

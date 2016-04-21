@@ -1,4 +1,4 @@
-package com.qa.automation.video.annotations;
+package com.automation.remarks.video.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

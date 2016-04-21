@@ -1,4 +1,4 @@
-package com.qa.automation.video.exception;
+package com.automation.remarks.video.exception;
 
 /**
  * Created by sergey on 4/13/16.

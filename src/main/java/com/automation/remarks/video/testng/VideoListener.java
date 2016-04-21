@@ -1,7 +1,7 @@
-package com.qa.automation.video.testng;
+package com.automation.remarks.video.testng;
 
-import com.qa.automation.video.annotations.Video;
-import com.qa.automation.video.recorder.VideoRecorder;
+import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;

@@ -1,4 +1,4 @@
-package com.qa.automation.video;
+package com.automation.remarks.video;
 
 import java.io.File;
 

@@ -1,7 +1,7 @@
-package com.qa.automation.video.test;
+package com.automation.remarks.video.test;
 
-import com.qa.automation.video.annotations.Video;
-import com.qa.automation.video.testng.VideoListener;
+import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.testng.VideoListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
