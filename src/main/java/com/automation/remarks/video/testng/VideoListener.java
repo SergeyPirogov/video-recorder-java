@@ -1,6 +1,7 @@
 package com.automation.remarks.video.testng;
 
 import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -17,13 +18,12 @@ import static com.automation.remarks.video.RecordingUtils.deleteRecordingOnSucce
  */
 public class VideoListener implements IInvokedMethodListener {
 
-    private VideoRecorder recorder;
+    private IVideoRecorder recorder;
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-        boolean testMethod = method.isTestMethod();
         Video video = getVideoAnnotation(method);
-        if (video == null || !testMethod || !video.enabled()) {
+        if (video == null || !method.isTestMethod() || !video.enabled()) {
             return;
         }
         String fileName = getFileName(method, video);
@@ -33,7 +33,7 @@ public class VideoListener implements IInvokedMethodListener {
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-        if (recorder != null) {
+        if (recorder != null && method.isTestMethod()) {
             LinkedList<File> recordings = recorder.stop();
             if (testResult.isSuccess()) {
                 deleteRecordingOnSuccess(recordings);

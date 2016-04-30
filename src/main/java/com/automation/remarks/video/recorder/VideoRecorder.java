@@ -20,7 +20,7 @@ import static org.monte.media.VideoFormatKeys.MIME_AVI;
 /**
  * Created by sergey on 13.04.16.
  */
-public class VideoRecorder {
+public class VideoRecorder implements IVideoRecorder{
 
     private String fileName;
     private GeneralScreenRecorder screenRecorder;

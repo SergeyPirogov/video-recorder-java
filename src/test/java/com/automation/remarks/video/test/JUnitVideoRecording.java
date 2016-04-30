@@ -2,6 +2,7 @@ package com.automation.remarks.video.test;
 
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.junit.VideoRule;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -21,9 +22,14 @@ public class JUnitVideoRecording {
     }
 
     @Test
-    @Video(name = "second_test")
+    @Video(name = "junit_test")
     public void shouldFail() throws Exception {
         Thread.sleep(5000);
         assertTrue(false);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.out.println("After test");
     }
 }

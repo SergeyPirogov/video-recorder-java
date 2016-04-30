@@ -37,7 +37,7 @@ public class VideoRule implements TestRule {
                     successful = true;
                 } finally {
                     LinkedList<File> files = recorder.stop();
-                    if (successful) {
+                    if (successful && description.isTest()) {
                         deleteRecordingOnSuccess(files);
                     }
                 }

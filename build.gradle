@@ -17,7 +17,7 @@ sourceCompatibility = 1.7
 
 group = 'com.automation-remarks'
 archivesBaseName = "video-recorder"
-version = '1.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -61,9 +61,9 @@ modifyPom {
 }
 
 extraArchive {
-    sources = false
+    sources = true
     tests = false
-    javadoc = false
+    javadoc = true
 }
 
 nexus {

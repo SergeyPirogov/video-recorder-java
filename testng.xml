@@ -3,7 +3,7 @@
 <suite name="Suite" verbose="1" >
     <test name="testng" >
         <classes>
-            <class name="TestVideoRecording" />
+            <class name="com.automation.remarks.video.test.TestNGVideoRecording" />
         </classes>
     </test>
 </suite>
