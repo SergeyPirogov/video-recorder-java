@@ -23,7 +23,7 @@ import static org.monte.media.VideoFormatKeys.MIME_AVI;
 public class VideoRecorder implements IVideoRecorder{
 
     private String fileName;
-    private GeneralScreenRecorder screenRecorder;
+    private MonteScreenRecorder screenRecorder;
     private GraphicsConfiguration gc;
     private File folder;
 
@@ -61,7 +61,7 @@ public class VideoRecorder implements IVideoRecorder{
                 .getDefaultConfiguration();
     }
 
-    private GeneralScreenRecorder getScreenRecorder() {
+    private MonteScreenRecorder getScreenRecorder() {
         Format fileFormat = new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI);
         Format screenFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey,
                 ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
@@ -72,7 +72,7 @@ public class VideoRecorder implements IVideoRecorder{
         Format mouseFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
                 FrameRateKey, Rational.valueOf(30));
 
-        return GeneralScreenRecorderBuilder
+        return MonteScreenRecorderBuilder
                 .builder()
                 .setGraphicConfig(gc)
                 .setFileFormat(fileFormat)

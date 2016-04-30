@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by sergey on 4/18/16.
  */
-public class GeneralScreenRecorderBuilder {
+public class MonteScreenRecorderBuilder {
 
     private GraphicsConfiguration cfg;
     private Format fileFormat;
@@ -21,49 +21,49 @@ public class GeneralScreenRecorderBuilder {
     private String fileName;
 
     public static Builder builder() {
-        return new GeneralScreenRecorderBuilder().new Builder();
+        return new MonteScreenRecorderBuilder().new Builder();
     }
 
     public class Builder {
 
         public Builder setGraphicConfig(GraphicsConfiguration cfg) {
-            GeneralScreenRecorderBuilder.this.cfg = cfg;
+            MonteScreenRecorderBuilder.this.cfg = cfg;
             return this;
         }
 
         public Builder setFileFormat(Format fileFormat) {
-            GeneralScreenRecorderBuilder.this.fileFormat = fileFormat;
+            MonteScreenRecorderBuilder.this.fileFormat = fileFormat;
             return this;
         }
 
         public Builder setScreenFormat(Format screenFormat) {
-            GeneralScreenRecorderBuilder.this.screenFormat = screenFormat;
+            MonteScreenRecorderBuilder.this.screenFormat = screenFormat;
             return this;
         }
 
         public Builder setMouseFormat(Format mouseFormat) {
-            GeneralScreenRecorderBuilder.this.mouseFormat = mouseFormat;
+            MonteScreenRecorderBuilder.this.mouseFormat = mouseFormat;
             return this;
         }
 
         public Builder setAudioFormat(Format audioFormat) {
-            GeneralScreenRecorderBuilder.this.audioFormat = audioFormat;
+            MonteScreenRecorderBuilder.this.audioFormat = audioFormat;
             return this;
         }
 
         public Builder setFolder(File folder) {
-            GeneralScreenRecorderBuilder.this.folder = folder;
+            MonteScreenRecorderBuilder.this.folder = folder;
             return this;
         }
 
         public Builder setFileName(String fileName) {
-            GeneralScreenRecorderBuilder.this.fileName = fileName;
+            MonteScreenRecorderBuilder.this.fileName = fileName;
             return this;
         }
 
-        public GeneralScreenRecorder build() {
+        public MonteScreenRecorder build() {
             try {
-                return new GeneralScreenRecorder(cfg,
+                return new MonteScreenRecorder(cfg,
                         fileFormat,
                         screenFormat,
                         mouseFormat,

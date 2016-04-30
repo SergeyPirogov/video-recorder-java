@@ -15,16 +15,16 @@ import java.util.LinkedList;
 /**
  * Created by sergey on 13.04.16.
  */
-public class GeneralScreenRecorder extends ScreenRecorder {
+public class MonteScreenRecorder extends ScreenRecorder {
 
     private String fileName;
     private LinkedList<File> createdFiles = new LinkedList<>();
 
-    public GeneralScreenRecorder(GraphicsConfiguration cfg,
-                                 Format fileFormat,
-                                 Format screenFormat,
-                                 Format mouseFormat,
-                                 Format audioFormat, File folder, String fileName) throws IOException, AWTException {
+    public MonteScreenRecorder(GraphicsConfiguration cfg,
+                               Format fileFormat,
+                               Format screenFormat,
+                               Format mouseFormat,
+                               Format audioFormat, File folder, String fileName) throws IOException, AWTException {
         super(cfg, fileFormat, screenFormat, mouseFormat, audioFormat);
         this.fileName = fileName;
         setMovieFolder(folder);
