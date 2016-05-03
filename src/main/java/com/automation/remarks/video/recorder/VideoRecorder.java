@@ -6,6 +6,7 @@ import org.monte.media.math.Rational;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.monte.media.FormatKeys.EncodingKey;
@@ -20,12 +21,14 @@ import static org.monte.media.VideoFormatKeys.MIME_AVI;
 /**
  * Created by sergey on 13.04.16.
  */
-public class VideoRecorder implements IVideoRecorder{
+public class VideoRecorder implements IVideoRecorder {
 
     private String fileName;
     private MonteScreenRecorder screenRecorder;
     private GraphicsConfiguration gc;
     private File folder;
+
+    private static ArrayList<String> recordingsNames = new ArrayList<>();
 
     public VideoRecorder(String fileName) {
         this.fileName = fileName;
@@ -44,7 +47,15 @@ public class VideoRecorder implements IVideoRecorder{
         if (videoEnabled()) {
             screenRecorder.stop();
         }
-        return screenRecorder.getCreatedMovieFiles();
+        LinkedList<File> createdMovieFiles = screenRecorder.getCreatedMovieFiles();
+        rememberFileNames(createdMovieFiles);
+        return createdMovieFiles;
+    }
+
+    private void rememberFileNames(java.util.List<File> fileList) {
+        for (File file : fileList) {
+            recordingsNames.add(file.getName());
+        }
     }
 
     public static boolean videoEnabled() {
@@ -80,5 +91,9 @@ public class VideoRecorder implements IVideoRecorder{
                 .setFolder(folder)
                 .setMouseFormat(mouseFormat)
                 .setFileName(fileName).build();
+    }
+
+    public static ArrayList<String> getAllRecordedTestNames() {
+        return recordingsNames;
     }
 }

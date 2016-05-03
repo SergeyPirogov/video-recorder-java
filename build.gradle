@@ -21,13 +21,19 @@ version = '1.0.1'
 
 repositories {
     mavenCentral()
+    mavenLocal()
+    maven {
+        url "https://jitpack.io"
+    }
 }
 
 dependencies {
     compile 'junit:junit:4.12'
     compile 'org.testng:testng:6.9.10'
+    compile 'com.github.vbauer:avconv4java:1.2.0'
     compile fileTree('libs')
     testCompile 'com.codeborne:selenide:3.4'
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.5'
 }
 
 modifyPom {
