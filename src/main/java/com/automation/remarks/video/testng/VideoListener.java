@@ -11,7 +11,7 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.LinkedList;
 
-import static com.automation.remarks.video.RecordingUtils.deleteRecordingOnSuccess;
+import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
 /**
  * Created by sergey on 4/13/16.
@@ -35,9 +35,7 @@ public class VideoListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         if (recorder != null && method.isTestMethod()) {
             LinkedList<File> recordings = recorder.stop();
-            if (testResult.isSuccess()) {
-                deleteRecordingOnSuccess(recordings);
-            }
+            doVideoProcessing(testResult.isSuccess(), recordings);
         }
     }
 

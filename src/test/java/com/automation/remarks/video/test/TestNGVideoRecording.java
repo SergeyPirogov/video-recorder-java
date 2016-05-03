@@ -17,21 +17,21 @@ public class TestNGVideoRecording {
     @Test
     @Video(enabled = false)
     public void testName() throws Exception {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         assertTrue(false);
     }
 
     @Test
     @Video(name = "second_test")
     public void testName2() throws Exception {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         assertTrue(false);
     }
 
     @Test
     @Video
     public void testName3() throws Exception {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         assertTrue(false);
     }
 

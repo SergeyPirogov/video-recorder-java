@@ -35,6 +35,12 @@ public class JUnitVideoRecording {
         assertTrue("Should fail", false);
     }
 
+    @Test
+    @Video(enabled = false)
+    public void shouldPassWithoutVideo() throws Exception {
+        Thread.sleep(1000);
+    }
+
     @After
     public void afterTest() throws Exception {
         System.out.println("After test completed");

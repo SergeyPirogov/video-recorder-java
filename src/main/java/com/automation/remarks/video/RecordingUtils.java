@@ -11,8 +11,10 @@ public class RecordingUtils {
     private RecordingUtils() {
     }
 
-    public static void deleteRecordingOnSuccess(LinkedList<File> recordings) {
-        if (recordings.size() > 0) {
+    public static void doVideoProcessing(boolean successfulTest, LinkedList<File> recordings) {
+        if (!successfulTest) {
+            System.err.println("Video recording\n" + recordings);
+        } else if (recordings.size() > 0) {
             recordings.getFirst().delete();
         }
     }

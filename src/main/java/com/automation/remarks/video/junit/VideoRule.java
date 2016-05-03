@@ -10,7 +10,7 @@ import org.junit.runners.model.Statement;
 import java.io.File;
 import java.util.LinkedList;
 
-import static com.automation.remarks.video.RecordingUtils.deleteRecordingOnSuccess;
+import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
 /**
  * Created by sergey on 4/21/16.
@@ -37,8 +37,8 @@ public class VideoRule implements TestRule {
                     successful = true;
                 } finally {
                     LinkedList<File> files = recorder.stop();
-                    if (successful && description.isTest()) {
-                        deleteRecordingOnSuccess(files);
+                    if (description.isTest()) {
+                        doVideoProcessing(successful, files);
                     }
                 }
             }
