@@ -3,6 +3,7 @@ package com.automation.remarks.video.test;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.junit.VideoRule;
 import com.automation.remarks.video.recorder.VideoRecorder;
+import junit.framework.AssertionFailedError;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Rule;
@@ -28,9 +29,9 @@ public class JUnitVideoRecording {
         Thread.sleep(1000);
     }
 
-    @Test
+    @Test(expected = AssertionFailedError.class)
     @Video(name = VIDEO_FILE_NAME)
-    public void shouldFail() throws Exception {
+    public void shouldBeAssertionFail() throws Exception {
         Thread.sleep(1000);
         assertTrue("Should fail", false);
     }
