@@ -1,5 +1,6 @@
 package com.automation.remarks.video.test;
 
+import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.junit.Test;
 
@@ -33,6 +34,7 @@ public class TestVideoRecorder {
 
     @Test
     public void shouldBeVideoInRecordingsFolder() throws IOException {
+        VideoConfiguration.VIDEO_FOLDER = VIDEO_FOLDER_NAME;
         File video = recordVideo().getFirst();
         String folderName = video.getParentFile().getName();
         assertEquals(folderName, VIDEO_FOLDER_NAME);

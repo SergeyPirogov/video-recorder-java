@@ -1,5 +1,6 @@
 package com.automation.remarks.video.test;
 
+import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
@@ -26,8 +27,9 @@ public class TestVideoConfiguration {
 
     @Test
     public void testName() throws Exception {
-        final String path = "/home/sergey/VideoRecorder/video/";
-        System.setProperty("video.folder", path);
+        VideoConfiguration.VIDEO_ENABLED = "true";
+        final String path = System.getProperty("user.dir") + File.separator + "video";
+        VideoConfiguration.VIDEO_FOLDER = path;
         VideoRecorder recorder = new VideoRecorder("test_video");
         recorder.start();
         LinkedList<File> files = recorder.stop();

@@ -17,7 +17,7 @@ sourceCompatibility = 1.7
 
 group = 'com.automation-remarks'
 archivesBaseName = "video-recorder"
-version = '1.0.1'
+version = '1.0.2'
 
 repositories {
     mavenCentral()
@@ -30,7 +30,6 @@ repositories {
 dependencies {
     compile 'junit:junit:4.12'
     compile 'org.testng:testng:6.9.10'
-    compile 'com.github.vbauer:avconv4java:1.2.0'
     compile fileTree('libs')
     testCompile 'com.codeborne:selenide:3.4'
     testCompile 'org.codehaus.groovy:groovy-all:2.4.5'
@@ -78,6 +77,9 @@ nexus {
 
 jar {
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.compile
+                .findAll {!it.name.contains('junit') }
+                .findAll {!it.name.contains('testng')}
+                .collect { it.isDirectory() ? it : zipTree(it)}
     }
 }
