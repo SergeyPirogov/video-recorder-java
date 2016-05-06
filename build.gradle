@@ -17,7 +17,7 @@ sourceCompatibility = 1.7
 
 group = 'com.automation-remarks'
 archivesBaseName = "video-recorder"
-version = '1.0.2'
+version = '1.0.3'
 
 repositories {
     mavenCentral()
@@ -28,6 +28,7 @@ repositories {
 }
 
 dependencies {
+    compile 'ru.yandex.qatools.allure:allure-java-annotations:1.4.23'
     compile 'junit:junit:4.12'
     compile 'org.testng:testng:6.9.10'
     compile fileTree('libs')
@@ -80,6 +81,7 @@ jar {
         configurations.compile
                 .findAll {!it.name.contains('junit') }
                 .findAll {!it.name.contains('testng')}
+                .findAll {!it.name.contains('allure')}
                 .collect { it.isDirectory() ? it : zipTree(it)}
     }
 }
