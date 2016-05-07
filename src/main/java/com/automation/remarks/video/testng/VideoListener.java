@@ -11,7 +11,9 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.LinkedList;
 
+import static com.automation.remarks.video.RecordingMode.ALL;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
+import static com.automation.remarks.video.VideoConfiguration.MODE;
 
 /**
  * Created by sergey on 4/13/16.
@@ -23,11 +25,12 @@ public class VideoListener implements IInvokedMethodListener {
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         Video video = getVideoAnnotation(method);
-        if (video == null || !method.isTestMethod() || !video.enabled()) {
+        String fileName = getFileName(method, video);
+        if (MODE.equals(ALL)) {
+            recorder = new VideoRecorder(fileName);
+        } else if (video == null || !method.isTestMethod() || !video.enabled()) {
             return;
         }
-        String fileName = getFileName(method, video);
-        recorder = new VideoRecorder(fileName);
         recorder.start();
     }
 
@@ -40,11 +43,12 @@ public class VideoListener implements IInvokedMethodListener {
     }
 
     public String getFileName(IInvokedMethod method, Video video) {
-        String name = video.name();
-        if (name.length() == 0) {
-            name = method.getTestMethod().getMethodName();
+        String methodName = method.getTestMethod().getMethodName();
+        if (video == null) {
+            return methodName;
         }
-        return name;
+        String name = video.name();
+        return name.length() > 1 ? name : methodName;
     }
 
     private Video getVideoAnnotation(IInvokedMethod method) {

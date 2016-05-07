@@ -3,11 +3,7 @@ package com.automation.remarks.video.test;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.junit.VideoRule;
 import com.automation.remarks.video.recorder.VideoRecorder;
-import junit.framework.AssertionFailedError;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 
 import java.util.ArrayList;
 
@@ -24,12 +20,18 @@ public class JUnitVideoRecording {
     @Rule
     public VideoRule videoRule = new VideoRule();
 
+    @BeforeClass
+    public static void setUp() throws Exception {
+        System.setProperty("video.mode","annotated");
+    }
+
     @Test
     public void shouldPass() throws Exception {
         Thread.sleep(1000);
+        assertTrue(false);
     }
 
-    @Test(expected = AssertionFailedError.class)
+    @Test
     @Video(name = VIDEO_FILE_NAME)
     public void shouldBeAssertionFail() throws Exception {
         Thread.sleep(1000);
