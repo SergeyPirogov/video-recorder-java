@@ -11,7 +11,7 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.LinkedList;
 
-import static com.automation.remarks.video.RecordingMode.ALL;
+import static com.automation.remarks.video.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 import static com.automation.remarks.video.VideoConfiguration.MODE;
 
@@ -24,13 +24,16 @@ public class VideoListener implements IInvokedMethodListener {
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-        Video video = getVideoAnnotation(method);
-        String fileName = getFileName(method, video);
-        if (MODE.equals(ALL)) {
-            recorder = new VideoRecorder(fileName);
-        } else if (video == null || !method.isTestMethod() || !video.enabled()) {
+        boolean testMethod = method.isTestMethod();
+        if (!testMethod) {
             return;
         }
+        Video video = getVideoAnnotation(method);
+        String fileName = getFileName(method, video);
+        if (MODE.equals(ANNOTATED) && (video == null || !video.enabled())) {
+            return;
+        }
+        recorder = new VideoRecorder(fileName);
         recorder.start();
     }
 
