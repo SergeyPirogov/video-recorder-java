@@ -1,0 +1,3 @@
+include 'core'
+include 'testng-adapter'
+include 'junit-adapter'

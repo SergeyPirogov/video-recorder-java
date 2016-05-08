@@ -1,13 +1,13 @@
 # VideoRecorder
 
-This library allows easily record video of your UI tests by just putting couple annotations.
+This library allows easily record com.automation.remarks.video of your UI tests by just putting couple annotations.
 
 Supports popular Java test frameworks: JUnit, TestNg, Spock.
 
 ```
 <dependency>
   <groupId>com.automation-remarks</groupId>
-  <artifactId>video-recorder</artifactId>
+  <artifactId>com.automation.remarks.video-recorder</artifactId>
   <version>1.0.+</version>
 </dependency> 
 ```
@@ -15,8 +15,8 @@ Supports popular Java test frameworks: JUnit, TestNg, Spock.
 Example with JUnit Rule:
 
 ```
-import com.automation.remarks.video.annotations.Video;  
-import com.automation.remarks.video.junit.VideoRule;  
+import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.junit.VideoRule;
 import org.junit.Rule;  
 import org.junit.Test;
 
@@ -53,8 +53,8 @@ public class JUnitVideoTest {
 Example with TestNG:
 
 ```
-import com.automation.remarks.video.annotations.Video;  
-import com.automation.remarks.video.testng.VideoListener;  
+import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.testng.VideoListener;
 import org.testng.annotations.Listeners;  
 import org.testng.annotations.Test;
 

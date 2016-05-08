@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':core')
+    compile 'org.testng:testng:6.9.10'
+}

@@ -1,3 +1,16 @@
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    archivesBaseName = group + '-' + project.name
+
+    sourceCompatibility = 1.7
+
+    repositories {
+        mavenCentral()
+    }
+}
+
 buildscript {
     repositories {
         jcenter()
@@ -8,37 +21,18 @@ buildscript {
 }
 
 apply plugin: 'com.bmuschko.nexus'
-apply plugin: 'java'
-apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-sourceCompatibility = 1.7
-
-group = 'com.automation-remarks'
-archivesBaseName = "video-recorder"
-version = '1.0.3'
-
 repositories {
-    mavenCentral()
-    mavenLocal()
     maven {
         url "https://jitpack.io"
     }
 }
 
-dependencies {
-    compile 'ru.yandex.qatools.allure:allure-java-annotations:1.4.23'
-    compile 'junit:junit:4.12'
-    compile 'org.testng:testng:6.9.10'
-    compile fileTree('libs')
-    testCompile 'com.codeborne:selenide:3.4'
-    testCompile 'org.codehaus.groovy:groovy-all:2.4.5'
-}
-
 modifyPom {
     project {
-        name 'video-recorder'
+        name 'com.automation.remarks.video-recorder'
         packaging 'jar'
         description 'Video Recorder is a library that allows to record selenium tests'
         url 'https://github.com/SergeyPirogov/VideoRule'
@@ -74,14 +68,4 @@ extraArchive {
 
 nexus {
     sign = true
-}
-
-jar {
-    from {
-        configurations.compile
-                .findAll {!it.name.contains('junit') }
-                .findAll {!it.name.contains('testng')}
-                .findAll {!it.name.contains('allure')}
-                .collect { it.isDirectory() ? it : zipTree(it)}
-    }
 }
