@@ -1,8 +1,9 @@
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: 'maven'
 
-    archivesBaseName = group + '-' + project.name
+    archivesBaseName = baseArchiveName + '-' + project.name
 
     sourceCompatibility = 1.7
 
@@ -21,7 +22,6 @@ buildscript {
 }
 
 apply plugin: 'com.bmuschko.nexus'
-apply plugin: 'maven'
 apply plugin: 'signing'
 
 repositories {
