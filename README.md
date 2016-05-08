@@ -1,6 +1,6 @@
 # VideoRecorder
 
-This library allows easily record com.automation.remarks.video of your UI tests by just putting couple annotations.
+This library allows easily record video of your UI tests by just putting couple annotations.
 
 Supports popular Java test frameworks: JUnit, TestNg, Spock.
 
@@ -14,15 +14,15 @@ Supports popular Java test frameworks: JUnit, TestNg, Spock.
   <groupId>com.automation-remarks</groupId>
   <artifactId>video-recorder-junit</artifactId>
   <version>LATEST</version>
-</dependency> 
+</dependency>
 ```
 
 Example with JUnit Rule:
 
-
-import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.junit.VideoRule;
-import org.junit.Rule;
+```
+import com.automation.remarks.video.annotations.Video;  
+import com.automation.remarks.video.junit.VideoRule;  
+import org.junit.Rule;  
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -53,6 +53,7 @@ public class JUnitVideoTest {
         assertTrue(false);
     }
 }
+```
 
 Example with TestNG:
 
@@ -70,9 +71,10 @@ Example with TestNG:
 ```
 
 
-import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.testng.VideoListener;
-import org.testng.annotations.Listeners;
+```
+import com.automation.remarks.video.annotations.Video;  
+import com.automation.remarks.video.testng.VideoListener;  
+import org.testng.annotations.Listeners;  
 import org.testng.annotations.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -101,6 +103,6 @@ public class TestNgAnnotationTest {
         assertTrue(false);
     }
 }
-
+```
 
 by [automation-remarks.com](http://automation-remarks.com/)
