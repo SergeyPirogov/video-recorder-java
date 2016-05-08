@@ -24,8 +24,23 @@ public class MonteScreenRecorder extends ScreenRecorder {
                                Format fileFormat,
                                Format screenFormat,
                                Format mouseFormat,
-                               Format audioFormat, File folder, String fileName) throws IOException, AWTException {
+                               Format audioFormat,
+                               File folder,
+                               String fileName) throws IOException, AWTException {
         super(cfg, fileFormat, screenFormat, mouseFormat, audioFormat);
+        this.fileName = fileName;
+        setMovieFolder(folder);
+    }
+
+    public MonteScreenRecorder(GraphicsConfiguration cfg,
+                               Rectangle rectangle,
+                               Format fileFormat,
+                               Format screenFormat,
+                               Format mouseFormat,
+                               Format audioFormat,
+                               File folder,
+                               String fileName) throws IOException, AWTException {
+        super(cfg, rectangle, fileFormat, screenFormat, mouseFormat, audioFormat);
         this.fileName = fileName;
         setMovieFolder(folder);
     }

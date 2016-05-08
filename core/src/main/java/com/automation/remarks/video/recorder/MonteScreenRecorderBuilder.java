@@ -18,6 +18,7 @@ public class MonteScreenRecorderBuilder {
     private Format mouseFormat;
     private Format audioFormat;
     private File folder;
+    private Rectangle rectangle;
     private String fileName;
 
     public static Builder builder() {
@@ -61,9 +62,15 @@ public class MonteScreenRecorderBuilder {
             return this;
         }
 
+        public Builder setRectangle(Rectangle rectangle) {
+            MonteScreenRecorderBuilder.this.rectangle = rectangle;
+            return this;
+        }
+
         public MonteScreenRecorder build() {
             try {
                 return new MonteScreenRecorder(cfg,
+                        rectangle,
                         fileFormat,
                         screenFormat,
                         mouseFormat,

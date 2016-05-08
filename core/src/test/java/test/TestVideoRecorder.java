@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class TestVideoRecorder {
 
     public static final String VIDEO_FILE_NAME = "video_test";
-    public static final String VIDEO_FOLDER_NAME = "recordings";
+    public static final String VIDEO_FOLDER_NAME = "video";
 
     public LinkedList<File> recordVideo() {
         VideoRecorder recorder = new VideoRecorder(VIDEO_FILE_NAME);

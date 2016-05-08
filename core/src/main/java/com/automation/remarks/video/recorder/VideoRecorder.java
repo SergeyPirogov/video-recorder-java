@@ -68,7 +68,7 @@ public class VideoRecorder implements IVideoRecorder {
     }
 
     private MonteScreenRecorder getScreenRecorder() {
-        Format fileFormat = new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, FormatKeys.MIME_AVI);
+        Format fileFormat = new Format(MediaTypeKey, MediaType.VIDEO, MimeTypeKey, FormatKeys.MIME_AVI);
         Format screenFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey,
                 ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
                 CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
@@ -78,9 +78,16 @@ public class VideoRecorder implements IVideoRecorder {
         Format mouseFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
                 FrameRateKey, Rational.valueOf(30));
 
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = screenSize.width;
+        int height = screenSize.height;
+
+        Rectangle captureSize = new Rectangle(0,0, width, height);
+
         return MonteScreenRecorderBuilder
                 .builder()
                 .setGraphicConfig(gc)
+                .setRectangle(captureSize)
                 .setFileFormat(fileFormat)
                 .setScreenFormat(screenFormat)
                 .setFolder(folder)

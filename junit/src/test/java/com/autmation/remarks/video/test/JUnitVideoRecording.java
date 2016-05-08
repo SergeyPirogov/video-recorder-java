@@ -22,12 +22,12 @@ public class JUnitVideoRecording {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        System.setProperty("com.automation.remarks.video.mode","annotated");
+        System.setProperty("video.mode","annotated");
     }
 
     @Test
     public void shouldPass() throws Exception {
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         assertTrue(false);
     }
 
