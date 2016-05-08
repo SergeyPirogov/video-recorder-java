@@ -75,7 +75,7 @@ Example with TestNG:
 
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.testng.VideoListener;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.Listeners;  
 import org.testng.annotations.Test;
 
 import static junit.framework.Assert.assertTrue;
