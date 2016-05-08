@@ -19,7 +19,7 @@ Supports popular Java test frameworks: JUnit, TestNg, Spock.
 
 Example with JUnit Rule:
 
-```
+
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.junit.VideoRule;
 import org.junit.Rule;
@@ -53,11 +53,8 @@ public class JUnitVideoTest {
         assertTrue(false);
     }
 }
-```
 
 Example with TestNG:
-
-```
 
 ```
 <dependency>
@@ -104,6 +101,6 @@ public class TestNgAnnotationTest {
         assertTrue(false);
     }
 }
-```
+
 
 by [automation-remarks.com](http://automation-remarks.com/)
