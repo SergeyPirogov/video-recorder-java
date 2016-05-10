@@ -1,0 +1,3 @@
+dependencies {
+    compile 'org.seleniumhq.selenium:selenium-server:2.53.0'
+}
