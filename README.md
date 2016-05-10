@@ -7,11 +7,6 @@ Supports popular Java test frameworks: JUnit, TestNg, Spock.
 ```
 <dependency>
   <groupId>com.automation-remarks</groupId>
-  <artifactId>video-recorder-core</artifactId>
-  <version>LATEST</version>
-</dependency>
-<dependency>
-  <groupId>com.automation-remarks</groupId>
   <artifactId>video-recorder-junit</artifactId>
   <version>LATEST</version>
 </dependency>
@@ -58,11 +53,6 @@ public class JUnitVideoTest {
 Example with TestNG:
 
 ```
-<dependency>
-  <groupId>com.automation-remarks</groupId>
-  <artifactId>video-recorder-core</artifactId>
-  <version>LATEST</version>
-</dependency>
 <dependency>
   <groupId>com.automation-remarks</groupId>
   <artifactId>video-recorder-testng</artifactId>
