@@ -6,3 +6,10 @@ dependencies {
 test {
     ignoreFailures = true
 }
+
+jar{
+    from {
+        configurations.compile.findAll {!it.name.contains('junit')}
+                .collect { it.isDirectory() ? it : zipTree(it)}
+    }
+}

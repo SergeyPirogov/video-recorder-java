@@ -2,3 +2,10 @@ dependencies {
     compile project(':core')
     compile 'org.testng:testng:6.9.10'
 }
+
+jar{
+    from {
+        configurations.compile.findAll {!it.name.contains('testng')}
+                .collect { it.isDirectory() ? it : zipTree(it)}
+    }
+}
