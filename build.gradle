@@ -21,6 +21,7 @@ buildscript {
     }
 }
 
+apply plugin: 'idea'
 apply plugin: 'com.bmuschko.nexus'
 apply plugin: 'signing'
 
