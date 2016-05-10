@@ -18,7 +18,7 @@ public class TestVideoConfiguration {
 
     @Test
     public void shouldDisableVideoRecording() throws Exception {
-        System.setProperty("com.automation.remarks.video.enabled", "false");
+        VideoConfiguration.VIDEO_ENABLED = "false";
         VideoRecorder recorder = new VideoRecorder("test_video");
         recorder.start();
         LinkedList<File> files = recorder.stop();
