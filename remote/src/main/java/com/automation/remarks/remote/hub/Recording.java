@@ -6,47 +6,47 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.openqa.grid.common.RegistrationRequest;
+import org.openqa.grid.internal.ProxySet;
 import org.openqa.grid.internal.Registry;
-import org.openqa.grid.internal.TestSession;
-import org.openqa.grid.selenium.proxy.DefaultRemoteProxy;
+import org.openqa.grid.internal.RemoteProxy;
+import org.openqa.grid.web.servlet.RegistryBasedServlet;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * Created by Serhii_Pirohov on 10.05.2016.
+ * Created by Serhii_Pirohov on 11.05.2016.
  */
-public class HubProxy extends DefaultRemoteProxy {
+public class Recording extends RegistryBasedServlet {
 
     private static final Logger LOGGER = Logger.getLogger(HubProxy.class.getName());
 
-    public HubProxy(RegistrationRequest request, Registry registry) {
-        super(request, registry);
+    public Recording() {
+        this(null);
+    }
+
+    public Recording(Registry registry) {
+        super(registry);
     }
 
     @Override
-    public void beforeSession(TestSession session) {
-        super.beforeSession(session);
-        processRecording(session, "start");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 
     @Override
-    public void afterSession(TestSession session) {
-        super.afterSession(session);
-        processRecording(session, "stop");
-    }
-
-    @Override
-    public void beforeCommand(TestSession session, HttpServletRequest request, HttpServletResponse response) {
-        super.beforeCommand(session, request, response);
-    }
-
-    private void processRecording(final TestSession session, final String command) {
-        final String url = "http://" + this.getRemoteHost().getHost() + ":" + this.getRemoteHost().getPort() +
-                "/extra/" + VideoRecordingServlet.class.getSimpleName() + "/" + command;
-        sendRecordingRequest(url);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ProxySet allProxies = getRegistry().getAllProxies();
+        String path = req.getPathInfo();
+        for (RemoteProxy proxy : allProxies) {
+            String proxyId = proxy.getId();
+            final String url = proxyId +
+                    "/extra/" + VideoRecordingServlet.class.getSimpleName() + path;
+            sendRecordingRequest(url);
+        }
     }
 
     private void sendRecordingRequest(final String url) {

@@ -1,8 +1,10 @@
-package com.automation.remarks.remote.hub;
+package com.automation.remarks.remote.node;
 
-import com.automation.remarks.remote.Command;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.http.HttpStatus;
+import org.openqa.grid.internal.ProxySet;
+import org.openqa.grid.internal.Registry;
+import org.openqa.grid.web.servlet.RegistryBasedServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
