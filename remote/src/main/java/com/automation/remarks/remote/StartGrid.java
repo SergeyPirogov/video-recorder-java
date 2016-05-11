@@ -18,7 +18,8 @@ public class StartGrid {
                 "-host", "localhost",
                 "-role", "node",
                 "-hub", "http://localhost:4444/grid/register",
-                "-servlets", "com.automation.remarks.remote.hub.VideoRecordingServlet"};
+                "-servlets", "com.automation.remarks.remote.hub.VideoRecordingServlet",
+                "-proxy","com.automation.remarks.remote.hub.HubProxy"};
         GridLauncher.main(node);
     }
 

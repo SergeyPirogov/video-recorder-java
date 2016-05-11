@@ -13,6 +13,8 @@ import org.openqa.grid.internal.Registry;
 import org.openqa.grid.internal.TestSession;
 import org.openqa.grid.selenium.proxy.DefaultRemoteProxy;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
 
 /**
@@ -38,6 +40,11 @@ public class HubProxy extends DefaultRemoteProxy {
         processRecording(session, "stop");
     }
 
+    @Override
+    public void beforeCommand(TestSession session, HttpServletRequest request, HttpServletResponse response) {
+        super.beforeCommand(session, request, response);
+    }
+
     private void processRecording(final TestSession session, final String command) {
         final String url = "http://" + this.getRemoteHost().getHost() + ":" + this.getRemoteHost().getPort() +
                 "/extra/" + VideoRecordingServlet.class.getSimpleName() + "/" + command;
@@ -57,5 +64,4 @@ public class HubProxy extends DefaultRemoteProxy {
             HttpClientUtils.closeQuietly(response);
         }
     }
-
 }
