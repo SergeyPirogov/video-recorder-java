@@ -1,10 +1,8 @@
 package com.automation.remarks.remote.node;
 
 import com.automation.remarks.video.recorder.VideoRecorder;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.HttpStatus;
-import org.openqa.grid.internal.ProxySet;
-import org.openqa.grid.internal.Registry;
-import org.openqa.grid.web.servlet.RegistryBasedServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import static com.automation.remarks.remote.utils.RestUtils.updateResponse;
+
 /**
  * Created by Serhii_Pirohov on 10.05.2016.
  */
-public class VideoRecordingServlet extends HttpServlet {
+public class VideoServlet extends HttpServlet {
 
     private VideoRecorder videoRecorder;
 
@@ -33,6 +33,7 @@ public class VideoRecordingServlet extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String path = req.getPathInfo();
+
         try {
             switch (path) {
                 case "/start":
@@ -50,11 +51,5 @@ public class VideoRecordingServlet extends HttpServlet {
             updateResponse(resp, HttpStatus.SC_INTERNAL_SERVER_ERROR,
                     "Internal server error occurred while trying to start / stop recording: " + ex);
         }
-
-    }
-
-    private void updateResponse(final HttpServletResponse response, final int status, final String message) throws IOException {
-        response.setStatus(status);
-        response.getWriter().write(message);
     }
 }

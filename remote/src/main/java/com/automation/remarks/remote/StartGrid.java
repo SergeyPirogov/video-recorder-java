@@ -11,14 +11,14 @@ public class StartGrid {
         String[] hub = {"-port", "4444",
                 "-host", "localhost",
                 "-role", "hub",
-                "-servlets", "com.automation.remarks.remote.hub.Recording"};
+                "-servlets", "com.automation.remarks.remote.hub.Video"};
         GridLauncher.main(hub);
 
         String[] node = {"-port", "5555",
                 "-host", "localhost",
                 "-role", "node",
                 "-hub", "http://localhost:4444/grid/register",
-                "-servlets", "com.automation.remarks.remote.node.VideoRecordingServlet"};
+                "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
         GridLauncher.main(node);
     }
 
