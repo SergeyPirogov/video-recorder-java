@@ -11,6 +11,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.lang.reflect.Method;
 import java.util.logging.Logger;
 
 /**
@@ -23,9 +24,11 @@ public class RemoteVideoListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         String testName = result.getTestName();
-        result.getMethod().getConstructorOrMethod().getMethod().getDeclaredAnnotation(Video.class);
-        String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start/" + testName;
-        sendRecordingRequest(url);
+        Video video = MethodUtils.getVideoAnnotation(result.getMethod());
+        if (video != null && video.enabled()) {
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start/" + testName;
+            sendRecordingRequest(url);
+        }
     }
 
     @Override
