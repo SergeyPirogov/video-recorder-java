@@ -25,7 +25,7 @@ public class RemoteVideoListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         String testName = result.getTestName();
         Video video = MethodUtils.getVideoAnnotation(result.getMethod());
-        if (video != null && video.enabled()) {
+        if (videoEnabled(video)) {
             String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start/" + testName;
             sendRecordingRequest(url);
         }
@@ -38,7 +38,11 @@ public class RemoteVideoListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-
+        Video video = MethodUtils.getVideoAnnotation(result.getMethod());
+        if (videoEnabled(video)) {
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start/";
+            sendRecordingRequest(url);
+        }
     }
 
     @Override
@@ -59,6 +63,10 @@ public class RemoteVideoListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
 
+    }
+
+    private boolean videoEnabled(Video video){
+        return video != null && video.enabled();
     }
 
     private void sendRecordingRequest(final String url) {
