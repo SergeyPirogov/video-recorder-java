@@ -1,7 +1,6 @@
 package com.automation.remarks.remote.node;
 
 import com.automation.remarks.video.recorder.VideoRecorder;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.HttpStatus;
 
 import javax.servlet.ServletException;
@@ -43,8 +42,7 @@ public class VideoServlet extends HttpServlet {
                     break;
                 case "/stop":
                     LinkedList<File> files = videoRecorder.stop();
-                    System.out.println(files);
-                    updateResponse(resp, HttpStatus.SC_OK, "Stopped recording");
+                    updateResponse(resp, HttpStatus.SC_OK, "Stopped recording " + files);
                     break;
             }
         } catch (Exception ex) {
