@@ -32,7 +32,7 @@ class NodeServletTest extends BaseTest {
         when:
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
-        message =~ "recording stopped /home/sergey/VideoRecorder/video/video_recording"
+        message.startsWith "recording stopped /home/sergey/VideoRecorder/remote/video/video_recording"
     }
 
     def "shouldBeDefaultFileName"() {
@@ -41,7 +41,7 @@ class NodeServletTest extends BaseTest {
         when:
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
-        message =~ "recording stopped /home/sergey/VideoRecorder/video/video_recording"
+        message.startsWith "recording stopped /home/sergey/VideoRecorder/remote/video/video_recording"
     }
 
     def "shouldBeFileNameAsNameRequestParameter"() {
@@ -51,7 +51,7 @@ class NodeServletTest extends BaseTest {
         when:
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
-        message =~ "recording stopped /home/sergey/VideoRecorder/video/video"
+        message.startsWith "recording stopped /home/sergey/VideoRecorder/remote/video/video_recording"
         getVideoFiles().first().name =~ name
     }
 

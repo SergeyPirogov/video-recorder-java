@@ -69,4 +69,11 @@ subprojects {
     nexus {
         sign = true
     }
+
+    test {
+        testLogging {
+            events "passed", "skipped", "failed"
+            exceptionFormat = 'full'
+        }
+    }
 }
