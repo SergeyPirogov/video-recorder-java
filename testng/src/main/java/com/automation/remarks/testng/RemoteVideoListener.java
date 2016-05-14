@@ -16,36 +16,40 @@ public class RemoteVideoListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        String testName = result.getTestName();
+        String testName = result.getMethod().getMethodName();
         Video video = getVideoAnnotation(result.getMethod());
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start";
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start?name=" + testName;
             sendRecordingRequest(url);
         }
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-
+        Video video = getVideoAnnotation(result.getMethod());
+        if (videoEnabled(video)) {
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/stop?result=true";
+            sendRecordingRequest(url);
+        }
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         Video video = getVideoAnnotation(result.getMethod());
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/stop";
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/stop?result=false";
             sendRecordingRequest(url);
         }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-
+        onTestFailure(result);
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-
+        onTestFailure(result);
     }
 
     @Override
@@ -58,7 +62,7 @@ public class RemoteVideoListener implements ITestListener {
 
     }
 
-    private boolean videoEnabled(Video video){
+    private boolean videoEnabled(Video video) {
         return video != null && video.enabled();
     }
 }

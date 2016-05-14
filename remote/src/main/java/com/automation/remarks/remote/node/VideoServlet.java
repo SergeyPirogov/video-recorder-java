@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import static com.automation.remarks.remote.utils.RestUtils.updateResponse;
+import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
 /**
  * Created by Serhii_Pirohov on 10.05.2016.
@@ -32,22 +33,42 @@ public class VideoServlet extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String path = req.getPathInfo();
-
         try {
             switch (path) {
                 case "/start":
-                    videoRecorder = new VideoRecorder("video");
+                    videoRecorder = new VideoRecorder(getFileName(req));
                     videoRecorder.start();
                     updateResponse(resp, HttpStatus.SC_OK, "recording started");
                     break;
                 case "/stop":
+                    if (videoRecorder == null) {
+                        updateResponse(resp, HttpStatus.SC_METHOD_NOT_ALLOWED, "Wrong Action! First, start recording");
+                        break;
+                    }
                     LinkedList<File> files = videoRecorder.stop();
-                    updateResponse(resp, HttpStatus.SC_OK, "recording " + files);
+                    File file = doVideoProcessing(isSuccess(req), files);
+                    updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + file.getAbsolutePath());
                     break;
             }
         } catch (Exception ex) {
             updateResponse(resp, HttpStatus.SC_INTERNAL_SERVER_ERROR,
                     "Internal server error occurred while trying to start / stop recording: " + ex);
         }
+    }
+
+    private String getFileName(HttpServletRequest req) {
+        String name = req.getParameter("name");
+        if (name == null || "null".equalsIgnoreCase(name)) {
+            return "video";
+        }
+        return name;
+    }
+
+    private boolean isSuccess(HttpServletRequest req) {
+        String result = req.getParameter("result");
+        if (result == null) {
+            return false;
+        }
+        return Boolean.valueOf(result);
     }
 }

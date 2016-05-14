@@ -15,14 +15,16 @@ public class RecordingUtils {
     private RecordingUtils() {
     }
 
-    public static void doVideoProcessing(boolean successfulTest, LinkedList<File> recordings) {
+    public static File doVideoProcessing(boolean successfulTest, LinkedList<File> recordings) {
+        File video = null;
         if (!successfulTest) {
             System.err.println("Video recording\n" + recordings);
-            File video = recordings.getFirst();
+            video = recordings.getFirst();
             attachment(video);
         } else if (recordings.size() > 0) {
             recordings.getFirst().delete();
         }
+        return video;
     }
 
     @Attachment(value = "video", type = "video/avi")

@@ -37,13 +37,14 @@ public class Video extends RegistryBasedServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProxySet allProxies = getRegistry().getAllProxies();
         String path = req.getPathInfo();
+        String name = req.getParameter("name");
         try {
             for (RemoteProxy proxy : allProxies) {
                 String proxyId = proxy.getId();
                 final String url = proxyId +
-                        "/extra/" + VideoServlet.class.getSimpleName() + path;
+                        "/extra/" + VideoServlet.class.getSimpleName() + path + "?name=" + name;
                 String response = sendRecordingRequest(url);
-                updateResponse(resp, HttpStatus.SC_OK, proxyId +" video command " + path + " " + response);
+                updateResponse(resp, HttpStatus.SC_OK, proxyId + " video command " + path + " " + response);
             }
         } catch (Exception ex) {
             updateResponse(resp, HttpStatus.SC_INTERNAL_SERVER_ERROR,
