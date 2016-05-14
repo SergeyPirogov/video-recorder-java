@@ -2,7 +2,7 @@
 
 This library allows easily record video of your UI tests by just putting couple annotations.
 
-Supports popular Java test frameworks: JUnit, TestNg, Spock.
+Supports popular Java test frameworks: JUnit, TestNg, Spock, Selenium Grid
 
 ```
 <dependency>
@@ -94,5 +94,65 @@ public class TestNgAnnotationTest {
     }
 }
 ```
+
+Remote Video Recording:
+
+Build remote module:
+
+```
+./gradlew remote:jar
+```
+
+Run hub:
+
+```
+java -jar video-recorder-remote-1.0.jar -role hub -servlets "com.automation.remarks.remote.hub.Video"
+```
+
+Run node:
+
+```
+java -jar video-recorder-remote-1.0.jar -servlets "com.automation.remarks.remote.hub.Video" -role node -port 5555 -hub "http://localhost:4444/grid/register"
+```
+
+TestNG + Remote Video recorder
+
+Change listener in your tests to RemoteVideoListener:
+
+```
+import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.testng.VideoListener;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import static junit.framework.Assert.assertTrue;
+
+@Listeners(RemoteVideoListener.class)
+public class TestNgAnnotationTest {
+
+    @Test
+    @Video
+    public void shouldFailAndCreateRecordWithTestName() {
+        Thread.sleep(1000);
+        assert false;
+    }
+
+    @Test
+    @Video(name = "second_test")
+    public void videoShouldHaveNameSecondTest(){
+        Thread.sleep(1000);
+        assertTrue(false);
+    }
+
+    @Test
+    @Video(name = "third_test", enabled = false)
+    public void shouldFailWithoutRecording() {
+        Thread.sleep(1000);
+        assertTrue(false);
+    }
+}
+```
+
+more [details](http://automation-remarks.com/remote-recorder/)
 
 by [automation-remarks.com](http://automation-remarks.com/)
