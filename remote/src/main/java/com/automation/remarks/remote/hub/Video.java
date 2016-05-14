@@ -38,11 +38,12 @@ public class Video extends RegistryBasedServlet {
         ProxySet allProxies = getRegistry().getAllProxies();
         String path = req.getPathInfo();
         String name = req.getParameter("name");
+        String result = req.getParameter("result");
         try {
             for (RemoteProxy proxy : allProxies) {
                 String proxyId = proxy.getId();
                 final String url = proxyId +
-                        "/extra/" + VideoServlet.class.getSimpleName() + path + "?name=" + name;
+                        "/extra/" + VideoServlet.class.getSimpleName() + path + "?name=" + name + "&result=" + result;
                 String response = sendRecordingRequest(url);
                 updateResponse(resp, HttpStatus.SC_OK, proxyId + " video command " + path + " " + response);
             }

@@ -46,8 +46,8 @@ public class VideoServlet extends HttpServlet {
                         break;
                     }
                     LinkedList<File> files = videoRecorder.stop();
-                    File file = doVideoProcessing(isSuccess(req), files);
-                    updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + file.getAbsolutePath());
+                    String filePath = doVideoProcessing(isSuccess(req), files);
+                    updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + filePath);
                     break;
             }
         } catch (Exception ex) {

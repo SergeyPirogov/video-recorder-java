@@ -38,7 +38,7 @@ public class TestNGRemoteRecordingTest {
     @Video
     public void testName3() throws Exception {
         Thread.sleep(1000);
-        assertTrue(false);
+        assertTrue(true);
     }
 
     @AfterMethod
