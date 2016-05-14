@@ -2,6 +2,8 @@ package test;
 
 import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
+import org.apache.commons.io.FileUtils;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -26,6 +28,11 @@ public class TestVideoRecorder {
         return recorder.stop();
     }
 
+    @Before
+    public void setUp() throws IOException {
+        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
+    }
+
     @Test
     public void shouldBeListWithOneVideo() {
         LinkedList<File> files = recordVideo();
@@ -44,5 +51,12 @@ public class TestVideoRecorder {
     public void shouldBeExactVideoFileName() throws Exception {
         String fileName = recordVideo().getFirst().getName();
         assertThat(fileName, startsWith(VIDEO_FILE_NAME));
+    }
+
+    @Test
+    public void shouldBeEmptyListIfRecordingWasNotStarted() throws Exception {
+        VideoRecorder recorder = new VideoRecorder(VIDEO_FILE_NAME);
+        LinkedList<File> stop = recorder.stop();
+        assertEquals(0, stop.size());
     }
 }
