@@ -42,7 +42,7 @@ public class VideoServlet extends HttpServlet {
                     break;
                 case "/stop":
                     LinkedList<File> files = videoRecorder.stop();
-                    updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + files);
+                    updateResponse(resp, HttpStatus.SC_OK, "recording " + files);
                     break;
             }
         } catch (Exception ex) {

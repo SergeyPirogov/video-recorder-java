@@ -9,10 +9,9 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.util.LinkedList;
 
-import static com.automation.remarks.testng.MethodUtils.getVideoAnnotation;
+import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.video.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 import static com.automation.remarks.video.VideoConfiguration.MODE;

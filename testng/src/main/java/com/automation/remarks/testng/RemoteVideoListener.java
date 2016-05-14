@@ -2,31 +2,24 @@ package com.automation.remarks.testng;
 
 import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.annotations.Video;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.HttpClientUtils;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.lang.reflect.Method;
-import java.util.logging.Logger;
+import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
+import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
 
 /**
  * Created by sergey on 12.05.16.
  */
 public class RemoteVideoListener implements ITestListener {
 
-    private static final Logger LOGGER = Logger.getLogger(RemoteVideoListener.class.getName());
-
     @Override
     public void onTestStart(ITestResult result) {
         String testName = result.getTestName();
-        Video video = MethodUtils.getVideoAnnotation(result.getMethod());
+        Video video = getVideoAnnotation(result.getMethod());
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start/" + testName;
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start";
             sendRecordingRequest(url);
         }
     }
@@ -38,9 +31,9 @@ public class RemoteVideoListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        Video video = MethodUtils.getVideoAnnotation(result.getMethod());
+        Video video = getVideoAnnotation(result.getMethod());
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start/";
+            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/stop";
             sendRecordingRequest(url);
         }
     }
@@ -67,18 +60,5 @@ public class RemoteVideoListener implements ITestListener {
 
     private boolean videoEnabled(Video video){
         return video != null && video.enabled();
-    }
-
-    private void sendRecordingRequest(final String url) {
-        CloseableHttpResponse response = null;
-        try (final CloseableHttpClient client = HttpClientBuilder.create().build()) {
-            final HttpGet get = new HttpGet(url);
-            response = client.execute(get);
-            LOGGER.info("Response: " + response);
-        } catch (Exception ex) {
-            LOGGER.severe("Unable to send recording request to node: " + ex);
-        } finally {
-            HttpClientUtils.closeQuietly(response);
-        }
     }
 }

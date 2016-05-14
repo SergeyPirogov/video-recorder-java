@@ -17,6 +17,8 @@ import org.openqa.selenium.remote.SessionId;
 
 import java.util.logging.Logger;
 
+import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest;
+
 /**
  * Created by Serhii_Pirohov on 11.05.2016.
  */
@@ -27,7 +29,7 @@ public class GridTest {
     @Before
     public void setUp() throws Exception {
         Configuration.remote = "http://localhost:4444/wd/hub";
-        sendRecordingRequest("http://127.0.0.1:4444/grid/admin/VideoServlet/start");
+        sendRecordingRequest("http://127.0.0.1:4444/grid/admin/Video/start");
     }
 
     @Test
@@ -44,20 +46,6 @@ public class GridTest {
 
     @After
     public void tearDown() throws Exception {
-        sendRecordingRequest("http://127.0.0.1:4444/grid/admin/VideoServlet/stop");
-    }
-
-    private void sendRecordingRequest(final String url) {
-        CloseableHttpResponse response = null;
-
-        try (final CloseableHttpClient client = HttpClientBuilder.create().build()) {
-            final HttpGet get = new HttpGet(url);
-            response = client.execute(get);
-            LOGGER.info("Response: " + response);
-        } catch (Exception ex) {
-            LOGGER.severe("Unable to send recording request to node: " + ex);
-        } finally {
-            HttpClientUtils.closeQuietly(response);
-        }
+        sendRecordingRequest("http://127.0.0.1:4444/grid/admin/Video/stop");
     }
 }
