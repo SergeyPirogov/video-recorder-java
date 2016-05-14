@@ -2,7 +2,6 @@ package com.automation.remarks.remote.hub;
 
 import com.automation.remarks.remote.node.VideoServlet;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.openqa.grid.internal.ProxySet;
 import org.openqa.grid.internal.Registry;
 import org.openqa.grid.internal.RemoteProxy;
@@ -43,8 +42,8 @@ public class Video extends RegistryBasedServlet {
                 String proxyId = proxy.getId();
                 final String url = proxyId +
                         "/extra/" + VideoServlet.class.getSimpleName() + path;
-                CloseableHttpResponse response = sendRecordingRequest(url);
-                updateResponse(resp, HttpStatus.SC_OK, "Video command " + path + " " + response);
+                String response = sendRecordingRequest(url);
+                updateResponse(resp, HttpStatus.SC_OK, proxyId +" video command " + path + " " + response);
             }
         } catch (Exception ex) {
             updateResponse(resp, HttpStatus.SC_INTERNAL_SERVER_ERROR,
