@@ -1,16 +1,4 @@
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'maven'
-
-    archivesBaseName = baseArchiveName + '-' + project.name
-
-    sourceCompatibility = 1.7
-
-    repositories {
-        mavenCentral()
-    }
-}
+apply plugin: 'idea'
 
 buildscript {
     repositories {
@@ -21,52 +9,63 @@ buildscript {
     }
 }
 
-apply plugin: 'idea'
-apply plugin: 'com.bmuschko.nexus'
-apply plugin: 'signing'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'com.bmuschko.nexus'
+    apply plugin: 'signing'
 
-repositories {
-    maven {
-        url "https://jitpack.io"
+    archivesBaseName = baseArchiveName + '-' + project.name
+
+    sourceCompatibility = 1.7
+
+    repositories {
+        mavenCentral()
     }
-}
 
-modifyPom {
-    project {
-        name 'com.automation.remarks.video-recorder'
-        packaging 'jar'
-        description 'Video Recorder is a library that allows to record selenium tests'
-        url 'https://github.com/SergeyPirogov/VideoRule'
-
-        scm {
-            url 'scm:git@github.com:SergeyPirogov/VideoRule.git'
-            connection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
-            developerConnection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
-        }
-
-        licenses {
-            license {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                distribution 'repo'
-            }
-        }
-
-        developers {
-            developer {
-                id 'SerhiiP'
-                name 'Sergey Pirogov'
-            }
+    repositories {
+        maven {
+            url "https://jitpack.io"
         }
     }
-}
 
-extraArchive {
-    sources = true
-    tests = false
-    javadoc = true
-}
+    modifyPom {
+        project {
+            name 'com.automation.remarks.video-recorder'
+            packaging 'jar'
+            description 'Video Recorder is a library that allows to record selenium tests'
+            url 'https://github.com/SergeyPirogov/VideoRule'
 
-nexus {
-    sign = true
+            scm {
+                url 'scm:git@github.com:SergeyPirogov/VideoRule.git'
+                connection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
+                developerConnection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'SerhiiP'
+                    name 'Sergey Pirogov'
+                }
+            }
+        }
+    }
+
+    extraArchive {
+        sources = true
+        tests = false
+        javadoc = true
+    }
+
+    nexus {
+        sign = true
+    }
 }

@@ -21,5 +21,4 @@ public class StartGrid {
                 "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
         GridLauncher.main(node);
     }
-
 }
