@@ -112,7 +112,7 @@ java -jar video-recorder-remote-1.0.jar -role hub -servlets "com.automation.rema
 Run node:
 
 ```
-java -jar video-recorder-remote-1.0.jar -servlets "com.automation.remarks.remote.hub.Video" -role node -port 5555 -hub "http://localhost:4444/grid/register"
+java -jar video-recorder-remote-1.0.jar -servlets "com.automation.remarks.remote.node.VideoServlet" -role node -port 5555 -hub "http://localhost:4444/grid/register"
 ```
 
 TestNG + Remote Video recorder
