@@ -1,0 +1,159 @@
+= The Book of Selenide!
+Doc Writer <selenide lovers>
+
+Official Selenide web site http://selenide.org[http://selenide.org]
+
+=== What is Selenide?
+
+Selenide is a framework for test automation powered by http://docs.seleniumhq.org/projects/webdriver/[Selenium WebDriver] that brings the following advantages:
+
+* Concise fluent API for tests 
+* Ajax support for stable tests 
+* Powerful selectors 
+* True Page Objects
+
+[IMPORTANT]
+====
+You don't need to think how to shutdown browser, handle timeouts and StaleElement Exceptions or search for relevant log lines, debugging your tests.  
+Just focus on your business logic and let Selenide do the rest!
+====
+
+<<<
+
+== How to start?
+
+
+Just put actual http://search.maven.org/remotecontent?filepath=com/codeborne/selenide/3.0/selenide-3.0.jar[selenide.jar] to your project.
+
+For Maven users:
+
+Add these lines to file **pom.xml**:
+
+[source,java]
+----
+<dependency>
+    <groupId>com.codeborne</groupId>
+    <artifactId>selenide</artifactId>
+    <version>3.0</version>
+    <scope>test</scope>
+</dependency>
+----
+
+For Ivy users:
+
+Add these lines to file **ivy.xml**:
+
+[source,java]
+----
+  <dependencies>
+    <dependency org="com.codeborne" name="selenide" rev="3.0"/>
+  </dependencies>
+----
+
+For Gradle users:
+
+Add these lines to file **build.gradle**:
+
+[source,java]
+----
+dependencies {
+  testCompile 'com.codeborne:selenide:3.0'
+}
+----
+
+Import the following methods:
+
+[source,java]
+----
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
+----
+
+And start writing UI Tests!
+
+[source,java]
+----
+@Test
+public void userCanLoginByUsername() {
+   open("/login");
+   $(By.name("username")).setValue("johny");
+   $("#submit").click();
+   $(".success-message").shouldHave(text("Hello, Johny!"));
+}
+----
+
+You can find some Selenide usages in the example project https://github.com/selenide-examples/hangman/blob/master/test/uitest/selenide/HangmanSpec.java[Hangman].
+
+There is also a separate project with examples of Selenide usages: https://github.com/selenide-examples[selenide-examples]
+
+<<<
+
+= Selenide vs Selenium
+
+This page brings an overview of how Selenide API is simpler and more powerful than http://seleniumhq.org/projects/webdriver/[Selenium WebDriver] API.
+
+Though http://seleniumhq.org/projects/webdriver/[Selenium WebDriver] is a great library for operating web browser, it's API is too low-level. Developer needs to write some boilerplate code to create/shutdown webdriver, to search radio buttons, to wait for javascript interactions etc. With Selenide You don't need to operate with Selenium WebDriver directly, don't need to wait for ajax requests etc.
+
+[NOTE]
+====
+Remember, this doesn't mean that Selenium WebDriver is "bad":
+
+*   Selenium WebDriver just has lower-level API which is suitable for wider range of tasks.
+*   Selenide API is higher-level, but it was designed specifically for UI- and Acceptance testing.
+====
+
+So, let's compare how to do primitive actions with both libraries.
+
+==== 1.1 Create a browser
+
+Selenide creates browser instance automatically when method **open(url)** invoked.
+
+.Selenide:
+[source,java]
+----
+open("/my-application/login");
+----
+
+You can easily change browser by setting system property browser:
+----
+-Dbrowser=htmlunit (or "chrome" or "ie", default value is "firefox")
+----
+
+.Selenium WebDriver:
+
+[source,java]
+----
+DesiredCapabilities desiredCapabilities = DesiredCapabilities.htmlUnit();
+desiredCapabilities.setCapability(HtmlUnitDriver.INVALIDSELECTIONERROR, true);
+desiredCapabilities.setCapability(HtmlUnitDriver.INVALIDXPATHERROR, false);
+desiredCapabilities.setJavascriptEnabled(true);
+WebDriver driver = new HtmlUnitDriver(desiredCapabilities);
+----
+
+==== 1.2 Shutdown a browser
+
+
+With **Selenide** You don't need to operate with Selenium WebDriver directly. WebDriver will be automatically created/deleted during test start/finished.
+
+==== Selenide takes all responsibilities about webdriver closing. 
+
+[TIP]
+====
+You can explicitly close driver:
+----
+WebDriverRunner.closeBrowser();
+----
+====
+
+
+
+
+
+
+
+
+
+
+
+
+
