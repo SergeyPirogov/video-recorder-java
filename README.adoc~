@@ -3,7 +3,7 @@ Doc Writer <selenide lovers>
 
 Official Selenide web site http://selenide.org[http://selenide.org]
 
-== What is Selenide?
+=== What is Selenide?
 
 Selenide is a framework for test automation powered by http://docs.seleniumhq.org/projects/webdriver/[Selenium WebDriver] that brings the following advantages:
 
