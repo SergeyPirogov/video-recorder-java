@@ -1,159 +1,250 @@
-= The Book of Selenide!
-Doc Writer <selenide lovers>
+Asciidoctor Demo
+================
+////
+Big ol' comment
 
-Official Selenide web site http://selenide.org[http://selenide.org]
+sittin' right 'tween this here title 'n header metadata
+////
+Dan Allen <thedoc@asciidoctor.org>
+:description: A demo of Asciidoctor. This document +
+              exercises numerous features of AsciiDoc +
+              to test Asciidoctor compliance.
+:library: Asciidoctor
+:idprefix:
+:numbered:
+:imagesdir: images
+:toc: manual
+:css-signature: demo
+:toc-placement: preamble
+//:max-width: 800px
+//:doctype: book
+//:sectids!:
 
-== What is Selenide?
+This is a demonstration of {library} {asciidoctor-version}.
+And this is the preamble of this document.
 
-Selenide is a framework for test automation powered by http://docs.seleniumhq.org/projects/webdriver/[Selenium WebDriver] that brings the following advantages:
+ifdef::env-github[]
+++++
+<a name="purpose"></a>
+++++
+endif::env-github[]
 
-* Concise fluent API for tests 
-* Ajax support for stable tests 
-* Powerful selectors 
-* True Page Objects
+[[purpose]]
+.Purpose
+****
+This document exercises many of the features of AsciiDoc to test the {library} implementation.
+****
 
-[IMPORTANT]
-====
-You don't need to think how to shutdown browser, handle timeouts and StaleElement Exceptions or search for relevant log lines, debugging your tests.  
-Just focus on your business logic and let Selenide do the rest!
-====
+TIP: If you want the output to look familiar, copy (or link) the AsciiDoc stylesheet, asciidoc.css, to the output directory.
 
-<<<
+NOTE: Items marked with TODO are either not yet supported or a work in progress.
 
-== How to start?
+== First Steps with AsciiDoc
 
+.Inline markup
+* single quotes around a phrase place 'emphasis'
+* astericks around a phrase make the text *bold*
+* double astericks around one or more **l**etters in a word make those letters bold
+* double underscore around a __sub__string in a word emphasizes that substring
+* use carrots around characters to make them ^super^script
+* use tildes around characters to make them ~sub~script
 
-Just put actual http://search.maven.org/remotecontent?filepath=com/codeborne/selenide/3.0/selenide-3.0.jar[selenide.jar] to your project.
+// separate two adjacent lists using a line comment (only the leading // is required)
 
-For Maven users:
+- characters can be escaped using a {backslash}
+* for instance, you can escape a quote inside emphasized text like 'Here\'s Johnny!'
+- you can safely use reserved XML characters like <, > and &, which are escaped when rendering
+- force a space{sp}between inline elements using the \{sp} attribute
+- hold text together with an intrinsic non-breaking{nbsp}space attribute, \{nbsp}
+- handle words with unicode characters like in the name Gregory Romé
+- claim your copyright (C), registered trademark (R) or trademark (TM)
 
-Add these lines to file **pom.xml**:
+You can write text http://example.com[with inline links], optionally{sp}using
+an explicit link:http://example.com[link prefix]. In either case, the link can
+have a http://example.com?foo=bar&lang=en[query string].
 
-[source,java]
-----
-<dependency>
-    <groupId>com.codeborne</groupId>
-    <artifactId>selenide</artifactId>
-    <version>3.0</version>
-    <scope>test</scope>
-</dependency>
-----
+If you want to break a line +
+just end it in a {plus} sign +
+and continue typing on the next line.
 
-For Ivy users:
+=== Lists Upon Lists
 
-Add these lines to file **ivy.xml**:
+.Adjacent lists
+* this list
+* should join
 
-[source,java]
-----
-  <dependencies>
-    <dependency org="com.codeborne" name="selenide" rev="3.0"/>
-  </dependencies>
-----
+* to have
+* four items
 
-For Gradle users:
+ifdef::env-github[]
+++++
+<a name="ordered"></a>
+++++
+endif::env-github[]
 
-Add these lines to file **build.gradle**:
+[[ordered]]
+.Ordered lists
+. These items
+. will be auto-numbered
+.. and can be nested
+. A numbered list can nest
+* unordered
+* list
+* items
 
-[source,java]
-----
-dependencies {
-  testCompile 'com.codeborne:selenide:3.0'
-}
-----
+.Statement
+I swear I left it in 'Guy\'s' car. Let\'s go look for it.
 
-Import the following methods:
+[[defs]]
+term::
+  definition
+line two
+[[another_term]]another term::
 
-[source,java]
-----
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Condition.*;
-----
+  another definition, which can be literal (indented) or regular paragraph
 
-And start writing UI Tests!
+This should be a standalone paragraph, not grabbed by the definition list.
 
-[source,java]
-----
-@Test
-public void userCanLoginByUsername() {
-   open("/login");
-   $(By.name("username")).setValue("johny");
-   $("#submit").click();
-   $(".success-message").shouldHave(text("Hello, Johny!"));
-}
-----
+[[nested]]
+* first level
+written on two lines
+* first level
++
+....
+with this literal text
+....
 
-You can find some Selenide usages in the example project https://github.com/selenide-examples/hangman/blob/master/test/uitest/selenide/HangmanSpec.java[Hangman].
+* first level
 
-There is also a separate project with examples of Selenide usages: https://github.com/selenide-examples[selenide-examples]
+ with more literal text
 
-<<<
+** second level
+*** third level
+- fourth level
+* back to +
+first level
 
-= Selenide vs Selenium
+// this is just a comment
 
-This page brings an overview of how Selenide API is simpler and more powerful than http://seleniumhq.org/projects/webdriver/[Selenium WebDriver] API.
+Let's make a horizontal rule...
 
-Though http://seleniumhq.org/projects/webdriver/[Selenium WebDriver] is a great library for operating web browser, it's API is too low-level. Developer needs to write some boilerplate code to create/shutdown webdriver, to search radio buttons, to wait for javascript interactions etc. With Selenide You don't need to operate with Selenium WebDriver directly, don't need to wait for ajax requests etc.
+'''
 
-[NOTE]
-====
-Remember, this doesn't mean that Selenium WebDriver is "bad":
+then take a break.
 
-*   Selenium WebDriver just has lower-level API which is suitable for wider range of tasks.
-*   Selenide API is higher-level, but it was designed specifically for UI- and Acceptance testing.
-====
+////
+We'll be right with you...
 
-So, let's compare how to do primitive actions with both libraries.
+after this brief interruption.
+////
 
-==== 1.1 Create a browser
+== ...and we're back!
 
-Selenide creates browser instance automatically when method **open(url)** invoked.
+Want to see a image:tiger.png[Tiger]?
 
-.Selenide:
-[source,java]
-----
-open("/my-application/login");
-----
+Do you feel safer with the tiger in a box?
 
-You can easily change browser by setting system property browser:
-----
--Dbrowser=htmlunit (or "chrome" or "ie", default value is "firefox")
-----
+.Tiger in a box
+image::tiger.png[]
 
-.Selenium WebDriver:
+include::includes/include.adoc[]
 
-[source,java]
-----
-DesiredCapabilities desiredCapabilities = DesiredCapabilities.htmlUnit();
-desiredCapabilities.setCapability(HtmlUnitDriver.INVALIDSELECTIONERROR, true);
-desiredCapabilities.setCapability(HtmlUnitDriver.INVALIDXPATHERROR, false);
-desiredCapabilities.setJavascriptEnabled(true);
-WebDriver driver = new HtmlUnitDriver(desiredCapabilities);
-----
+.Asciidoctor usage example. The listing should contain 5 lines.
+[source,ruby]
+--
+require 'asciidoctor'
 
-==== 1.2 Shutdown a browser
+doc = Asciidoctor.load '*This* is http://asciidoc.org[AsciiDoc]!', header_footer: true
 
+puts doc.render
+--
 
-With **Selenide** You don't need to operate with Selenium WebDriver directly. WebDriver will be automatically created/deleted during test start/finished.
+// TODO: Use ifdef to show output according to current backend
+.Output of Asciidoctor usage example
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="Asciidoctor 0.1.4">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untitled</title>
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="paragraph">
+<p><strong>This</strong> is <a href="http://asciidoc.org">AsciiDoc</a>!</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-01-28 20:11:37 MST
+</div>
+</div>
+</body>
+</html>
+```
 
-==== Selenide takes all responsibilities about webdriver closing. 
+=== Block Quotes and ``Smart'' Ones
+
+____
+AsciiDoc is 'so' *powerful*!
+____
+
+This verse comes to mind.
+
+[verse]
+La la la
+
+Here's another quote:
+
+[quote, Sir Arthur Conan Doyle, The Adventures of Sherlock Holmes]
+____
+When you have eliminated all which is impossible, then whatever remains,
+however improbable, must be the truth.
+____
+
+``Get moving!'' he shouted.
+
+Getting Literal [[literally]]
+-----------------------------
+
+ Want to get literal? Just prefix a line with a space (just 1 space will do).
+
+....
+I'll join that party, too.
+....
+
+We forgot to mention in <<ordered>> that you can change the numbering style.
+
+.. first item (yeah!)
+.. second item, looking `so mono`
+.. third item, +mono+ it is!
+
+// This attribute line will get reattached to the next block
+// despite being followed by a trailing blank line
+[id='wrapup']
+
+== Wrap-up
+
+NOTE: AsciiDoc is quite cool, you should try it!
 
 [TIP]
-====
-You can explicitly close driver:
-----
-WebDriverRunner.closeBrowser();
-----
-====
+.Info
+=====
+Go to this URL to learn more about it:
 
+* http://asciidoc.org
 
+Or you could return to the xref:first-steps-with-asciidoc[] or <<purpose,Purpose>>.
+=====
 
+Here's a reference to the definition of <<another_term>>, in case you forgot it.
 
+[NOTE]
+One more thing. Happy documenting!
 
-
-
-
-
-
-
-
-
+[[google]]When all else fails, head over to <http://google.com>.
