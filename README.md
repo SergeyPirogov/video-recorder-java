@@ -1,5 +1,7 @@
 # VideoRecorder
 
+[![Build Status](https://travis-ci.org/SergeyPirogov/VideoRecorder.svg?branch=master)](https://travis-ci.org/SergeyPirogov/VideoRecorder)
+
 This library allows easily record video of your UI tests by just putting couple annotations.
 
 Supports popular Java test frameworks: JUnit, TestNg, Spock, Selenium Grid
