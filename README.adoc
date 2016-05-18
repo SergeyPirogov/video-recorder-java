@@ -1,5 +1,6 @@
 = Video Recorder
-================
+:toc: left
+
 
 image:https://travis-ci.org/SergeyPirogov/VideoRecorder.svg?branch=master["Build Status", link="https://travis-ci.org/SergeyPirogov/VideoRecorder"]
 
@@ -12,7 +13,7 @@ Supports popular Java test frameworks:
 * Spock
 * Selenium Grid
 
-=== JUnit Rule:
+== JUnit Rule:
 
 .maven
 [source,java]
@@ -68,7 +69,7 @@ public class JUnitVideoTest {
 }
 ----
 
-=== TestNG:
+== TestNG:
 
 .maven
 [source,java]
