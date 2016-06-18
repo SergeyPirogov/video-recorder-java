@@ -27,7 +27,7 @@ Supports popular Java test frameworks:
 .gradle 
 [source,java]
 ----
-compile group: 'com.automation-remarks', name: 'video-recorder-junit', version: '1.0'
+compile group: 'com.automation-remarks', name: 'video-recorder-junit', version: '1.+'
 ----
 
 .JUnitVideoTest.class
@@ -80,10 +80,28 @@ public class JUnitVideoTest {
 </dependency>
 ----
 
+By default recorder will include testng dependency 6.9.10. If you want to place other version of TestNG use this declaration:
+
+.maven
+[source,java]
+----
+<dependency>
+   <groupId>com.automation-remarks</groupId>
+   <artifactId>video-recorder-testng</artifactId>
+   <version>1.0.2</version>
+   <exclusions>
+      <exclusion>
+         <groupId>org.testng</groupId>
+         <artifactId>testng</artifactId>
+       </exclusion>
+    </exclusions>
+</dependency>
+----
+
 .gradle 
 [source,java]
 ----
-compile group: 'com.automation-remarks', name: 'video-recorder-testng', version: '1.0.1'
+compile group: 'com.automation-remarks', name: 'video-recorder-testng', version: '1.+'
 ----
 
 .TestNgVideoTest.class
