@@ -13,3 +13,7 @@ jar{
                 .collect { it.isDirectory() ? it : zipTree(it)}
     }
 }
+
+test{
+    useTestNG()
+}
