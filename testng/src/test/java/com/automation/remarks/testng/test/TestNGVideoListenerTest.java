@@ -12,12 +12,11 @@ import org.testng.internal.ConstructorOrMethod;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by sergey on 18.06.16.
@@ -38,8 +37,8 @@ public class TestNGVideoListenerTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        LinkedList<File> allRecordedTestNames = VideoRecorder.getRecordings();
-        assertThat(allRecordedTestNames.size(), equalTo(1));
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertTrue(file.exists());
     }
 
     @Test
@@ -49,8 +48,8 @@ public class TestNGVideoListenerTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        LinkedList<File> allRecordedTestNames = VideoRecorder.getRecordings();
-        assertThat(allRecordedTestNames.size(), equalTo(1));
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertFalse(file.exists());
     }
 
     private ITestResult prepareMock(Method testMethod) {
