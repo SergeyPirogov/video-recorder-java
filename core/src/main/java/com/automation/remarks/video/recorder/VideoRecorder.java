@@ -7,10 +7,14 @@ import org.monte.media.math.Rational;
 
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static org.monte.media.FormatKeys.*;
+import static org.monte.media.FormatKeys.EncodingKey;
+import static org.monte.media.FormatKeys.FrameRateKey;
+import static org.monte.media.FormatKeys.KeyFrameIntervalKey;
+import static org.monte.media.FormatKeys.MediaType;
+import static org.monte.media.FormatKeys.MediaTypeKey;
+import static org.monte.media.FormatKeys.MimeTypeKey;
 import static org.monte.media.VideoFormatKeys.*;
 
 /**
@@ -23,7 +27,7 @@ public class VideoRecorder implements IVideoRecorder {
     private GraphicsConfiguration gc;
     private File folder;
 
-    private static ArrayList<String> recordingsNames = new ArrayList<>();
+    private static LinkedList<String> recordingsNames = new LinkedList<>();
 
     public VideoRecorder(String fileName) {
         this.fileName = fileName;
@@ -43,13 +47,13 @@ public class VideoRecorder implements IVideoRecorder {
             screenRecorder.stop();
         }
         LinkedList<File> createdMovieFiles = screenRecorder.getCreatedMovieFiles();
-        rememberFileNames(createdMovieFiles);
+        rememberFilePath(createdMovieFiles);
         return createdMovieFiles;
     }
 
-    private void rememberFileNames(java.util.List<File> fileList) {
+    private void rememberFilePath(java.util.List<File> fileList) {
         for (File file : fileList) {
-            recordingsNames.add(file.getName());
+            recordingsNames.add(file.getAbsolutePath());
         }
     }
 
@@ -82,7 +86,7 @@ public class VideoRecorder implements IVideoRecorder {
         int width = screenSize.width;
         int height = screenSize.height;
 
-        Rectangle captureSize = new Rectangle(0,0, width, height);
+        Rectangle captureSize = new Rectangle(0, 0, width, height);
 
         return MonteScreenRecorderBuilder
                 .builder()
@@ -95,7 +99,13 @@ public class VideoRecorder implements IVideoRecorder {
                 .setFileName(fileName).build();
     }
 
-    public static ArrayList<String> getAllRecordedTestNames() {
+    public static LinkedList<String> getAllRecordedTestNames() {
         return recordingsNames;
+    }
+
+    public static String getLastRecordingPath() {
+        if (recordingsNames.size() > 0)
+            return recordingsNames.getLast();
+        return "";
     }
 }

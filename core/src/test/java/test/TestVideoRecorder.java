@@ -48,6 +48,13 @@ public class TestVideoRecorder {
     }
 
     @Test
+    public void shouldBeAbsoluteRecordingPath() throws Exception {
+        recordVideo();
+        String lastRecordingPath = VideoRecorder.getLastRecordingPath();
+        assertThat(lastRecordingPath, startsWith(VideoConfiguration.VIDEO_FOLDER + "/" + VIDEO_FILE_NAME));
+    }
+
+    @Test
     public void shouldBeExactVideoFileName() throws Exception {
         String fileName = recordVideo().getFirst().getName();
         assertThat(fileName, startsWith(VIDEO_FILE_NAME));
