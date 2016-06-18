@@ -4,6 +4,7 @@ dependencies {
     compile 'org.testng:testng:6.9.9'
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
     testCompile group: 'commons-io', name: 'commons-io', version: '2.5'
+    testCompile project(':remote')
 }
 
 jar{
