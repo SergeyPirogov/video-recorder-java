@@ -23,7 +23,6 @@ public class VideoRecorder implements IVideoRecorder {
     private GraphicsConfiguration gc;
     private File folder;
 
-    private static LinkedList<File> recordings;
     private static ArrayList<String> recordingsNames = new ArrayList<>();
 
     public VideoRecorder(String fileName) {
@@ -45,7 +44,6 @@ public class VideoRecorder implements IVideoRecorder {
         }
         LinkedList<File> createdMovieFiles = screenRecorder.getCreatedMovieFiles();
         rememberFileNames(createdMovieFiles);
-        recordings = createdMovieFiles;
         return createdMovieFiles;
     }
 
@@ -53,10 +51,6 @@ public class VideoRecorder implements IVideoRecorder {
         for (File file : fileList) {
             recordingsNames.add(file.getName());
         }
-    }
-
-    public static LinkedList<File> getRecordings() {
-        return recordings;
     }
 
     public static boolean videoEnabled() {
