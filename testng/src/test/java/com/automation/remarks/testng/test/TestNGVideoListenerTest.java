@@ -1,8 +1,10 @@
 package com.automation.remarks.testng.test;
 
 import com.automation.remarks.testng.VideoListener;
+import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
+import org.apache.commons.io.FileUtils;
 import org.testng.IClass;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
@@ -11,6 +13,7 @@ import org.testng.annotations.Test;
 import org.testng.internal.ConstructorOrMethod;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static org.mockito.Mockito.mock;
@@ -26,13 +29,14 @@ public class TestNGVideoListenerTest {
     private Method testMethod;
 
     @BeforeMethod
-    public void beforeMethod(Method method) {
+    public void beforeMethod(Method method) throws IOException {
         this.testMethod = method;
+        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
     }
 
     @Test
     @Video
-    public void shouldBeOneRecordingOnTestFail() throws NoSuchMethodException {
+    public void shouldBeOneRecordingOnTestFail() {
         ITestResult result = prepareMock(testMethod);
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
@@ -43,13 +47,36 @@ public class TestNGVideoListenerTest {
 
     @Test
     @Video
-    public void shouldNotBeRecordingOnTestSuccess() throws NoSuchMethodException {
+    public void shouldNotBeRecordingOnTestSuccess()  {
         ITestResult result = prepareMock(testMethod);
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertFalse(file.exists());
+    }
+
+    @Test
+    @Video(enabled = false)
+    public void shouldNotBeRecordingIfVideoDisabled() {
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        listener.onTestSuccess(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertFalse(file.exists());
+    }
+
+    @Test
+    @Video(name = "new_recording")
+    public void shouldBeRecordingWithCustomName() {
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertTrue(file.exists());
+        assertTrue(file.getName().contains("new_recording"));
     }
 
     private ITestResult prepareMock(Method testMethod) {
