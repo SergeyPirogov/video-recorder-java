@@ -5,7 +5,7 @@ import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.junit.*;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -51,7 +51,7 @@ public class JUnitVideoRecording {
 
     @AfterClass
     public static void shouldBeOneRecordedVideo() {
-        ArrayList<String> lastVideoFiles = VideoRecorder.getAllRecordedTestNames();
+        LinkedList<String> lastVideoFiles = VideoRecorder.getAllRecordedTestNames();
         assertEquals(lastVideoFiles.size(), 2);
     }
 }
