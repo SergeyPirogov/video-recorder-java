@@ -61,7 +61,19 @@ Example with TestNG:
   <version>LATEST</version>
 </dependency>
 ```
+By default recorder will include testng dependency 6.9.10. If you want to place other version of TestNG use this declaration:
 
+<dependency>
+   <groupId>com.automation-remarks</groupId>
+   <artifactId>video-recorder-testng</artifactId>
+   <version>1.0.2</version>
+   <exclusions>
+      <exclusion>
+         <groupId>org.testng</groupId>
+         <artifactId>testng</artifactId>
+       </exclusion>
+    </exclusions>
+</dependency>
 
 ```
 import com.automation.remarks.video.annotations.Video;  
