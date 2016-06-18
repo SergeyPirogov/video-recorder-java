@@ -16,6 +16,9 @@ public class RecordingUtils {
     }
 
     public static String doVideoProcessing(boolean successfulTest, LinkedList<File> recordings) {
+        if(recordings.size() == 0){
+            return "";
+        }
         if (!successfulTest) {
             System.err.println("Video recording\n" + recordings);
             File video = recordings.getFirst();

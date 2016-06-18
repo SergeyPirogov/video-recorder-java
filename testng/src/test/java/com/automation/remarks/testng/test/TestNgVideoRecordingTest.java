@@ -3,6 +3,7 @@ package com.automation.remarks.testng.test;
 import com.automation.remarks.testng.VideoListener;
 import com.automation.remarks.video.annotations.Video;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -13,6 +14,11 @@ import static org.testng.AssertJUnit.assertTrue;
  */
 @Listeners(VideoListener.class)
 public class TestNgVideoRecordingTest {
+
+    @BeforeMethod
+    public void setUp() throws Exception {
+        System.out.println("Start testing");
+    }
 
     @Test
     public void first_test() throws Exception {
