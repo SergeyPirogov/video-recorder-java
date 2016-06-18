@@ -47,6 +47,7 @@ public class MonteScreenRecorder extends ScreenRecorder {
 
     @Override
     protected File createMovieFile(Format fileFormat) throws IOException {
+        createdFiles.clear();
         if (!movieFolder.exists()) {
             movieFolder.mkdirs();
         } else if (!movieFolder.isDirectory()) {

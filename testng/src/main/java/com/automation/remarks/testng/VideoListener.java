@@ -40,7 +40,7 @@ public class VideoListener implements ITestListener {
         if (MODE.equals(ANNOTATED) && (video == null || !video.enabled())) {
             return;
         }
-        String fileName = getFileName(method);
+        String fileName = getFileName(method, video);
         recorder = new VideoRecorder(fileName);
         recorder.start();
     }
@@ -74,8 +74,7 @@ public class VideoListener implements ITestListener {
         return new LinkedList<>();
     }
 
-    private String getFileName(ITestNGMethod method) {
-        Video video = getVideoAnnotation(method);
+    private String getFileName(ITestNGMethod method, Video video) {
         String methodName = method.getMethodName();
         if (video == null) {
             return methodName;
