@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.automation.remarks.testng.VideoListener"/>
+    </listeners>
+    <test name="testng test">
+        <classes>
+            <class name="com.automation.remarks.testng.test.TestNGXmlTest1"/>
+            <class name="com.automation.remarks.testng.test.TestNGXmlTest2"/>
+        </classes>
+    </test>
+</suite>
