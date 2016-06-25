@@ -30,6 +30,10 @@ subprojects {
         }
     }
 
+    dependencies {
+        testCompile group: 'commons-io', name: 'commons-io', version: '2.5'
+    }
+
     modifyPom {
         project {
             name 'com.automation.remarks.video-recorder'
