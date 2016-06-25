@@ -70,4 +70,15 @@ public class TestNGRemoteListenerTest extends BaseTest{
         assertTrue(file.exists(), "File " + file.getName());
         assertThat(file.getName(), CoreMatchers.startsWith("custom_name"));
     }
+
+    @Test
+    @Video(enabled = false)
+    public void shouldNotBeRecordingIfVideoEnabledIsFalse() {
+        ITestResult result = prepareMock(testMethod);
+        RemoteVideoListener listener = new RemoteVideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertFalse(file.exists(), "File " + file.getName());
+    }
 }
