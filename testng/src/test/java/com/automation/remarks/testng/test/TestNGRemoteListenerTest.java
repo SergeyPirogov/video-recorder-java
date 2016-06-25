@@ -5,6 +5,7 @@ import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.CoreMatchers;
 import org.openqa.grid.selenium.GridLauncher;
 import org.testng.IClass;
 import org.testng.ITestNGMethod;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertFalse;
@@ -76,6 +78,17 @@ public class TestNGRemoteListenerTest {
         assertFalse(file.exists());
     }
 
+    @Test
+    @Video(name = "custom_name")
+    public void shouldBeRecordingWithCustomNameOnTestFail() {
+        ITestResult result = prepareMock(testMethod);
+        RemoteVideoListener listener = new RemoteVideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertTrue(file.exists(), "File " + file.getName());
+        assertThat(file.getName(), CoreMatchers.startsWith("custom_name"));
+    }
 
     private ITestResult prepareMock(Method testMethod) {
         ITestResult result = mock(ITestResult.class);

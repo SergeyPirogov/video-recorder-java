@@ -11,6 +11,7 @@ import org.testng.ITestResult;
 import java.io.File;
 import java.util.LinkedList;
 
+import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.video.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
@@ -73,14 +74,4 @@ public class VideoListener implements ITestListener {
         }
         return new LinkedList<>();
     }
-
-    private String getFileName(ITestNGMethod method, Video video) {
-        String methodName = method.getMethodName();
-        if (video == null) {
-            return methodName;
-        }
-        String name = video.name();
-        return name.length() > 1 ? name : methodName;
-    }
-
 }

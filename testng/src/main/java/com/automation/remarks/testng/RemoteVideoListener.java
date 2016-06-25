@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
 
@@ -16,8 +17,8 @@ public class RemoteVideoListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        String testName = result.getMethod().getMethodName();
         Video video = getVideoAnnotation(result.getMethod());
+        String testName = getFileName(result.getMethod(), video);
         if (videoEnabled(video)) {
             String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start?name=" + testName;
             sendRecordingRequest(url);
