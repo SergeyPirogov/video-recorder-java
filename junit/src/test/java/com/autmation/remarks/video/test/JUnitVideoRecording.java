@@ -5,6 +5,7 @@ import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,11 +23,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Created by sergey on 4/21/16.
  */
 public class JUnitVideoRecording {
-
-    @Before
-    public void setUp() throws IOException {
-        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
-    }
 
     @Video
     public void failWithVideo() throws Exception {
@@ -68,6 +64,16 @@ public class JUnitVideoRecording {
         verifyVideoFileNotExists();
     }
 
+    @Before
+    public void setUp() throws IOException {
+        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        setUp();
+    }
+
     private void verifyVideoFileExistsWithName(String fileName) {
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertTrue(file.exists());
@@ -77,4 +83,6 @@ public class JUnitVideoRecording {
     private void verifyVideoFileNotExists() {
         assertFalse(new File(VideoRecorder.getLastRecordingPath()).exists());
     }
+
+
 }
