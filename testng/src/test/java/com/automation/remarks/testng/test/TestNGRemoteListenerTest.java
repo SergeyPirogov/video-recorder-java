@@ -71,6 +71,7 @@ public class TestNGRemoteListenerTest extends BaseTest{
         assertThat(file.getName(), CoreMatchers.startsWith("custom_name"));
     }
 
+
     @Test
     @Video(enabled = false)
     public void shouldNotBeRecordingIfVideoEnabledIsFalse() {
