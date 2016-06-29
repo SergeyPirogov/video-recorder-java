@@ -1,6 +1,6 @@
 package test;
 
-import com.automation.remarks.video.VideoConfiguration;
+import com.automation.remarks.video.recorder.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import static com.automation.remarks.video.recorder.VideoRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -30,7 +31,7 @@ public class TestVideoRecorder {
 
     @Before
     public void setUp() throws IOException {
-        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
+        FileUtils.deleteDirectory(conf().getVideoFolder());
     }
 
     @Test
@@ -41,7 +42,7 @@ public class TestVideoRecorder {
 
     @Test
     public void shouldBeVideoInRecordingsFolder() throws IOException {
-        VideoConfiguration.VIDEO_FOLDER = VIDEO_FOLDER_NAME;
+        conf().withVideoFolder(VIDEO_FOLDER_NAME);
         File video = recordVideo().getFirst();
         String folderName = video.getParentFile().getName();
         assertEquals(folderName, VIDEO_FOLDER_NAME);
@@ -51,7 +52,7 @@ public class TestVideoRecorder {
     public void shouldBeAbsoluteRecordingPath() throws Exception {
         recordVideo();
         String lastRecordingPath = VideoRecorder.getLastRecordingPath();
-        assertThat(lastRecordingPath, startsWith(VideoConfiguration.VIDEO_FOLDER + "/" + VIDEO_FILE_NAME));
+        assertThat(lastRecordingPath, startsWith(conf().getVideoFolder().getAbsolutePath() + "/" + VIDEO_FILE_NAME));
     }
 
     @Test

@@ -2,7 +2,6 @@ package com.automation.remarks.junit.rule.test;
 
 import com.automation.remarks.junit.VideoRule;
 import com.automation.remarks.junit.rule.test.util.TestUtils;
-import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
@@ -66,7 +65,7 @@ public class JUnitVideoRecording {
 
     @Before
     public void setUp() throws IOException {
-        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
+        FileUtils.deleteDirectory(VideoRecorder.conf().getVideoFolder());
     }
 
     @After

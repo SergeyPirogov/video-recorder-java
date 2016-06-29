@@ -1,7 +1,7 @@
 package com.automation.remarks.testng;
 
-import com.automation.remarks.video.VideoConfiguration;
 import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -15,12 +15,14 @@ import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest
  */
 public class RemoteVideoListener implements ITestListener {
 
+    private static final String REMOTE = VideoRecorder.conf().getRemoteUrl();
+
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result.getMethod());
         String testName = getFileName(result.getMethod(), video);
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/start?name=" + testName;
+            String url = REMOTE + "/grid/admin/Video/start?name=" + testName;
             sendRecordingRequest(url);
         }
     }
@@ -29,7 +31,7 @@ public class RemoteVideoListener implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         Video video = getVideoAnnotation(result.getMethod());
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/stop?result=true";
+            String url = REMOTE + "/grid/admin/Video/stop?result=true";
             sendRecordingRequest(url);
         }
     }
@@ -38,7 +40,7 @@ public class RemoteVideoListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         Video video = getVideoAnnotation(result.getMethod());
         if (videoEnabled(video)) {
-            String url = VideoConfiguration.REMOTE + "/grid/admin/Video/stop?result=false";
+            String url = REMOTE + "/grid/admin/Video/stop?result=false";
             sendRecordingRequest(url);
         }
     }

@@ -1,6 +1,6 @@
 package com.automation.remarks.testng.test;
 
-import com.automation.remarks.video.VideoConfiguration;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
 import org.testng.IClass;
 import org.testng.ITestNGMethod;
@@ -8,7 +8,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.internal.ConstructorOrMethod;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
@@ -25,7 +24,7 @@ public class BaseTest {
     @BeforeMethod
     public void beforeMethod(Method method) throws IOException {
         this.testMethod = method;
-        FileUtils.deleteDirectory(new File(VideoConfiguration.VIDEO_FOLDER));
+        FileUtils.deleteDirectory(VideoRecorder.conf().getVideoFolder());
     }
 
     protected ITestResult prepareMock(Method testMethod) {

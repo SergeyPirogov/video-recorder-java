@@ -15,7 +15,6 @@ import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.video.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
-import static com.automation.remarks.video.VideoConfiguration.MODE;
 
 /**
  * Created by sergey on 18.06.16.
@@ -38,7 +37,7 @@ public class VideoListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         ITestNGMethod method = result.getMethod();
         Video video = getVideoAnnotation(method);
-        if (MODE.equals(ANNOTATED) && (video == null || !video.enabled())) {
+        if (VideoRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled())) {
             return;
         }
         String fileName = getFileName(method, video);

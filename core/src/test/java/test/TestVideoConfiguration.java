@@ -1,6 +1,6 @@
 package test;
 
-import com.automation.remarks.video.VideoConfiguration;
+import com.automation.remarks.video.recorder.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class TestVideoConfiguration {
 
     @Test
     public void shouldDisableVideoRecording() throws Exception {
-        VideoConfiguration.VIDEO_ENABLED = "false";
+        VideoRecorder.conf().videoEnabled(false);
         VideoRecorder recorder = new VideoRecorder("test_video");
         recorder.start();
         LinkedList<File> files = recorder.stop();
@@ -27,9 +27,10 @@ public class TestVideoConfiguration {
 
     @Test
     public void testName() throws Exception {
-        VideoConfiguration.VIDEO_ENABLED = "true";
+        VideoConfiguration conf = VideoRecorder.conf();
+        conf.videoEnabled(true);
         final String path = System.getProperty("user.dir") + File.separator + "video";
-        VideoConfiguration.VIDEO_FOLDER = path;
+        conf.withVideoFolder(path);
         VideoRecorder recorder = new VideoRecorder("test_video");
         recorder.start();
         LinkedList<File> files = recorder.stop();

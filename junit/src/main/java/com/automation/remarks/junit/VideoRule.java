@@ -11,7 +11,6 @@ import java.util.LinkedList;
 
 import static com.automation.remarks.video.RecordingMode.ALL;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
-import static com.automation.remarks.video.VideoConfiguration.MODE;
 
 
 /**
@@ -26,7 +25,7 @@ public class VideoRule implements TestRule {
             public void evaluate() throws Throwable {
                 Video video = description.getAnnotation(Video.class);
                 String name = getFileName(video, description);
-                if (MODE.equals(ALL)) {
+                if (VideoRecorder.conf().getMode().equals(ALL)) {
                     recordVideo(name, base);
                 } else if (video != null && video.enabled()) {
                     recordVideo(name, base);

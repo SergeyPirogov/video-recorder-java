@@ -1,6 +1,5 @@
 package com.automation.remarks.video.recorder;
 
-import com.automation.remarks.video.VideoConfiguration;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
 import org.monte.media.math.Rational;
@@ -26,24 +25,26 @@ public class VideoRecorder implements IVideoRecorder {
     private MonteScreenRecorder screenRecorder;
     private GraphicsConfiguration gc;
     private File folder;
+    private VideoConfiguration videoConfiguration;
 
     private static LinkedList<String> recordingsNames = new LinkedList<>();
 
     public VideoRecorder(String fileName) {
         this.fileName = fileName;
-        this.folder = new File(VideoConfiguration.VIDEO_FOLDER);
+        this.videoConfiguration = conf();
+        this.folder = videoConfiguration.getVideoFolder();
         this.gc = getGraphicConfig();
         this.screenRecorder = getScreenRecorder();
     }
 
     public void start() {
-        if (videoEnabled()) {
+        if (videoConfiguration.isVideoEnabled()) {
             screenRecorder.start();
         }
     }
 
     public LinkedList<File> stop() {
-        if (videoEnabled()) {
+        if (videoConfiguration.isVideoEnabled()) {
             screenRecorder.stop();
         }
         LinkedList<File> createdMovieFiles = screenRecorder.getCreatedMovieFiles();
@@ -54,14 +55,6 @@ public class VideoRecorder implements IVideoRecorder {
     private void rememberFilePath(java.util.List<File> fileList) {
         for (File file : fileList) {
             recordingsNames.add(file.getAbsolutePath());
-        }
-    }
-
-    public static boolean videoEnabled() {
-        try {
-            return Boolean.valueOf(VideoConfiguration.VIDEO_ENABLED);
-        } catch (Exception e) {
-            return false;
         }
     }
 
@@ -107,5 +100,9 @@ public class VideoRecorder implements IVideoRecorder {
         if (recordingsNames.size() > 0)
             return recordingsNames.getLast();
         return "";
+    }
+
+    public static VideoConfiguration conf(){
+        return new VideoConfiguration();
     }
 }
