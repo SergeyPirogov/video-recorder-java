@@ -1,6 +1,5 @@
 package test;
 
-import com.automation.remarks.video.recorder.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
