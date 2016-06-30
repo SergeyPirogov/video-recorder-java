@@ -39,12 +39,12 @@ subprojects {
             name 'com.automation.remarks.video-recorder'
             packaging 'jar'
             description 'Video Recorder is a library that allows to record selenium tests'
-            url 'https://github.com/SergeyPirogov/VideoRule'
+            url 'https://github.com/SergeyPirogov/VideoRecorder'
 
             scm {
-                url 'scm:git@github.com:SergeyPirogov/VideoRule.git'
-                connection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
-                developerConnection 'scm:git@github.com:SergeyPirogov/VideoRule.git'
+                url 'scm:git@github.com:SergeyPirogov/VideoRecorder.git'
+                connection 'scm:git@github.com:SergeyPirogov/VideoRecorder.git'
+                developerConnection 'scm:git@github.com:SergeyPirogov/VideoRecorder.git'
             }
 
             licenses {
