@@ -7,3 +7,6 @@ build/
 out/
 recordings/
 core/video/
+junit/video/
+testng/video/
+remote/video/
