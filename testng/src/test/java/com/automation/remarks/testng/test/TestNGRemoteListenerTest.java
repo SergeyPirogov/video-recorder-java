@@ -18,23 +18,11 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by sergey on 18.06.16.
  */
-public class TestNGRemoteListenerTest extends BaseTest{
+public class TestNGRemoteListenerTest extends BaseTest {
 
     @BeforeClass
     public static void runGrid() throws Exception {
-        String[] hub = {"-port", "4444",
-                "-host", "localhost",
-                "-role", "hub",
-                "-servlets", "com.automation.remarks.remote.hub.Video"};
-        GridLauncher.main(hub);
-
-        String[] node = {"-port", "5555",
-                "-host", "localhost",
-                "-role", "node",
-                "-hub", "http://localhost:4444/grid/register",
-                "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
-        GridLauncher.main(node);
-        Thread.sleep(1000);
+        startGrid("4444","5555");
     }
 
     @Test
@@ -71,7 +59,6 @@ public class TestNGRemoteListenerTest extends BaseTest{
         assertThat(file.getName(), CoreMatchers.startsWith("custom_name"));
     }
 
-
     @Test
     @Video(enabled = false)
     public void shouldNotBeRecordingIfVideoEnabledIsFalse() {
@@ -81,5 +68,35 @@ public class TestNGRemoteListenerTest extends BaseTest{
         listener.onTestFailure(result);
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertFalse(file.exists(), "File " + file.getName());
+    }
+
+    @Test
+    @Video
+    public void shouldPassIfGridConfiguredWithCustomPorts() throws Exception {
+        startGrid("4446","5556");
+        VideoRecorder.conf().withRemoteGridHubUrl("http://localhost:4446");
+        ITestResult result = prepareMock(testMethod);
+        RemoteVideoListener listener = new RemoteVideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertTrue(file.exists(), "File " + file.getName());
+        assertThat(file.getName(), CoreMatchers.startsWith("shouldPassIfGridConfiguredWithCustomPorts"));
+    }
+
+    private static void startGrid(String hubPort, String nodePort) throws Exception {
+        String[] hub = {"-port", hubPort,
+                "-host", "localhost",
+                "-role", "hub",
+                "-servlets", "com.automation.remarks.remote.hub.Video"};
+        GridLauncher.main(hub);
+
+        String[] node = {"-port", nodePort,
+                "-host", "localhost",
+                "-role", "node",
+                "-hub", "http://localhost:" + hubPort + "/grid/register",
+                "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
+        GridLauncher.main(node);
+        Thread.sleep(1000);
     }
 }
