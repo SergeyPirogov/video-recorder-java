@@ -1,6 +1,7 @@
 package com.automation.remarks.testng.test;
 
 import com.automation.remarks.testng.RemoteVideoListener;
+import com.automation.remarks.video.RecordingMode;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.hamcrest.CoreMatchers;
@@ -82,6 +83,17 @@ public class TestNGRemoteListenerTest extends BaseTest {
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertTrue(file.exists(), "File " + file.getName());
         assertThat(file.getName(), CoreMatchers.startsWith("shouldPassIfGridConfiguredWithCustomPorts"));
+    }
+
+    @Test
+    public void shouldBeVideoForMethodWithoutAnnotationIfModeAll(){
+        VideoRecorder.conf().withRecordMode(RecordingMode.ALL);
+        ITestResult result = prepareMock(testMethod);
+        RemoteVideoListener listener = new RemoteVideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertTrue(file.exists(), "File " + file.getName());
     }
 
     private static void startGrid(String hubPort, String nodePort) throws Exception {

@@ -1,10 +1,12 @@
 package com.automation.remarks.testng.test;
 
+import com.automation.remarks.video.RecordingMode;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
 import org.testng.IClass;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.internal.ConstructorOrMethod;
 
@@ -24,6 +26,16 @@ public class BaseTest {
     @BeforeMethod
     public void beforeMethod(Method method) throws IOException {
         this.testMethod = method;
+        deleteVideoDir();
+        VideoRecorder.conf().withRecordMode(RecordingMode.ANNOTATED);
+    }
+
+    @AfterClass
+    public static void tearDown() throws Exception {
+        deleteVideoDir();
+    }
+
+    private static void deleteVideoDir() throws IOException {
         FileUtils.deleteDirectory(VideoRecorder.conf().getVideoFolder());
     }
 
