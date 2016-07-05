@@ -139,6 +139,20 @@ public class TestNgVideoTest {
     }
 }
 ----
+== Configuration
+
+You are able to set some configuration parameters for Video Recorder:
+
+[source,java]
+----
+ // Default video folder is ${user.dir}/video. Could be changed by:
+        VideoRecorder.conf().withVideoFolder("custom_folder")
+                // Video could be disabled globally. Set to "true"
+                .videoEnabled(true)
+                // There is two recording modes ANNOTATED AND ALL
+                // Annotated is default and works only with methods annotated by @Video
+                .withRecordMode(RecordingMode.ANNOTATED);
+----
 
 == Remote Video Recording:
 
