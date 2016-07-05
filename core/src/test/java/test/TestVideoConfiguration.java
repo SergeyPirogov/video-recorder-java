@@ -26,7 +26,7 @@ public class TestVideoConfiguration {
     }
 
     @Test
-    public void testName() throws Exception {
+    public void shouldBeVideoFileWithDefaultVideoFolderPath() throws Exception {
         VideoConfiguration conf = VideoRecorder.conf();
         conf.videoEnabled(true);
         final String path = System.getProperty("user.dir") + File.separator + "video";
