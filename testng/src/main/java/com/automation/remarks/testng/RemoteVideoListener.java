@@ -9,6 +9,7 @@ import org.testng.ITestResult;
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
+import static com.automation.remarks.video.RecordingMode.ALL;
 
 /**
  * Created by sergey on 12.05.16.
@@ -66,6 +67,10 @@ public class RemoteVideoListener implements ITestListener {
     }
 
     private boolean videoEnabled(Video video) {
-        return video != null && video.enabled();
+        if (!VideoRecorder.conf().isVideoEnabled()) {
+            return false;
+        }
+        return VideoRecorder.conf().getMode().equals(ALL) ||
+                (video != null && video.enabled());
     }
 }
