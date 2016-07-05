@@ -2,6 +2,7 @@ package test;
 
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,10 +20,10 @@ import static org.junit.Assert.assertThat;
  */
 public class TestVideoRecorder {
 
-    public static final String VIDEO_FILE_NAME = "video_test";
-    public static final String VIDEO_FOLDER_NAME = "video";
+    private static final String VIDEO_FILE_NAME = "video_test";
+    private static final String VIDEO_FOLDER_NAME = "video";
 
-    public LinkedList<File> recordVideo() {
+    private LinkedList<File> recordVideo() {
         VideoRecorder recorder = new VideoRecorder(VIDEO_FILE_NAME);
         recorder.start();
         return recorder.stop();
@@ -31,6 +32,11 @@ public class TestVideoRecorder {
     @Before
     public void setUp() throws IOException {
         FileUtils.deleteDirectory(conf().getVideoFolder());
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        setUp();
     }
 
     @Test
@@ -51,7 +57,7 @@ public class TestVideoRecorder {
     public void shouldBeAbsoluteRecordingPath() throws Exception {
         recordVideo();
         String lastRecordingPath = VideoRecorder.getLastRecordingPath();
-        assertThat(lastRecordingPath, startsWith(conf().getVideoFolder().getAbsolutePath() + "/" + VIDEO_FILE_NAME));
+        assertThat(lastRecordingPath, startsWith(conf().getVideoFolder().getAbsolutePath() + File.separator + VIDEO_FILE_NAME));
     }
 
     @Test
