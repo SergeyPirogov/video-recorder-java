@@ -4,7 +4,6 @@ import com.automation.remarks.testng.RemoteVideoListener;
 import com.automation.remarks.video.RecordingMode;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
-import org.hamcrest.CoreMatchers;
 import org.openqa.grid.selenium.GridLauncher;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
@@ -13,6 +12,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -57,7 +57,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         listener.onTestFailure(result);
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertTrue(file.exists(), "File " + file.getName());
-        assertThat(file.getName(), CoreMatchers.startsWith("custom_name"));
+        assertThat(file.getName(), startsWith("custom_name"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         listener.onTestFailure(result);
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertTrue(file.exists(), "File " + file.getName());
-        assertThat(file.getName(), CoreMatchers.startsWith("shouldPassIfGridConfiguredWithCustomPorts"));
+        assertThat(file.getName(), startsWith("shouldPassIfGridConfiguredWithCustomPorts"));
     }
 
     @Test
