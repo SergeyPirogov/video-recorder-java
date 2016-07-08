@@ -19,7 +19,7 @@ class BaseTest extends Specification {
     }
 
     def runGrid(){
-        String[] args = {};
+        String[] args = [];
         StartGrid.main(args);
         sleep(1000);
     }

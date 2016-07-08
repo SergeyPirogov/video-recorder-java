@@ -1,6 +1,7 @@
 package com.automation.remarks.remote.tests
 
 import com.automation.remarks.video.recorder.VideoRecorder
+import spock.lang.Shared
 import spock.lang.Stepwise
 
 import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest
@@ -9,6 +10,8 @@ import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest
  */
 @Stepwise
 class NodeServletTest extends BaseTest {
+
+    @Shared String VIDEO_FOLDER = System.getProperty('user.dir')
 
     def setup() {
         VideoRecorder.conf().videoFolder.deleteDir()
@@ -32,7 +35,7 @@ class NodeServletTest extends BaseTest {
         when:
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
-        message.startsWith "recording stopped /home/sergey/VideoRecorder/remote/video/video_recording"
+        message.startsWith "recording stopped ${VIDEO_FOLDER}/video/video_recording"
     }
 
     def "shouldBeDefaultFileName"() {
@@ -41,7 +44,7 @@ class NodeServletTest extends BaseTest {
         when:
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
-        message.startsWith "recording stopped /home/sergey/VideoRecorder/remote/video/video_recording"
+        message.startsWith "recording stopped ${VIDEO_FOLDER}/video/video_recording"
     }
 
     def "shouldBeFileNameAsNameRequestParameter"() {
@@ -51,7 +54,7 @@ class NodeServletTest extends BaseTest {
         when:
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
-        message.startsWith "recording stopped /home/sergey/VideoRecorder/remote/video/video_recording"
+        message.startsWith "recording stopped ${VIDEO_FOLDER}/video/video_recording"
         getVideoFiles().first().name =~ name
     }
 
