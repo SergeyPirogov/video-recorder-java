@@ -56,4 +56,9 @@ public class VideoConfiguration {
     public boolean isVideoEnabled() {
         return videoEnabled;
     }
+
+    public VideoConfiguration withDefaultFolder() {
+        videoFolder = FOLDER;
+        return this;
+    }
 }

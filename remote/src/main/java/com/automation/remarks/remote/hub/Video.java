@@ -1,6 +1,7 @@
 package com.automation.remarks.remote.hub;
 
 import com.automation.remarks.remote.node.VideoServlet;
+import com.google.common.base.Joiner;
 import org.apache.http.HttpStatus;
 import org.openqa.grid.internal.ProxySet;
 import org.openqa.grid.internal.Registry;
@@ -11,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest;
@@ -38,7 +41,7 @@ public class Video extends RegistryBasedServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProxySet allProxies = getRegistry().getAllProxies();
         String path = req.getPathInfo();
-        String params = mapToParams(req.getParameterMap());
+        String params = mapToParams(req);
 
         try {
             for (RemoteProxy proxy : allProxies) {
@@ -54,14 +57,15 @@ public class Video extends RegistryBasedServlet {
         }
     }
 
-    private String mapToParams(Map<String, String[]> map) {
-        StringBuilder builder = new StringBuilder();
-        for (String key : map.keySet()) {
-            builder.append(key).append("=").append(map.get(key)[0]).append("&");
+    private String mapToParams(HttpServletRequest req) {
+        Enumeration<String> parameterNames = req.getParameterNames();
+        Map<String,String> map = new HashMap<>();
+        while (parameterNames.hasMoreElements()){
+            String parameter = parameterNames.nextElement();
+            String value = req.getParameter(parameter);
+            map.put(parameter,value);
         }
-        builder.setLength(builder.length() - 1);
-        return builder.toString();
-
+        return Joiner.on("&").withKeyValueSeparator("=").join(map);
     }
 
 }

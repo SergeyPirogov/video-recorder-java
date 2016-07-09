@@ -33,6 +33,7 @@ public class VideoServlet extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String path = req.getPathInfo();
+        VideoRecorder.conf().withDefaultFolder();
         try {
             switch (path) {
                 case "/start":
