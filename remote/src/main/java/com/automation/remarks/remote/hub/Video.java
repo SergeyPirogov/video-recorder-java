@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest;
 import static com.automation.remarks.remote.utils.RestUtils.updateResponse;
@@ -37,13 +38,13 @@ public class Video extends RegistryBasedServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProxySet allProxies = getRegistry().getAllProxies();
         String path = req.getPathInfo();
-        String name = req.getParameter("name");
-        String result = req.getParameter("result");
+        String params = mapToParams(req.getParameterMap());
+
         try {
             for (RemoteProxy proxy : allProxies) {
                 String proxyId = proxy.getId();
                 final String url = proxyId +
-                        "/extra/" + VideoServlet.class.getSimpleName() + path + "?name=" + name + "&result=" + result;
+                        "/extra/" + VideoServlet.class.getSimpleName() + path + "?" + params;
                 String response = sendRecordingRequest(url);
                 updateResponse(resp, HttpStatus.SC_OK, proxyId + " video command " + path + " " + response);
             }
@@ -53,5 +54,14 @@ public class Video extends RegistryBasedServlet {
         }
     }
 
+    private String mapToParams(Map<String, String[]> map) {
+        StringBuilder builder = new StringBuilder();
+        for (String key : map.keySet()) {
+            builder.append(key).append("=").append(map.get(key)[0]).append("&");
+        }
+        builder.setLength(builder.length() - 1);
+        return builder.toString();
+
+    }
 
 }
