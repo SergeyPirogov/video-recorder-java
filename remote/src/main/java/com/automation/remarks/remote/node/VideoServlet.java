@@ -36,6 +36,10 @@ public class VideoServlet extends HttpServlet {
         try {
             switch (path) {
                 case "/start":
+                    String folder = req.getParameter("folder");
+                    if(folder != null){
+                        VideoRecorder.conf().withVideoFolder(folder);
+                    }
                     videoRecorder = new VideoRecorder(getFileName(req));
                     videoRecorder.start();
                     updateResponse(resp, HttpStatus.SC_OK, "recording started");

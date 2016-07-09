@@ -76,12 +76,15 @@ class NodeServletTest extends BaseTest {
         getVideoFiles().size() == 1
     }
 
-    @spock.lang.Ignore
-    def "shouldBeWrongActionMessageOnStopIfWasNotStarted"() {
+
+    def "shouldBeCustomFolderForVideo"() {
+        def folderName = "custom_folder"
+        given:
+        sendRecordingRequest(NODE_SERVLET_URL + "/start?name=video&folder=${folderName}")
         when:
-        def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
+        def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop?result=false")
         then:
-        message == "Wrong Action! First, start recording"
+        message.startsWith "recording stopped ${VIDEO_FOLDER}/${folderName}/video_recording"
     }
 }
 
