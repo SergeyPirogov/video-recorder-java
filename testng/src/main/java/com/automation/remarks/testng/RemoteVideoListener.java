@@ -23,7 +23,7 @@ public class RemoteVideoListener implements ITestListener {
         Video video = getVideoAnnotation(result.getMethod());
         String testName = getFileName(result.getMethod(), video);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/start?name=" + testName;
+            String url = REMOTE + "/grid/admin/Video/start?name=" + testName + "&folder=" + VideoRecorder.conf().getVideoFolder();
             sendRecordingRequest(url);
         }
     }

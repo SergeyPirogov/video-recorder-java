@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.testng.Assert.assertFalse;
@@ -94,6 +95,29 @@ public class TestNGRemoteListenerTest extends BaseTest {
         listener.onTestFailure(result);
         File file = new File(VideoRecorder.getLastRecordingPath());
         assertTrue(file.exists(), "File " + file.getName());
+    }
+
+    @Test
+    @Video
+    public void shouldBeDefaultFolderForVideo(){
+        ITestResult result = prepareMock(testMethod);
+        RemoteVideoListener listener = new RemoteVideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertThat(file.getParentFile().getName(), equalTo("video"));
+    }
+
+    @Test
+    @Video
+    public void shouldBeCustomFolderForVideo(){
+        VideoRecorder.conf().withVideoFolder("custom_folder");
+        ITestResult result = prepareMock(testMethod);
+        RemoteVideoListener listener = new RemoteVideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = new File(VideoRecorder.getLastRecordingPath());
+        assertThat(file.getParentFile().getName(), equalTo("custom_folder"));
     }
 
     private static void startGrid(String hubPort, String nodePort) throws Exception {
