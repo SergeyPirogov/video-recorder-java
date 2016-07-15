@@ -20,28 +20,29 @@ public class RemoteVideoListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        Video video = getVideoAnnotation(result.getMethod());
-        String testName = getFileName(result.getMethod(), video);
+        Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/start?name=" + testName + "&folder=" + VideoRecorder.conf().getVideoFolder();
+            String url = REMOTE + "/grid/admin/Video/start?&folder=" + VideoRecorder.conf().getVideoFolder();
             sendRecordingRequest(url);
         }
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        Video video = getVideoAnnotation(result.getMethod());
+        String testName = getFileName(result);
+        Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/stop?result=true";
+            String url = REMOTE + "/grid/admin/Video/stop?result=true&name="+ testName;
             sendRecordingRequest(url);
         }
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        Video video = getVideoAnnotation(result.getMethod());
+        String testName = getFileName(result);
+        Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/stop?result=false";
+            String url = REMOTE + "/grid/admin/Video/stop?result=false&name="+testName;
             sendRecordingRequest(url);
         }
     }
@@ -67,10 +68,8 @@ public class RemoteVideoListener implements ITestListener {
     }
 
     private boolean videoEnabled(Video video) {
-        if (!VideoRecorder.conf().isVideoEnabled()) {
-            return false;
-        }
-        return VideoRecorder.conf().getMode().equals(ALL) ||
-                (video != null && video.enabled());
+        return VideoRecorder.conf().isVideoEnabled()
+                && (VideoRecorder.conf().getMode().equals(ALL)
+                || (video != null && video.enabled()));
     }
 }

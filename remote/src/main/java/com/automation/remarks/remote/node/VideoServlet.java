@@ -41,7 +41,7 @@ public class VideoServlet extends HttpServlet {
                     if(folder != null){
                         VideoRecorder.conf().withVideoFolder(folder);
                     }
-                    videoRecorder = new VideoRecorder(getFileName(req));
+                    videoRecorder = new VideoRecorder();
                     videoRecorder.start();
                     updateResponse(resp, HttpStatus.SC_OK, "recording started");
                     break;
@@ -50,8 +50,9 @@ public class VideoServlet extends HttpServlet {
                         updateResponse(resp, HttpStatus.SC_METHOD_NOT_ALLOWED, "Wrong Action! First, start recording");
                         break;
                     }
-                    LinkedList<File> files = videoRecorder.stop();
-                    String filePath = doVideoProcessing(isSuccess(req), files);
+                    String fileName = getFileName(req);
+                    File video = videoRecorder.stopAndSave(fileName);
+                    String filePath = doVideoProcessing(isSuccess(req), video);
                     updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + filePath);
                     break;
             }

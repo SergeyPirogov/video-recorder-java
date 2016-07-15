@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -23,7 +24,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists());
     }
 
@@ -34,7 +35,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertFalse(file.exists());
     }
 
@@ -45,7 +46,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertFalse(file.exists());
     }
 
@@ -56,7 +57,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists());
         assertTrue(file.getName().contains("new_recording"));
     }

@@ -31,6 +31,7 @@ subprojects {
     }
 
     dependencies {
+        testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
         testCompile group: 'commons-io', name: 'commons-io', version: '2.5'
     }
 

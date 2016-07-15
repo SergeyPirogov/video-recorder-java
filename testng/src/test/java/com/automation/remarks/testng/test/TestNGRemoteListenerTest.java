@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -34,7 +34,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists());
     }
 
@@ -45,7 +45,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertFalse(file.exists());
     }
 
@@ -56,7 +56,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists(), "File " + file.getName());
         assertThat(file.getName(), startsWith("custom_name"));
     }
@@ -68,7 +68,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertFalse(file.exists(), "File " + file.getName());
     }
 
@@ -81,7 +81,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists(), "File " + file.getName());
         assertThat(file.getName(), startsWith("shouldPassIfGridConfiguredWithCustomPorts"));
     }
@@ -93,7 +93,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists(), "File " + file.getName());
     }
 
@@ -104,7 +104,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertThat(file.getParentFile().getName(), equalTo("video"));
     }
 
@@ -116,7 +116,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertThat(file.getParentFile().getName(), equalTo("custom_folder"));
     }
 

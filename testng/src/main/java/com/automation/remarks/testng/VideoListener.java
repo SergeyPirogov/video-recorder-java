@@ -35,26 +35,26 @@ public class VideoListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        ITestNGMethod method = result.getMethod();
-        Video video = getVideoAnnotation(method);
+        Video video = getVideoAnnotation(result);
         if (VideoRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled())) {
             return;
         }
-        String fileName = getFileName(method, video);
-        recorder = new VideoRecorder(fileName);
+        recorder = new VideoRecorder();
         recorder.start();
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        LinkedList<File> recordings = stopRecording();
-        doVideoProcessing(true, recordings);
+        String fileName = getFileName(result);
+        File video = stopRecording(fileName);
+        doVideoProcessing(true, video);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        LinkedList<File> recordings = stopRecording();
-        doVideoProcessing(false, recordings);
+        String fileName = getFileName(result);
+        File video = stopRecording(fileName);
+        doVideoProcessing(false, video);
     }
 
     @Override
@@ -67,10 +67,10 @@ public class VideoListener implements ITestListener {
         onTestFailure(result);
     }
 
-    private LinkedList<File> stopRecording() {
+    private File stopRecording(String filename) {
         if (recorder != null) {
-            return recorder.stop();
+            return recorder.stopAndSave(filename);
         }
-        return new LinkedList<>();
+        return null;
     }
 }
