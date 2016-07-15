@@ -11,15 +11,16 @@ public class RecordingUtils {
     private RecordingUtils() {
     }
 
-    public static String doVideoProcessing(boolean successfulTest, LinkedList<File> recordings) {
-        if (recordings.size() == 0) {
-            return "";
+    public static String doVideoProcessing(boolean successfulTest, File video) {
+        if (video == null) {
+            return "Video file is NULL";
         }
         if (!successfulTest) {
-            System.err.println("Video recording\n" + recordings);
-            return recordings.getFirst().getAbsolutePath();
-        } else if (recordings.size() > 0) {
-            recordings.getFirst().delete();
+            String absolutePath = video.getAbsolutePath();
+            System.err.println("Video recording\n" + absolutePath);
+            return absolutePath;
+        } else  {
+            video.delete();
         }
         return "no recordings on success test";
     }

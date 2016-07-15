@@ -24,6 +24,7 @@ public class VideoRecorder implements IVideoRecorder {
 
     private MonteScreenRecorder screenRecorder;
     private VideoConfiguration videoConfiguration;
+    private static File lastVideo;
 
     public VideoRecorder() {
         this.videoConfiguration = conf();
@@ -37,10 +38,12 @@ public class VideoRecorder implements IVideoRecorder {
     }
 
     public File stopAndSave(String filename) {
+        File video = null;
         if (videoConfiguration.isVideoEnabled()) {
-            return writeVideo(filename);
+             video = writeVideo(filename);
         }
-        return null;
+        lastVideo = video;
+        return video;
     }
 
     private File writeVideo(String filename){
@@ -92,5 +95,10 @@ public class VideoRecorder implements IVideoRecorder {
 
     public static VideoConfiguration conf() {
         return new VideoConfiguration();
+    }
+
+    public static File getLastRecording() {
+        return lastVideo;
+
     }
 }

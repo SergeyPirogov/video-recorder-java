@@ -37,15 +37,15 @@ public class VideoRule implements TestRule {
 
             private void recordVideo(String name, final Statement base) throws Throwable {
                 boolean successful = false;
-                IVideoRecorder recorder = new VideoRecorder(name);
+                IVideoRecorder recorder = new VideoRecorder();
                 recorder.start();
                 try {
                     base.evaluate();
                     successful = true;
                 } finally {
-                    LinkedList<File> files = recorder.stop();
+                    File video = recorder.stopAndSave(name);
                     if (description.isTest()) {
-                        doVideoProcessing(successful, files);
+                        doVideoProcessing(successful, video);
                     }
                 }
             }

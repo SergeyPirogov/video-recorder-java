@@ -74,13 +74,13 @@ public class JUnitVideoRecording {
     }
 
     private void verifyVideoFileExistsWithName(String fileName) {
-        File file = new File(VideoRecorder.getLastRecordingPath());
+        File file = VideoRecorder.getLastRecording();
         assertTrue(file.exists());
         assertThat(file.getName(), startsWith(fileName));
     }
 
     private void verifyVideoFileNotExists() {
-        assertFalse(new File(VideoRecorder.getLastRecordingPath()).exists());
+        assertFalse(VideoRecorder.getLastRecording().exists());
     }
 
 
