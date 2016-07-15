@@ -15,9 +15,9 @@ class GridHubRecordingTest extends BaseTest {
     def "shouldCreateVideoFile"() {
         final String name = "video_name"
         given:
-        sendRecordingRequest(HUB_SERVLET_URL + "/start?name=${name}");
+        sendRecordingRequest(HUB_SERVLET_URL + "/start");
         when:
-        sendRecordingRequest(HUB_SERVLET_URL + "/stop");
+        sendRecordingRequest(HUB_SERVLET_URL + "/stop?name=${name}");
         def file = getVideoFiles().first()
         then:
         assert file.name.startsWith(name)
@@ -26,9 +26,9 @@ class GridHubRecordingTest extends BaseTest {
     def "shouldCreateVideoFileIfFalseFlag"() {
         final String name = "video_name"
         given:
-        sendRecordingRequest(HUB_SERVLET_URL + "/start?name=${name}");
+        sendRecordingRequest(HUB_SERVLET_URL + "/start?");
         when:
-        sendRecordingRequest(HUB_SERVLET_URL + "/stop?result=false");
+        sendRecordingRequest(HUB_SERVLET_URL + "/stop?result=false&name=${name}");
         def file = getVideoFiles().first()
         then:
         assert file.name.startsWith(name)

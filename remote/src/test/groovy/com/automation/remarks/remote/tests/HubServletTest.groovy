@@ -31,9 +31,9 @@ class HubServletTest extends BaseTest{
     def "shouldBeCustomFolderForVideo"(){
         def folder = "custom_folder"
         given:
-        sendRecordingRequest(HUB_SERVLET_URL + "/start?name=video_name&folder=${folder}");
+        sendRecordingRequest(HUB_SERVLET_URL + "/start?folder=${folder}");
         when:
-        def message = sendRecordingRequest(HUB_SERVLET_URL + "/stop?result=false");
+        def message = sendRecordingRequest(HUB_SERVLET_URL + "/stop?result=false&name=video_name&");
         then:
         message.startsWith "http://localhost:5555 video command /stop recording stopped ${System.getProperty("user.dir")}/custom_folder/video_name_recording"
     }
