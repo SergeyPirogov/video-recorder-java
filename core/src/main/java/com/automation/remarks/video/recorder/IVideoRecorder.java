@@ -7,6 +7,7 @@ import java.util.LinkedList;
  * Created by sergey on 4/30/16.
  */
 public interface IVideoRecorder {
-    public void start();
-    public LinkedList<File> stop();
+    void start();
+
+    File stopAndSave(String filename);
 }

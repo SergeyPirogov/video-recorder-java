@@ -75,8 +75,7 @@ public class MonteScreenRecorderBuilder {
                         screenFormat,
                         mouseFormat,
                         audioFormat,
-                        folder,
-                        fileName);
+                        folder);
             } catch (IOException | AWTException e) {
                 throw new RecordingException(e);
             }

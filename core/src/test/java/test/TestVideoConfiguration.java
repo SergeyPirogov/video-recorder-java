@@ -8,8 +8,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.LinkedList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * Created by sergey on 5/3/16.
@@ -19,10 +18,11 @@ public class TestVideoConfiguration {
     @Test
     public void shouldDisableVideoRecording() throws Exception {
         VideoRecorder.conf().videoEnabled(false);
-        VideoRecorder recorder = new VideoRecorder("test_video");
+        VideoRecorder recorder = new VideoRecorder();
         recorder.start();
-        LinkedList<File> files = recorder.stop();
-        assertEquals(files.size(), 0);
+        File test_video = recorder.stopAndSave("test_video");
+        assertNull(test_video);
+
     }
 
     @Test
@@ -31,10 +31,10 @@ public class TestVideoConfiguration {
         conf.videoEnabled(true);
         final String path = System.getProperty("user.dir") + File.separator + "video";
         conf.withVideoFolder(path);
-        VideoRecorder recorder = new VideoRecorder("test_video");
+        VideoRecorder recorder = new VideoRecorder();
         recorder.start();
-        LinkedList<File> files = recorder.stop();
-        String canonicalPath = files.getFirst().getCanonicalPath();
+        File file = recorder.stopAndSave("test_video");
+        String canonicalPath = file.getCanonicalPath();
         assertThat(canonicalPath, CoreMatchers.startsWith(path));
     }
 }

@@ -1,5 +1,6 @@
 package test;
 
+import com.automation.remarks.video.exception.RecordingException;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -13,6 +14,7 @@ import java.util.LinkedList;
 import static com.automation.remarks.video.recorder.VideoRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -23,10 +25,10 @@ public class TestVideoRecorder {
     private static final String VIDEO_FILE_NAME = "video_test";
     private static final String VIDEO_FOLDER_NAME = "video";
 
-    private LinkedList<File> recordVideo() {
-        VideoRecorder recorder = new VideoRecorder(VIDEO_FILE_NAME);
+    private File recordVideo() {
+        VideoRecorder recorder = new VideoRecorder();
         recorder.start();
-        return recorder.stop();
+        return recorder.stopAndSave(VIDEO_FILE_NAME);
     }
 
     @Before
@@ -40,36 +42,28 @@ public class TestVideoRecorder {
     }
 
     @Test
-    public void shouldBeListWithOneVideo() {
-        LinkedList<File> files = recordVideo();
-        assertEquals(files.size(), 1);
-    }
-
-    @Test
     public void shouldBeVideoInRecordingsFolder() throws IOException {
         conf().withVideoFolder(VIDEO_FOLDER_NAME);
-        File video = recordVideo().getFirst();
+        File video = recordVideo();
         String folderName = video.getParentFile().getName();
         assertEquals(folderName, VIDEO_FOLDER_NAME);
     }
 
     @Test
     public void shouldBeAbsoluteRecordingPath() throws Exception {
-        recordVideo();
-        String lastRecordingPath = VideoRecorder.getLastRecordingPath();
-        assertThat(lastRecordingPath, startsWith(conf().getVideoFolder().getAbsolutePath() + File.separator + VIDEO_FILE_NAME));
+        File video = recordVideo();
+        assertThat(video.getAbsolutePath(), startsWith(conf().getVideoFolder().getAbsolutePath() + File.separator + VIDEO_FILE_NAME));
     }
 
     @Test
     public void shouldBeExactVideoFileName() throws Exception {
-        String fileName = recordVideo().getFirst().getName();
+        String fileName = recordVideo().getName();
         assertThat(fileName, startsWith(VIDEO_FILE_NAME));
     }
 
-    @Test
-    public void shouldBeEmptyListIfRecordingWasNotStarted() throws Exception {
-        VideoRecorder recorder = new VideoRecorder(VIDEO_FILE_NAME);
-        LinkedList<File> stop = recorder.stop();
-        assertEquals(0, stop.size());
+    @Test(expected = RecordingException.class)
+    public void shouldBeRecordingExceptionIfRecordingWasNotStarted() throws Exception {
+        VideoRecorder recorder = new VideoRecorder();
+        recorder.stopAndSave(VIDEO_FILE_NAME);
     }
 }

@@ -1,5 +1,6 @@
 package com.automation.remarks.video.recorder;
 
+import com.automation.remarks.video.exception.RecordingException;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
 import org.monte.media.math.Rational;
@@ -21,19 +22,11 @@ import static org.monte.media.VideoFormatKeys.*;
  */
 public class VideoRecorder implements IVideoRecorder {
 
-    private String fileName;
     private MonteScreenRecorder screenRecorder;
-    private GraphicsConfiguration gc;
-    private File folder;
     private VideoConfiguration videoConfiguration;
 
-    private static LinkedList<String> recordingsNames = new LinkedList<>();
-
-    public VideoRecorder(String fileName) {
-        this.fileName = fileName;
+    public VideoRecorder() {
         this.videoConfiguration = conf();
-        this.folder = videoConfiguration.getVideoFolder();
-        this.gc = getGraphicConfig();
         this.screenRecorder = getScreenRecorder();
     }
 
@@ -43,18 +36,18 @@ public class VideoRecorder implements IVideoRecorder {
         }
     }
 
-    public LinkedList<File> stop() {
+    public File stopAndSave(String filename) {
         if (videoConfiguration.isVideoEnabled()) {
-            screenRecorder.stop();
+            return writeVideo(filename);
         }
-        LinkedList<File> createdMovieFiles = screenRecorder.getCreatedMovieFiles();
-        rememberFilePath(createdMovieFiles);
-        return createdMovieFiles;
+        return null;
     }
 
-    private void rememberFilePath(java.util.List<File> fileList) {
-        for (File file : fileList) {
-            recordingsNames.add(file.getAbsolutePath());
+    private File writeVideo(String filename){
+        try {
+            return screenRecorder.saveAs(filename);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new RecordingException("Video recording wasn't started");
         }
     }
 
@@ -83,26 +76,21 @@ public class VideoRecorder implements IVideoRecorder {
 
         return MonteScreenRecorderBuilder
                 .builder()
-                .setGraphicConfig(gc)
+                .setGraphicConfig(getGraphicConfig())
                 .setRectangle(captureSize)
                 .setFileFormat(fileFormat)
                 .setScreenFormat(screenFormat)
-                .setFolder(folder)
-                .setMouseFormat(mouseFormat)
-                .setFileName(fileName).build();
+                .setFolder(videoConfiguration.getVideoFolder())
+                .setMouseFormat(mouseFormat).build();
     }
 
-    public static LinkedList<String> getAllRecordedTestNames() {
-        return recordingsNames;
-    }
+//    public static String getLastRecordingPath() {
+//        if (recordingsNames.size() > 0)
+//            return recordingsNames.getLast();
+//        return "";
+//    }
 
-    public static String getLastRecordingPath() {
-        if (recordingsNames.size() > 0)
-            return recordingsNames.getLast();
-        return "";
-    }
-
-    public static VideoConfiguration conf(){
+    public static VideoConfiguration conf() {
         return new VideoConfiguration();
     }
 }
