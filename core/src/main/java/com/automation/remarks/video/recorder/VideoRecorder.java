@@ -87,12 +87,6 @@ public class VideoRecorder implements IVideoRecorder {
                 .setMouseFormat(mouseFormat).build();
     }
 
-//    public static String getLastRecordingPath() {
-//        if (recordingsNames.size() > 0)
-//            return recordingsNames.getLast();
-//        return "";
-//    }
-
     public static VideoConfiguration conf() {
         return new VideoConfiguration();
     }
