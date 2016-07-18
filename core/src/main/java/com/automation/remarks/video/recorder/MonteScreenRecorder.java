@@ -16,7 +16,6 @@ import java.util.Date;
  */
 public class MonteScreenRecorder extends ScreenRecorder {
 
-    private static final String TEMP_FILENAME_WITHOUT_EXTENSION = "currentRecording";
     private String currentTempExtension;
 
     MonteScreenRecorder(GraphicsConfiguration cfg,
@@ -43,24 +42,7 @@ public class MonteScreenRecorder extends ScreenRecorder {
     @Override
     protected File createMovieFile(Format fileFormat) throws IOException {
         this.currentTempExtension = Registry.getInstance().getExtension(fileFormat);
-        String tempFile = getTempFileName();
-
-        File fileToWriteMovie = new File(tempFile);
-        if (fileToWriteMovie.exists()) {
-            fileToWriteMovie.delete();
-        }
-
-        return fileToWriteMovie;
-    }
-
-    private String getTempFileName() throws IOException {
-        if(!this.movieFolder.exists()) {
-            this.movieFolder.mkdirs();
-        } else if(!this.movieFolder.isDirectory()) {
-            throw new IOException("\"" + this.movieFolder + "\" is not a directory.");
-        }
-        return this.movieFolder + File.separator +
-                TEMP_FILENAME_WITHOUT_EXTENSION + "." + this.currentTempExtension;
+        return super.createMovieFile(fileFormat);
     }
 
     public File saveAs(String filename){

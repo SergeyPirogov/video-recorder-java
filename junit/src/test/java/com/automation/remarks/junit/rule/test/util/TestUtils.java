@@ -1,6 +1,5 @@
 package com.automation.remarks.junit.rule.test.util;
 
-import com.automation.remarks.junit.rule.test.JUnitVideoRecording;
 import org.junit.internal.runners.statements.InvokeMethod;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -25,11 +24,12 @@ public class TestUtils {
         }
     }
 
-    public static void runRule(TestRule rule, Class<?> clazz, String methodName) {
-        Method method = TestUtils.getMethod(JUnitVideoRecording.class, methodName);
+    public static void runRule(TestRule rule, Object target, String methodName) {
+        Class<?> clazz = target.getClass();
+        Method method = TestUtils.getMethod(clazz, methodName);
         Description description = Description.createTestDescription(clazz, method.getName(), method.getDeclaredAnnotations());
         try {
-            InvokeMethod invokeMethod = new InvokeMethod(new FrameworkMethod(method), clazz.newInstance());
+            InvokeMethod invokeMethod = new InvokeMethod(new FrameworkMethod(method), target);
             rule.apply(invokeMethod, description).evaluate();
         } catch (Throwable throwable) {
             logger.warning(Arrays.toString(throwable.getStackTrace()));

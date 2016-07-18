@@ -42,7 +42,7 @@ public class JUnitVideoRecording {
     public void shouldPassOnMethodWithVideoAnnotation() {
         String methodName = "failWithVideo";
         VideoRule videoRule = new VideoRule();
-        TestUtils.runRule(videoRule, this.getClass(), methodName);
+        TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileExistsWithName(methodName);
     }
 
@@ -51,7 +51,7 @@ public class JUnitVideoRecording {
         String methodName = "failWithCustomVideoName";
         String video_name = "custom_name";
         VideoRule videoRule = new VideoRule();
-        TestUtils.runRule(videoRule, this.getClass(), methodName);
+        TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileExistsWithName(video_name);
     }
 
@@ -59,7 +59,7 @@ public class JUnitVideoRecording {
     public void shouldPassOnMethodWithoutVideoIfVideoEnableFlagIsFalse() {
         String methodName = "failWithoutVideo";
         VideoRule videoRule = new VideoRule();
-        TestUtils.runRule(videoRule, this.getClass(), methodName);
+        TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileNotExists();
     }
 

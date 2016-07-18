@@ -20,7 +20,7 @@ public class RecordingUtils {
         }
         if (!successfulTest) {
             String absolutePath = video.getAbsolutePath();
-            logger.info("Video recording on success test" + absolutePath);
+            logger.info("Video recording on failed test" + absolutePath);
             return absolutePath;
         } else {
             logger.info("Video deleted on success test " + video.getAbsolutePath());
