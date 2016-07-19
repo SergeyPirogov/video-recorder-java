@@ -12,14 +12,12 @@ import java.io.IOException;
 
 import static com.automation.remarks.video.recorder.MonteRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * Created by sergey on 5/3/16.
  */
-public class TestMonteVideoRecorder extends BaseTest{
+public class TestMonteVideoRecorder extends BaseTest {
 
     private static final String VIDEO_FILE_NAME = "video_test";
     private static final String VIDEO_FOLDER_NAME = "video";
@@ -36,6 +34,7 @@ public class TestMonteVideoRecorder extends BaseTest{
         File video = recordVideo();
         String folderName = video.getParentFile().getName();
         assertEquals(folderName, VIDEO_FOLDER_NAME);
+        assertTrue("File doesn't exists " + video.getAbsolutePath(), video.exists());
     }
 
     @Test
