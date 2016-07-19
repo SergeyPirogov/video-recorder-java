@@ -64,9 +64,8 @@ public class FFMpegRecorder extends BaseRecorder {
 
     @Override
     public File stopAndSave(String filename) {
-        final String output = SystemUtils.IS_OS_LINUX ?
-                runCommand("pkill", "-INT", RECORDING_TOOL) :
-                runCommand(SEND_CTRL_C_TOOL_NAME, getPidOf(RECORDING_TOOL));
+        final String output = SystemUtils.IS_OS_WINDOWS ?
+                runCommand(SEND_CTRL_C_TOOL_NAME, getPidOf(RECORDING_TOOL)) : runCommand("pkill", "-INT", RECORDING_TOOL);
         LOGGER.info("Stop recording output log: " + output);
 
         File destFile = getDestinationFile(filename);
@@ -92,7 +91,7 @@ public class FFMpegRecorder extends BaseRecorder {
                     .outputUTF8();
         } catch (IOException | InterruptedException | TimeoutException e) {
             LOGGER.severe("Unable to execute command: " + e);
-            return "PROCESS_EXECUTION_ERROR";
+            throw new RecordingException(e);
         }
     }
 
