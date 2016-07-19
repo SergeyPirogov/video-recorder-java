@@ -26,9 +26,7 @@ public class VideoRule implements TestRule {
             public void evaluate() throws Throwable {
                 Video video = description.getAnnotation(Video.class);
                 String name = getFileName(video, description);
-                if (MonteRecorder.conf().getMode().equals(ALL)) {
-                    recordVideo(name, base);
-                } else if (video != null && video.enabled()) {
+                if (MonteRecorder.conf().getMode().equals(ALL) || (video != null && video.enabled())) {
                     recordVideo(name, base);
                 } else {
                     base.evaluate();
