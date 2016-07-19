@@ -8,7 +8,6 @@ import org.zeroturnaround.exec.ProcessExecutor;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
@@ -35,7 +34,7 @@ public class FFMpegRecorder extends BaseRecorder {
     public void start() {
         createVideoFolder();
 
-        final String display = SystemUtils.IS_OS_LINUX ? "0:0" : "desktop";
+        final String display = SystemUtils.IS_OS_LINUX ? ":0.0" : "desktop";
         final String recorder = SystemUtils.IS_OS_LINUX ? "x11grab" : "gdigrab";
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -44,7 +43,7 @@ public class FFMpegRecorder extends BaseRecorder {
 
         final String[] commandsSequence = new String[]{
                 RECORDING_TOOL, "-y",
-                "-video_size", MessageFormat.format("{0}x{1}", width, height),
+                "-video_size", String.format("%sx%s", width, height),
                 "-f", recorder,
                 "-i", display,
                 "-an",
@@ -55,11 +54,7 @@ public class FFMpegRecorder extends BaseRecorder {
         CompletableFuture.supplyAsync(() -> runCommand(commandsSequence))
                 .whenCompleteAsync((output, errors) -> {
                     LOGGER.info("Start recording output log: " + output + (errors != null ? "; ex: " + errors : ""));
-                    //LOGGER.info("Trying to copy " + outputPath + " to the main folder.");
-                    //copyFile(info.getStoragePath(), info.getFileName());
-                    //FileUtils.copyFileToDirectory();
                 });
-
     }
 
     @Override

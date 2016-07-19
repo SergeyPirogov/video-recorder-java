@@ -2,8 +2,6 @@ package test;
 
 import com.automation.remarks.video.RecorderType;
 import com.automation.remarks.video.recorder.FFMpegRecorder;
-import com.automation.remarks.video.recorder.MonteRecorder;
-import com.sun.xml.internal.rngom.parse.host.Base;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,9 +22,10 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     private static final String VIDEO_FILE_NAME = "video_test";
     private static final String VIDEO_FOLDER_NAME = "video";
 
-    private File recordVideo() {
+    private File recordVideo() throws InterruptedException {
         FFMpegRecorder recorder = new FFMpegRecorder();
         recorder.start();
+        Thread.sleep(5000);
         return recorder.stopAndSave(VIDEO_FILE_NAME);
     }
 
@@ -36,13 +35,13 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     }
 
     @Test
-    public void shouldBeVideoFileInFolder() {
+    public void shouldBeVideoFileInFolder() throws InterruptedException {
         File video = recordVideo();
         assertTrue("File doesn't exists " + video.getAbsolutePath(), video.exists());
     }
 
     @Test
-    public void shouldBeVideoInRecordingsFolder() throws IOException {
+    public void shouldBeVideoInRecordingsFolder() throws IOException, InterruptedException {
         conf().withVideoFolder(VIDEO_FOLDER_NAME);
         File video = recordVideo();
         String folderName = video.getParentFile().getName();
