@@ -20,6 +20,6 @@ public class BaseTest {
 
     @After
     public void tearDown() throws Exception {
-        setUp();
+        //setUp();
     }
 }

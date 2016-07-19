@@ -14,6 +14,7 @@ import static com.automation.remarks.video.recorder.BaseRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by sepi on 19.07.16.
@@ -30,8 +31,14 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     }
 
     @BeforeClass
-    public static void setUpRecorder(){
+    public static void setUpRecorder() {
         conf().withRecorderType(RecorderType.FFMPEG);
+    }
+
+    @Test
+    public void shouldBeVideoFileInFolder() {
+        File video = recordVideo();
+        assertTrue("File doesn't exists " + video.getAbsolutePath(), video.exists());
     }
 
     @Test
