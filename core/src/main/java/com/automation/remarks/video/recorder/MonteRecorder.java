@@ -7,7 +7,6 @@ import org.monte.media.math.Rational;
 
 import java.awt.*;
 import java.io.File;
-import java.util.LinkedList;
 
 import static org.monte.media.FormatKeys.EncodingKey;
 import static org.monte.media.FormatKeys.FrameRateKey;
@@ -20,13 +19,13 @@ import static org.monte.media.VideoFormatKeys.*;
 /**
  * Created by sergey on 13.04.16.
  */
-public class VideoRecorder implements IVideoRecorder {
+public class MonteRecorder extends BaseRecorder {
 
     private MonteScreenRecorder screenRecorder;
     private VideoConfiguration videoConfiguration;
     private static File lastVideo;
 
-    public VideoRecorder() {
+    public MonteRecorder() {
         this.videoConfiguration = conf();
         this.screenRecorder = getScreenRecorder();
     }
@@ -85,10 +84,6 @@ public class VideoRecorder implements IVideoRecorder {
                 .setScreenFormat(screenFormat)
                 .setFolder(videoConfiguration.getVideoFolder())
                 .setMouseFormat(mouseFormat).build();
-    }
-
-    public static VideoConfiguration conf() {
-        return new VideoConfiguration();
     }
 
     public static File getLastRecording() {

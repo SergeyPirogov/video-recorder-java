@@ -2,7 +2,7 @@ package com.automation.remarks.testng.test;
 
 import com.automation.remarks.testng.VideoListener;
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
@@ -24,7 +24,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists());
     }
 
@@ -35,7 +35,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertFalse(file.exists());
     }
 
@@ -46,7 +46,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertFalse(file.exists());
     }
 
@@ -57,7 +57,7 @@ public class TestNGVideoListenerTest extends BaseTest {
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists());
         assertTrue(file.getName().contains("new_recording"));
     }

@@ -2,14 +2,12 @@ package com.automation.remarks.testng;
 
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
-import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 import java.io.File;
-import java.util.LinkedList;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
@@ -36,10 +34,10 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (VideoRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled())) {
+        if (MonteRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled())) {
             return;
         }
-        recorder = new VideoRecorder();
+        recorder = new MonteRecorder();
         recorder.start();
     }
 

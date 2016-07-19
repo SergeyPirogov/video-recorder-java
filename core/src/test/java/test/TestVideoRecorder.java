@@ -1,7 +1,7 @@
 package test;
 
 import com.automation.remarks.video.exception.RecordingException;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -9,9 +9,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
-import static com.automation.remarks.video.recorder.VideoRecorder.conf;
+import static com.automation.remarks.video.recorder.MonteRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,7 +25,7 @@ public class TestVideoRecorder {
     private static final String VIDEO_FOLDER_NAME = "video";
 
     private File recordVideo() {
-        VideoRecorder recorder = new VideoRecorder();
+        MonteRecorder recorder = new MonteRecorder();
         recorder.start();
         return recorder.stopAndSave(VIDEO_FILE_NAME);
     }
@@ -63,7 +62,7 @@ public class TestVideoRecorder {
 
     @Test(expected = RecordingException.class)
     public void shouldBeRecordingExceptionIfRecordingWasNotStarted() throws Exception {
-        VideoRecorder recorder = new VideoRecorder();
+        MonteRecorder recorder = new MonteRecorder();
         recorder.stopAndSave(VIDEO_FILE_NAME);
     }
 }

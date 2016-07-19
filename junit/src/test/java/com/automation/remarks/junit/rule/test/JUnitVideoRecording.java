@@ -3,7 +3,7 @@ package com.automation.remarks.junit.rule.test;
 import com.automation.remarks.junit.VideoRule;
 import com.automation.remarks.junit.rule.test.util.TestUtils;
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -65,7 +65,7 @@ public class JUnitVideoRecording {
 
     @Before
     public void setUp() throws IOException {
-        FileUtils.deleteDirectory(VideoRecorder.conf().getVideoFolder());
+        FileUtils.deleteDirectory(MonteRecorder.conf().getVideoFolder());
     }
 
     @After
@@ -74,13 +74,13 @@ public class JUnitVideoRecording {
     }
 
     private void verifyVideoFileExistsWithName(String fileName) {
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists());
         assertThat(file.getName(), startsWith(fileName));
     }
 
     private void verifyVideoFileNotExists() {
-        assertFalse(VideoRecorder.getLastRecording().exists());
+        assertFalse(MonteRecorder.getLastRecording().exists());
     }
 
 

@@ -2,13 +2,12 @@ package com.automation.remarks.junit;
 
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 import java.io.File;
-import java.util.LinkedList;
 
 import static com.automation.remarks.video.RecordingMode.ALL;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
@@ -26,7 +25,7 @@ public class VideoRule implements TestRule {
             public void evaluate() throws Throwable {
                 Video video = description.getAnnotation(Video.class);
                 String name = getFileName(video, description);
-                if (VideoRecorder.conf().getMode().equals(ALL)) {
+                if (MonteRecorder.conf().getMode().equals(ALL)) {
                     recordVideo(name, base);
                 } else if (video != null && video.enabled()) {
                     recordVideo(name, base);
@@ -37,7 +36,7 @@ public class VideoRule implements TestRule {
 
             private void recordVideo(String name, final Statement base) throws Throwable {
                 boolean successful = false;
-                IVideoRecorder recorder = new VideoRecorder();
+                IVideoRecorder recorder = new MonteRecorder();
                 recorder.start();
                 try {
                     base.evaluate();

@@ -1,7 +1,7 @@
 package com.automation.remarks.remote.tests
 
 import com.automation.remarks.remote.StartGrid
-import com.automation.remarks.video.recorder.VideoRecorder
+import com.automation.remarks.video.recorder.MonteRecorder
 import spock.lang.Specification
 
 import static java.lang.Thread.sleep
@@ -25,7 +25,7 @@ class BaseTest extends Specification {
     }
 
     def getVideoFiles(){
-        VideoRecorder.conf().videoFolder.listFiles()
+        MonteRecorder.conf().videoFolder.listFiles()
     }
 
 }

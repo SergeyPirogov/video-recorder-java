@@ -1,6 +1,6 @@
 package com.automation.remarks.remote.tests
 
-import com.automation.remarks.video.recorder.VideoRecorder
+import com.automation.remarks.video.recorder.MonteRecorder
 
 import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest
 /**
@@ -9,7 +9,7 @@ import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest
 class GridHubRecordingTest extends BaseTest {
 
     def setup() {
-        VideoRecorder.conf().videoFolder.deleteDir()
+        MonteRecorder.conf().videoFolder.deleteDir()
     }
 
     def "shouldCreateVideoFile"() {

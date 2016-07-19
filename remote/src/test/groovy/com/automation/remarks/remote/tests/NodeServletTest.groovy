@@ -1,6 +1,6 @@
 package com.automation.remarks.remote.tests
 
-import com.automation.remarks.video.recorder.VideoRecorder
+import com.automation.remarks.video.recorder.MonteRecorder
 import spock.lang.Shared
 import spock.lang.Stepwise
 
@@ -14,7 +14,7 @@ class NodeServletTest extends BaseTest {
     @Shared String VIDEO_FOLDER = System.getProperty('user.dir')
 
     def setup() {
-        VideoRecorder.conf().videoFolder.deleteDir()
+        MonteRecorder.conf().videoFolder.deleteDir()
     }
 
     def "shouldBeOkMessageOnStartWithoutParameters"() {

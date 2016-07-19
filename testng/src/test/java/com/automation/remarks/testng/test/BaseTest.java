@@ -1,7 +1,7 @@
 package com.automation.remarks.testng.test;
 
 import com.automation.remarks.video.RecordingMode;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.testng.IClass;
 import org.testng.ITestNGMethod;
@@ -27,7 +27,7 @@ public class BaseTest {
     public void beforeMethod(Method method) throws IOException {
         this.testMethod = method;
         deleteVideoDir();
-        VideoRecorder.conf().withRecordMode(RecordingMode.ANNOTATED);
+        MonteRecorder.conf().withRecordMode(RecordingMode.ANNOTATED);
     }
 
     @AfterClass
@@ -36,7 +36,7 @@ public class BaseTest {
     }
 
     private static void deleteVideoDir() throws IOException {
-        FileUtils.deleteDirectory(VideoRecorder.conf().getVideoFolder());
+        FileUtils.deleteDirectory(MonteRecorder.conf().getVideoFolder());
     }
 
     protected ITestResult prepareMock(Method testMethod) {

@@ -3,7 +3,7 @@ package com.automation.remarks.testng.test;
 import com.automation.remarks.testng.RemoteVideoListener;
 import com.automation.remarks.video.RecordingMode;
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.openqa.grid.selenium.GridLauncher;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
@@ -34,7 +34,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists());
     }
 
@@ -45,7 +45,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestSuccess(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertFalse(file.exists());
     }
 
@@ -56,7 +56,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists(), "File " + file.getName());
         assertThat(file.getName(), startsWith("custom_name"));
     }
@@ -68,7 +68,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertFalse(file.exists(), "File " + file.getName());
     }
 
@@ -76,24 +76,24 @@ public class TestNGRemoteListenerTest extends BaseTest {
     @Video
     public void shouldPassIfGridConfiguredWithCustomPorts() throws Exception {
         startGrid("4446","5556");
-        VideoRecorder.conf().withRemoteGridHubUrl("http://localhost:4446");
+        MonteRecorder.conf().withRemoteGridHubUrl("http://localhost:4446");
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists(), "File " + file.getName());
         assertThat(file.getName(), startsWith("shouldPassIfGridConfiguredWithCustomPorts"));
     }
 
     @Test
     public void shouldBeVideoForMethodWithoutAnnotationIfModeAll(){
-        VideoRecorder.conf().withRecordMode(RecordingMode.ALL);
+        MonteRecorder.conf().withRecordMode(RecordingMode.ALL);
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists(), "File " + file.getName());
     }
 
@@ -104,19 +104,19 @@ public class TestNGRemoteListenerTest extends BaseTest {
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertThat(file.getParentFile().getName(), equalTo("video"));
     }
 
     @Test
     @Video
     public void shouldBeCustomFolderForVideo(){
-        VideoRecorder.conf().withVideoFolder("custom_folder");
+        MonteRecorder.conf().withVideoFolder("custom_folder");
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
         listener.onTestFailure(result);
-        File file = VideoRecorder.getLastRecording();
+        File file = MonteRecorder.getLastRecording();
         assertThat(file.getParentFile().getName(), equalTo("custom_folder"));
     }
 

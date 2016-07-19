@@ -15,12 +15,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
 
-import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
-
 /**
  * Created by sepi on 19.07.16.
  */
-public class FFMpegRecorder implements IVideoRecorder {
+public class FFMpegRecorder extends BaseRecorder {
 
     private static final Logger LOGGER = Logger.getLogger(FFMpegRecorder.class.getName());
 

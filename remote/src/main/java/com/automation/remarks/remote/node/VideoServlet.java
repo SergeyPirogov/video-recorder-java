@@ -1,6 +1,6 @@
 package com.automation.remarks.remote.node;
 
-import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.MonteRecorder;
 import org.apache.http.HttpStatus;
 
 import javax.servlet.ServletException;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import static com.automation.remarks.remote.utils.RestUtils.updateResponse;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
@@ -19,7 +18,7 @@ import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
  */
 public class VideoServlet extends HttpServlet {
 
-    private VideoRecorder videoRecorder;
+    private MonteRecorder videoRecorder;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,15 +32,15 @@ public class VideoServlet extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String path = req.getPathInfo();
-        VideoRecorder.conf().withDefaultFolder();
+        MonteRecorder.conf().withDefaultFolder();
         try {
             switch (path) {
                 case "/start":
                     String folder = req.getParameter("folder");
                     if(folder != null){
-                        VideoRecorder.conf().withVideoFolder(folder);
+                        MonteRecorder.conf().withVideoFolder(folder);
                     }
-                    videoRecorder = new VideoRecorder();
+                    videoRecorder = new MonteRecorder();
                     videoRecorder.start();
                     updateResponse(resp, HttpStatus.SC_OK, "recording started");
                     break;
