@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Created by sepi on 19.07.16.
  */
-public class FFMpegRecorder extends BaseRecorder {
+public class FFMpegRecorder extends VideoRecorder {
 
     private static final Logger LOGGER = Logger.getLogger(FFMpegRecorder.class.getName());
 
@@ -28,7 +28,6 @@ public class FFMpegRecorder extends BaseRecorder {
     private final VideoConfiguration conf = new VideoConfiguration();
     private final File movieFolder = conf.getVideoFolder();
     private final String outputPath = movieFolder.getAbsolutePath() + File.separator + "recording" + EXTENTION;
-
 
     @Override
     public void start() {
@@ -67,6 +66,7 @@ public class FFMpegRecorder extends BaseRecorder {
 
         new File(outputPath).renameTo(destFile);
         LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
+        setLastVideo(destFile);
         return destFile;
     }
 

@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static com.automation.remarks.video.recorder.BaseRecorder.conf;
+import static com.automation.remarks.video.recorder.VideoRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;

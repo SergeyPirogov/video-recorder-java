@@ -19,11 +19,10 @@ import static org.monte.media.VideoFormatKeys.*;
 /**
  * Created by sergey on 13.04.16.
  */
-public class MonteRecorder extends BaseRecorder {
+public class MonteRecorder extends VideoRecorder {
 
     private MonteScreenRecorder screenRecorder;
     private VideoConfiguration videoConfiguration;
-    private static File lastVideo;
 
     public MonteRecorder() {
         this.videoConfiguration = conf();
@@ -41,7 +40,7 @@ public class MonteRecorder extends BaseRecorder {
         if (videoConfiguration.isVideoEnabled()) {
              video = writeVideo(filename);
         }
-        lastVideo = video;
+        setLastVideo(video);
         return video;
     }
 
@@ -84,10 +83,5 @@ public class MonteRecorder extends BaseRecorder {
                 .setScreenFormat(screenFormat)
                 .setFolder(videoConfiguration.getVideoFolder())
                 .setMouseFormat(mouseFormat).build();
-    }
-
-    public static File getLastRecording() {
-        return lastVideo;
-
     }
 }

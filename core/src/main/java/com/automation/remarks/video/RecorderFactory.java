@@ -8,7 +8,7 @@ import com.automation.remarks.video.recorder.*;
 public class RecorderFactory {
 
        public static IVideoRecorder getRecorder(){
-           if(BaseRecorder.conf().getRecorderType().equals(RecorderType.FFMPEG)){
+           if(VideoRecorder.conf().getRecorderType().equals(RecorderType.FFMPEG)){
                return new FFMpegRecorder();
            }
            return new MonteRecorder();

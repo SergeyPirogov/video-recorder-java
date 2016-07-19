@@ -6,7 +6,7 @@ import org.junit.Before;
 
 import java.io.IOException;
 
-import static com.automation.remarks.video.recorder.BaseRecorder.conf;
+import static com.automation.remarks.video.recorder.VideoRecorder.conf;
 
 /**
  * Created by sepi on 19.07.16.

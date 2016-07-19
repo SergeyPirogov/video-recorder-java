@@ -1,7 +1,7 @@
 package com.automation.remarks.testng;
 
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.BaseRecorder;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -16,13 +16,13 @@ import static com.automation.remarks.video.RecordingMode.ALL;
  */
 public class RemoteVideoListener implements ITestListener {
 
-    private static final String REMOTE = BaseRecorder.conf().getRemoteUrl();
+    private static final String REMOTE = VideoRecorder.conf().getRemoteUrl();
 
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/start?&folder=" + BaseRecorder.conf().getVideoFolder();
+            String url = REMOTE + "/grid/admin/Video/start?&folder=" + VideoRecorder.conf().getVideoFolder();
             sendRecordingRequest(url);
         }
     }
@@ -68,8 +68,8 @@ public class RemoteVideoListener implements ITestListener {
     }
 
     private boolean videoEnabled(Video video) {
-        return BaseRecorder.conf().isVideoEnabled()
-                && (BaseRecorder.conf().getMode().equals(ALL)
+        return VideoRecorder.conf().isVideoEnabled()
+                && (VideoRecorder.conf().getMode().equals(ALL)
                 || (video != null && video.enabled()));
     }
 }
