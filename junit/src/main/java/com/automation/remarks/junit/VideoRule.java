@@ -1,5 +1,6 @@
 package com.automation.remarks.junit;
 
+import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.MonteRecorder;
@@ -36,7 +37,7 @@ public class VideoRule implements TestRule {
 
             private void recordVideo(String name, final Statement base) throws Throwable {
                 boolean successful = false;
-                IVideoRecorder recorder = new MonteRecorder();
+                IVideoRecorder recorder = RecorderFactory.getRecorder();
                 recorder.start();
                 try {
                     base.evaluate();

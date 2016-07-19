@@ -1,5 +1,6 @@
 package com.automation.remarks.testng;
 
+import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.MonteRecorder;
@@ -37,7 +38,7 @@ public class VideoListener implements ITestListener {
         if (MonteRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled())) {
             return;
         }
-        recorder = new MonteRecorder();
+        recorder = RecorderFactory.getRecorder();
         recorder.start();
     }
 

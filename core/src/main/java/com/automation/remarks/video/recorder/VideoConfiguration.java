@@ -1,5 +1,6 @@
 package com.automation.remarks.video.recorder;
 
+import com.automation.remarks.video.RecorderType;
 import com.automation.remarks.video.RecordingMode;
 
 import java.io.File;
@@ -20,6 +21,8 @@ public class VideoConfiguration {
     private static boolean videoEnabled = Boolean.valueOf(getProperty("video.enabled", "true"));
     private static RecordingMode mode = valueOf(getProperty("video.mode", "ANNOTATED").toUpperCase());
     private static String remoteUrl = getProperty("remote", "http://localhost:4444");
+    private static RecorderType recorderType = RecorderType.valueOf(getProperty("recorder.type","MONTE"));
+
 
     public VideoConfiguration withVideoFolder(String dirPath) {
         videoFolder = dirPath;
@@ -41,6 +44,11 @@ public class VideoConfiguration {
         return this;
     }
 
+    public VideoConfiguration withRecorderType(RecorderType type){
+        recorderType = type;
+        return  this;
+    }
+
     public File getVideoFolder() {
         return new File(videoFolder);
     }
@@ -55,6 +63,10 @@ public class VideoConfiguration {
 
     public boolean isVideoEnabled() {
         return videoEnabled;
+    }
+
+    public RecorderType getRecorderType() {
+        return recorderType;
     }
 
     public VideoConfiguration withDefaultFolder() {
