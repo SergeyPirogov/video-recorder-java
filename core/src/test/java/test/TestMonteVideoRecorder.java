@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by sergey on 5/3/16.
  */
-public class TestVideoRecorder {
+public class TestMonteVideoRecorder {
 
     private static final String VIDEO_FILE_NAME = "video_test";
     private static final String VIDEO_FOLDER_NAME = "video";
