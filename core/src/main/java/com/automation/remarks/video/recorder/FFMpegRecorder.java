@@ -22,7 +22,7 @@ public class FFMpegRecorder extends VideoRecorder {
     private static final Logger LOGGER = Logger.getLogger(FFMpegRecorder.class.getName());
 
     private static final String RECORDING_TOOL = "ffmpeg";
-    public static final String SEND_CTRL_C_TOOL_NAME = "SendSignalCtrlC.exe";
+    private static final String SEND_CTRL_C_TOOL_NAME = "SendSignalCtrlC.exe";
 
     private static final String EXTENTION = ".mp4";
     private final VideoConfiguration conf = new VideoConfiguration();

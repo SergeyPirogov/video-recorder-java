@@ -12,7 +12,7 @@ public abstract class VideoRecorder implements IVideoRecorder{
 
     private static File lastVideo;
 
-    protected void setLastVideo(File video){
+    void setLastVideo(File video){
         lastVideo = video;
     }
 
