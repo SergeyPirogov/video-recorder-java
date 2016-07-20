@@ -29,10 +29,12 @@ public class FFMpegRecorder extends VideoRecorder {
     private final File movieFolder = conf.getVideoFolder();
     private final String outputPath = movieFolder.getAbsolutePath() + File.separator + "recording" + EXTENTION;
 
+    private CompletableFuture<String> future;
+
     @Override
     public void start() {
         createVideoFolder();
-
+        setLastVideo(null);
         final String display = SystemUtils.IS_OS_LINUX ? ":0.0" : "desktop";
         final String recorder = SystemUtils.IS_OS_LINUX ? "x11grab" : "gdigrab";
 
@@ -50,10 +52,11 @@ public class FFMpegRecorder extends VideoRecorder {
                 outputPath
         };
 
-        CompletableFuture.supplyAsync(() -> runCommand(commandsSequence))
-                .whenCompleteAsync((output, errors) -> {
-                    LOGGER.info("Start recording output log: " + output + (errors != null ? "; ex: " + errors : ""));
-                });
+        this.future = CompletableFuture.supplyAsync(() -> runCommand(commandsSequence));
+//        .whenCompleteAsync((output, errors) -> {
+//                    LOGGER.info("Start recording output log: " + output + (errors != null ? "; ex: " + errors : ""));
+//                    LOGGER.info("Trying to copy " + outputPath + " to the main folder.");
+//                });
     }
 
     @Override
@@ -64,9 +67,13 @@ public class FFMpegRecorder extends VideoRecorder {
 
         File destFile = getDestinationFile(filename);
 
-        new File(outputPath).renameTo(destFile);
-        LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
-        setLastVideo(destFile);
+        this.future.whenCompleteAsync((out, errors) -> {
+            LOGGER.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+            LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
+            new File(outputPath).renameTo(destFile);
+            setLastVideo(destFile);
+        });
+
         return destFile;
     }
 
