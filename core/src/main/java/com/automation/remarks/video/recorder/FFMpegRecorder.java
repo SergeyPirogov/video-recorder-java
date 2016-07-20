@@ -66,14 +66,13 @@ public class FFMpegRecorder extends VideoRecorder {
         LOGGER.info("Stop recording output log: " + output);
 
         File destFile = getDestinationFile(filename);
-
+        System.out.println(getLastRecording());
         this.future.whenCompleteAsync((out, errors) -> {
             LOGGER.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
             LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
             new File(outputPath).renameTo(destFile);
-            setLastVideo(destFile);
         });
-
+        setLastVideo(destFile);
         return destFile;
     }
 
