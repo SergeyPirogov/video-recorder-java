@@ -22,63 +22,58 @@ public class FFMpegRecorder extends VideoRecorder {
     private static final Logger LOGGER = Logger.getLogger(FFMpegRecorder.class.getName());
 
     private static final String RECORDING_TOOL = "ffmpeg";
-    private static final String SEND_CTRL_C_TOOL_NAME = "SendSignalCtrlC.exe";
-
+    public static final String TEM_FILE_NAME = "temporary";
     private static final String EXTENTION = ".mp4";
-    private final VideoConfiguration conf = new VideoConfiguration();
-    private final File movieFolder = conf.getVideoFolder();
-    private final String outputPath = movieFolder.getAbsolutePath() + File.separator + "recording" + EXTENTION;
+
+    private final File movieFolder = conf().getVideoFolder();
+    private File outputFile;
 
     private CompletableFuture<String> future;
+
 
     @Override
     public void start() {
         createVideoFolder();
-        setLastVideo(null);
+        Dimension screen = getScreenDimension();
+        outputFile = getDestinationFile(TEM_FILE_NAME);
         final String display = SystemUtils.IS_OS_LINUX ? ":0.0" : "desktop";
         final String recorder = SystemUtils.IS_OS_LINUX ? "x11grab" : "gdigrab";
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = screenSize.width;
-        int height = screenSize.height;
-
         final String[] commandsSequence = new String[]{
                 RECORDING_TOOL, "-y",
-                "-video_size", String.format("%sx%s", width, height),
+                "-video_size", String.format("%sx%s", screen.width, screen.height),
                 "-f", recorder,
                 "-i", display,
                 "-an",
                 "-r", "24",
-                outputPath
+                outputFile.getAbsolutePath()
         };
-
         this.future = CompletableFuture.supplyAsync(() -> runCommand(commandsSequence));
-//        .whenCompleteAsync((output, errors) -> {
-//                    LOGGER.info("Start recording output log: " + output + (errors != null ? "; ex: " + errors : ""));
-//                    LOGGER.info("Trying to copy " + outputPath + " to the main folder.");
-//                });
     }
 
     @Override
-    public File stopAndSave(String filename) {
-        final String output = SystemUtils.IS_OS_WINDOWS ?
-                runCommand(SEND_CTRL_C_TOOL_NAME, getPidOf(RECORDING_TOOL)) : runCommand("pkill", "-INT", RECORDING_TOOL);
-        LOGGER.info("Stop recording output log: " + output);
+    public File stopAndSave(final String filename) {
+        killFFmpeg();
 
         File destFile = getDestinationFile(filename);
-        System.out.println(getLastRecording());
         this.future.whenCompleteAsync((out, errors) -> {
             LOGGER.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
             LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
-            new File(outputPath).renameTo(destFile);
+            outputFile.renameTo(destFile);
         });
         setLastVideo(destFile);
         return destFile;
     }
 
-    private File getDestinationFile(String filename) {
-        String fileName = filename + "_recording_" + DateUtils.formatDate(new Date(), "yyyy_dd_MM_HH_mm_ss");
-        return new File(this.movieFolder + File.separator + fileName + EXTENTION);
+    private String killFFmpeg() {
+        final String SEND_CTRL_C_TOOL_NAME = "SendSignalCtrlC.exe";
+        return SystemUtils.IS_OS_WINDOWS ?
+                runCommand(SEND_CTRL_C_TOOL_NAME, getPidOf(RECORDING_TOOL)) : runCommand("pkill", "-INT", RECORDING_TOOL);
+    }
+
+    private File getDestinationFile(final String filename) {
+        final String name = filename + "_recording_" + DateUtils.formatDate(new Date(), "yyyy_dd_MM_HH_mm_ss");
+        return new File(this.movieFolder + File.separator + name + EXTENTION);
 
     }
 
@@ -107,5 +102,9 @@ public class FFMpegRecorder extends VideoRecorder {
         } else if (!movieFolder.isDirectory()) {
             throw new RecordingException("\"" + movieFolder + "\" is not a directory.");
         }
+    }
+
+    private Dimension getScreenDimension() {
+        return Toolkit.getDefaultToolkit().getScreenSize();
     }
 }
