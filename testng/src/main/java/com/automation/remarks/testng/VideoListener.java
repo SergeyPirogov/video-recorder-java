@@ -3,7 +3,6 @@ package com.automation.remarks.testng;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.MonteRecorder;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -36,7 +35,7 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (!isVideoActivated(video)) {
+        if (isVideoDisabled(video)) {
             return;
         }
         recorder = RecorderFactory.getRecorder();
@@ -53,7 +52,7 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (!isVideoActivated(video)) {
+        if (isVideoDisabled(video)) {
             return;
         }
         String fileName = getFileName(result);
@@ -71,7 +70,7 @@ public class VideoListener implements ITestListener {
         onTestFailure(result);
     }
 
-    private boolean isVideoActivated(Video video){
+    private boolean isVideoDisabled(Video video){
         return VideoRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled());
     }
 
