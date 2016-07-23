@@ -7,8 +7,10 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import static com.automation.remarks.video.recorder.VideoRecorder.conf;
+import static org.awaitility.Awaitility.await;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.*;
 
@@ -35,7 +37,15 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     @Test
     public void shouldBeVideoFileInFolder() throws InterruptedException {
         File video = recordVideo();
+        waitWhileVideoComplete(video);
         assertTrue("File doesn't exists " + video.getAbsolutePath(), video.exists());
+    }
+
+    private void waitWhileVideoComplete(File video){
+        await().atMost(3, TimeUnit.SECONDS)
+                .pollDelay(10, TimeUnit.MILLISECONDS)
+                .ignoreExceptions()
+                .until(() -> video.exists());
     }
 
     @Test

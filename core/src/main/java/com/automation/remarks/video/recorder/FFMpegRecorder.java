@@ -62,10 +62,9 @@ public class FFMpegRecorder extends VideoRecorder {
         this.future.whenCompleteAsync((out, errors) -> {
             outputFile.renameTo(destFile);
             log.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+            log.info("Recording finished to: " + destFile.getAbsolutePath());
         });
-        waitWhileVideoComplete(destFile);
         setLastVideo(destFile);
-        log.info("Recording finished to: " + destFile.getAbsolutePath());
         return destFile;
     }
 
@@ -110,12 +109,5 @@ public class FFMpegRecorder extends VideoRecorder {
 
     private Dimension getScreenDimension() {
         return Toolkit.getDefaultToolkit().getScreenSize();
-    }
-
-    private void waitWhileVideoComplete(File video){
-        await().atMost(3, TimeUnit.SECONDS)
-                .pollDelay(10, TimeUnit.MILLISECONDS)
-                .ignoreExceptions()
-                .until(() -> video.exists());
     }
 }
