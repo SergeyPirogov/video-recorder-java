@@ -57,7 +57,7 @@ public class FFMpegRecorder extends VideoRecorder {
 
         File destFile = getDestinationFile(filename);
         this.future.whenCompleteAsync((out, errors) -> {
-            LOGGER.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+            LOGGER.severe("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
             LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
             outputFile.renameTo(destFile);
         });
