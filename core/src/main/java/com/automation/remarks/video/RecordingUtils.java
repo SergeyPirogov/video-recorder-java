@@ -1,6 +1,7 @@
 package com.automation.remarks.video;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.logging.Logger;
 
 /**
@@ -14,17 +15,25 @@ public class RecordingUtils {
     }
 
     public static String doVideoProcessing(boolean successfulTest, File video) {
-        if (video == null) {
-            return "Video file is NULL";
-        }
-        String absolutePath = video.getAbsolutePath();
+        String filePath = formatVideoFilePath(video);
         if (!successfulTest) {
-            logger.info("Video recording on failed test: " + absolutePath);
-            return absolutePath;
-        } else {
-            logger.info("Video deleted on success test: " + absolutePath);
+            logger.info("Video recording on failed test: " + filePath);
+            return filePath;
+        } else if (video != null) {
             video.delete();
+            logger.info("Video deleted on success test: " + filePath);
         }
-        return "no recordings on success test";
+        return "";
+    }
+
+    private static String formatVideoFilePath(File video) {
+        if (video == null) {
+            return "";
+        }
+        try {
+            return video.toURI().toURL().toExternalForm();
+        } catch (MalformedURLException e) {
+            return "file://" + video.getAbsolutePath();
+        }
     }
 }
