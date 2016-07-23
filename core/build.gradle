@@ -2,6 +2,7 @@ dependencies {
     compile fileTree('libs')
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     compile group: 'org.zeroturnaround', name: 'zt-exec', version: '1.9'
+    compile group: 'org.awaitility', name: 'awaitility', version: '2.0.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
 }

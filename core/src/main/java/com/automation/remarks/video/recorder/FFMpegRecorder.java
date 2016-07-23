@@ -11,15 +11,18 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
+
+import static org.awaitility.Awaitility.await;
 
 /**
  * Created by sepi on 19.07.16.
  */
 public class FFMpegRecorder extends VideoRecorder {
 
-    private static final Logger LOGGER = Logger.getLogger(FFMpegRecorder.class.getName());
+    private static final Logger log = Logger.getLogger(FFMpegRecorder.class.getName());
 
     private static final String RECORDING_TOOL = "ffmpeg";
     public static final String TEM_FILE_NAME = "temporary";
@@ -57,11 +60,12 @@ public class FFMpegRecorder extends VideoRecorder {
 
         File destFile = getDestinationFile(filename);
         this.future.whenCompleteAsync((out, errors) -> {
-            LOGGER.severe("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
-            LOGGER.info("Recording finished to : " + destFile.getAbsolutePath());
             outputFile.renameTo(destFile);
+            log.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
         });
+        waitWhileVideoComplete(destFile);
         setLastVideo(destFile);
+        log.info("Recording finished to: " + destFile.getAbsolutePath());
         return destFile;
     }
 
@@ -78,7 +82,7 @@ public class FFMpegRecorder extends VideoRecorder {
     }
 
     private String runCommand(final String... args) {
-        LOGGER.info("Trying to execute the following command: " + Arrays.asList(args));
+        log.info("Trying to execute the following command: " + Arrays.asList(args));
         try {
             return new ProcessExecutor()
                     .command(args)
@@ -86,7 +90,7 @@ public class FFMpegRecorder extends VideoRecorder {
                     .execute()
                     .outputUTF8();
         } catch (IOException | InterruptedException | TimeoutException e) {
-            LOGGER.severe("Unable to execute command: " + e);
+            log.severe("Unable to execute command: " + e);
             throw new RecordingException(e);
         }
     }
@@ -106,5 +110,12 @@ public class FFMpegRecorder extends VideoRecorder {
 
     private Dimension getScreenDimension() {
         return Toolkit.getDefaultToolkit().getScreenSize();
+    }
+
+    private void waitWhileVideoComplete(File video){
+        await().atMost(3, TimeUnit.SECONDS)
+                .pollDelay(10, TimeUnit.MILLISECONDS)
+                .ignoreExceptions()
+                .until(() -> video.exists());
     }
 }
