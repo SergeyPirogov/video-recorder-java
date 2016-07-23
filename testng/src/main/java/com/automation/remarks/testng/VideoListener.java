@@ -4,6 +4,7 @@ import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -35,7 +36,7 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (MonteRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled())) {
+        if (!isVideoActivated(video)) {
             return;
         }
         recorder = RecorderFactory.getRecorder();
@@ -51,9 +52,13 @@ public class VideoListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+        Video video = getVideoAnnotation(result);
+        if (!isVideoActivated(video)) {
+            return;
+        }
         String fileName = getFileName(result);
-        File video = stopRecording(fileName);
-        doVideoProcessing(false, video);
+        File file = stopRecording(fileName);
+        doVideoProcessing(false, file);
     }
 
     @Override
@@ -64,6 +69,10 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
         onTestFailure(result);
+    }
+
+    private boolean isVideoActivated(Video video){
+        return VideoRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled());
     }
 
     private File stopRecording(String filename) {
