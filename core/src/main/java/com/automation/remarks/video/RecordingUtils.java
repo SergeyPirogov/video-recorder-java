@@ -1,7 +1,6 @@
 package com.automation.remarks.video;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.logging.Logger;
 
 /**
@@ -18,12 +17,12 @@ public class RecordingUtils {
         if (video == null) {
             return "Video file is NULL";
         }
+        String absolutePath = video.getAbsolutePath();
         if (!successfulTest) {
-            String absolutePath = video.getAbsolutePath();
-            logger.info("Video recording on failed test" + absolutePath);
+            logger.info("Video recording on failed test: " + absolutePath);
             return absolutePath;
         } else {
-            logger.info("Video deleted on success test " + video.getAbsolutePath());
+            logger.info("Video deleted on success test: " + absolutePath);
             video.delete();
         }
         return "no recordings on success test";

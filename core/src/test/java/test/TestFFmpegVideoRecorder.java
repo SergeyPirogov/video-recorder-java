@@ -10,9 +10,7 @@ import java.io.IOException;
 
 import static com.automation.remarks.video.recorder.VideoRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by sepi on 19.07.16.
