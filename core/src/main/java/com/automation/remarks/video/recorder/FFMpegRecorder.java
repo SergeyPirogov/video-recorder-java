@@ -3,6 +3,7 @@ package com.automation.remarks.video.recorder;
 import com.automation.remarks.video.DateUtils;
 import com.automation.remarks.video.exception.RecordingException;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.log4j.Logger;
 import org.zeroturnaround.exec.ProcessExecutor;
 
 import java.awt.*;
@@ -11,18 +12,14 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Logger;
-
-import static org.awaitility.Awaitility.await;
 
 /**
  * Created by sepi on 19.07.16.
  */
 public class FFMpegRecorder extends VideoRecorder {
 
-    private static final Logger log = Logger.getLogger(FFMpegRecorder.class.getName());
+    private static final Logger log = org.apache.log4j.Logger.getLogger(FFMpegRecorder.class);
 
     private static final String RECORDING_TOOL = "ffmpeg";
     public static final String TEM_FILE_NAME = "temporary";
@@ -61,8 +58,8 @@ public class FFMpegRecorder extends VideoRecorder {
         File destFile = getDestinationFile(filename);
         this.future.whenCompleteAsync((out, errors) -> {
             outputFile.renameTo(destFile);
-            log.info("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
-            log.info("Recording finished to: " + destFile.getAbsolutePath());
+            log.debug("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+            log.debug("Recording finished to: " + destFile.getAbsolutePath());
         });
         setLastVideo(destFile);
         return destFile;
@@ -89,7 +86,7 @@ public class FFMpegRecorder extends VideoRecorder {
                     .execute()
                     .outputUTF8();
         } catch (IOException | InterruptedException | TimeoutException e) {
-            log.severe("Unable to execute command: " + e);
+            log.warn("Unable to execute command: " + e);
             throw new RecordingException(e);
         }
     }
