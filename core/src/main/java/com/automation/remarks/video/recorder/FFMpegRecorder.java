@@ -53,7 +53,8 @@ public class FFMpegRecorder extends VideoRecorder {
 
     @Override
     public File stopAndSave(final String filename) {
-        killFFmpeg();
+        String killLog = killFFmpeg();
+        log.info("Process kill output: " + killLog);
 
         File destFile = getDestinationFile(filename);
         this.future.whenCompleteAsync((out, errors) -> {
