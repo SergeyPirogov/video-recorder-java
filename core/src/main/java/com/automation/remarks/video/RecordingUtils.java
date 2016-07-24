@@ -36,7 +36,7 @@ public class RecordingUtils {
         if (!isBlank(jenkinsReportsUrl)) {
             return jenkinsReportsUrl + video.getName();
         }
-        return "file://" + video.getAbsolutePath();
+        return video.getAbsolutePath();
     }
 
     private static String getJenkinsReportsUrl() {
