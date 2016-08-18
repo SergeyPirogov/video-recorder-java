@@ -7,13 +7,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-jar{
-    from {
-        configurations.compile.findAll {!it.name.contains('testng')}
-                .collect { it.isDirectory() ? it : zipTree(it)}
-    }
-}
-
 test{
     useTestNG()
 }

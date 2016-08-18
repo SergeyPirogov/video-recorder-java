@@ -10,7 +10,7 @@ dependencies {
 
 jar{
     from {
-        configurations.compile
+        configurations.compile.findAll {it.name.contains('MonteScreenRecorder')}
                 .collect { it.isDirectory() ? it : zipTree(it)}
     }
 }
