@@ -3,6 +3,7 @@ package com.automation.remarks.junit.rule.test;
 import com.automation.remarks.junit.VideoRule;
 import com.automation.remarks.junit.rule.test.util.TestUtils;
 import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.enums.VideoSaveMode;
 import com.automation.remarks.video.recorder.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -38,6 +39,9 @@ public class JUnitVideoRecording {
         fail();
     }
 
+    @Video
+    public void successWithVideo(){}
+
     @Test
     public void shouldPassOnMethodWithVideoAnnotation() {
         String methodName = "failWithVideo";
@@ -58,6 +62,24 @@ public class JUnitVideoRecording {
     @Test
     public void shouldPassOnMethodWithoutVideoIfVideoEnableFlagIsFalse() {
         String methodName = "failWithoutVideo";
+        VideoRule videoRule = new VideoRule();
+        TestUtils.runRule(videoRule, this, methodName);
+        verifyVideoFileNotExists();
+    }
+
+    @Test
+    public void shouldPassOnSucessTestWithVideoIfSaveModeAll() {
+        String methodName = "successWithVideo";
+        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.ALL);
+        VideoRule videoRule = new VideoRule();
+        TestUtils.runRule(videoRule, this, methodName);
+        verifyVideoFileExistsWithName(methodName);
+    }
+
+    @Test
+    public void shouldPassOnSucessTestWithoutVideoIfSaveModeFailedOnly() {
+        String methodName = "successWithVideo";
+        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.FAILED_ONLY);
         VideoRule videoRule = new VideoRule();
         TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileNotExists();
