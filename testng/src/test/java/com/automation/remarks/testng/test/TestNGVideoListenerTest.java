@@ -2,6 +2,7 @@ package com.automation.remarks.testng.test;
 
 import com.automation.remarks.testng.VideoListener;
 import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.enums.VideoSaveMode;
 import com.automation.remarks.video.recorder.MonteRecorder;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
@@ -9,7 +10,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -30,7 +30,7 @@ public class TestNGVideoListenerTest extends BaseTest {
 
     @Test
     @Video
-    public void shouldNotBeRecordingOnTestSuccess()  {
+    public void shouldNotBeRecordingOnTestSuccess() {
         ITestResult result = prepareMock(testMethod);
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
@@ -60,5 +60,43 @@ public class TestNGVideoListenerTest extends BaseTest {
         File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists());
         assertTrue(file.getName().contains("new_recording"));
+    }
+
+    @Test
+    @Video()
+    public void shouldBeRecordingForSuccessfulTestAndSaveModeAll() {
+        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.ALL);
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        listener.onTestSuccess(result);
+        File file = MonteRecorder.getLastRecording();
+        assertTrue(file.exists());
+        assertTrue(file.getName().contains("shouldBeRecordingForSuccessfulTest"), "Wrong file name");
+    }
+
+    @Test
+    @Video()
+    public void shouldBeRecordingForFailedTestAndSaveModeFailOnly() {
+        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.FAILED_ONLY);
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        listener.onTestFailure(result);
+        File file = MonteRecorder.getLastRecording();
+        assertTrue(file.exists());
+        assertTrue(file.getName().contains("shouldBeRecordingForFailedTestAndSaveModeFailOnly"), "Wrong file name");
+    }
+
+    @Test
+    @Video()
+    public void shouldNotBeRecordingForSuccessfulTestAndSaveModeFailOnly() {
+        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.FAILED_ONLY);
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        listener.onTestSuccess(result);
+        File file = MonteRecorder.getLastRecording();
+        assertFalse(file.exists());
     }
 }
