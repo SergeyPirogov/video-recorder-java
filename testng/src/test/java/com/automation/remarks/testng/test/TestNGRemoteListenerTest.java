@@ -1,7 +1,7 @@
 package com.automation.remarks.testng.test;
 
 import com.automation.remarks.testng.RemoteVideoListener;
-import com.automation.remarks.video.RecordingMode;
+import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.MonteRecorder;
 import org.openqa.grid.selenium.GridLauncher;

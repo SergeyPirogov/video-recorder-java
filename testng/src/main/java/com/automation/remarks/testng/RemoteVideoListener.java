@@ -9,7 +9,7 @@ import org.testng.ITestResult;
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
-import static com.automation.remarks.video.RecordingMode.ALL;
+import static com.automation.remarks.video.enums.RecordingMode.ALL;
 
 /**
  * Created by sergey on 12.05.16.

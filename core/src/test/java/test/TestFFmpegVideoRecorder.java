@@ -1,6 +1,6 @@
 package test;
 
-import com.automation.remarks.video.RecorderType;
+import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.recorder.FFMpegRecorder;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -1,11 +1,12 @@
 package com.automation.remarks.video.recorder;
 
-import com.automation.remarks.video.RecorderType;
-import com.automation.remarks.video.RecordingMode;
+import com.automation.remarks.video.enums.RecorderType;
+import com.automation.remarks.video.enums.RecordingMode;
+import com.automation.remarks.video.enums.VideoSaveMode;
 
 import java.io.File;
 
-import static com.automation.remarks.video.RecordingMode.valueOf;
+import static com.automation.remarks.video.enums.RecordingMode.valueOf;
 import static java.io.File.separator;
 import static java.lang.System.getProperty;
 
@@ -14,15 +15,16 @@ import static java.lang.System.getProperty;
  */
 public class VideoConfiguration {
 
-    VideoConfiguration() {}
+    VideoConfiguration() {
+    }
 
     private static final String FOLDER = getProperty("user.dir") + separator + "video";
     private static String videoFolder = getProperty("video.folder", FOLDER);
     private static boolean videoEnabled = Boolean.valueOf(getProperty("video.enabled", "true"));
     private static RecordingMode mode = valueOf(getProperty("video.mode", "ANNOTATED").toUpperCase());
-    private static String remoteUrl = getProperty("remote", "http://localhost:4444");
-    private static RecorderType recorderType = RecorderType.valueOf(getProperty("recorder.type","MONTE"));
-
+    private static String remoteUrl = getProperty("remote.video.hub", "http://localhost:4444");
+    private static RecorderType recorderType = RecorderType.valueOf(getProperty("recorder.type", "MONTE"));
+    private static VideoSaveMode saveMode = VideoSaveMode.valueOf(getProperty("video.save.mode", "FAILED_ONLY"));
 
     public VideoConfiguration withVideoFolder(String dirPath) {
         videoFolder = dirPath;
@@ -44,9 +46,14 @@ public class VideoConfiguration {
         return this;
     }
 
-    public VideoConfiguration withRecorderType(RecorderType type){
+    public VideoConfiguration withRecorderType(RecorderType type) {
         recorderType = type;
-        return  this;
+        return this;
+    }
+
+    public VideoConfiguration withVideoSaveMove(VideoSaveMode mode) {
+        saveMode = mode;
+        return this;
     }
 
     public File getVideoFolder() {
@@ -59,6 +66,10 @@ public class VideoConfiguration {
 
     public String getRemoteUrl() {
         return remoteUrl;
+    }
+
+    public static VideoSaveMode saveMode() {
+        return saveMode;
     }
 
     public boolean isVideoEnabled() {

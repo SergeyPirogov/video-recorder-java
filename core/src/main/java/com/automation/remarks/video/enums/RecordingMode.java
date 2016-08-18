@@ -1,4 +1,4 @@
-package com.automation.remarks.video;
+package com.automation.remarks.video.enums;
 
 /**
  * Created by sergey on 5/7/16.

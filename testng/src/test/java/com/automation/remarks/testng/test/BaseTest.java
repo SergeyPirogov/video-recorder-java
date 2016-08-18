@@ -1,6 +1,6 @@
 package com.automation.remarks.testng.test;
 
-import com.automation.remarks.video.RecordingMode;
+import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.recorder.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.testng.IClass;

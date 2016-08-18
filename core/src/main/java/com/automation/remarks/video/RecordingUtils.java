@@ -1,5 +1,7 @@
 package com.automation.remarks.video;
 
+import com.automation.remarks.video.enums.VideoSaveMode;
+import com.automation.remarks.video.recorder.VideoConfiguration;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -18,7 +20,7 @@ public class RecordingUtils {
 
     public static String doVideoProcessing(boolean successfulTest, File video) {
         String filePath = formatVideoFilePath(video);
-        if (!successfulTest) {
+        if (!successfulTest || VideoConfiguration.saveMode().equals(VideoSaveMode.ALL)) {
             logger.info("Video recording: " + filePath);
             return filePath;
         } else if (video != null) {

@@ -10,7 +10,7 @@ import org.junit.runners.model.Statement;
 
 import java.io.File;
 
-import static com.automation.remarks.video.RecordingMode.ALL;
+import static com.automation.remarks.video.enums.RecordingMode.ALL;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
 

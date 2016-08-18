@@ -12,7 +12,7 @@ import java.io.File;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
-import static com.automation.remarks.video.RecordingMode.ANNOTATED;
+import static com.automation.remarks.video.enums.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
 /**

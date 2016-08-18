@@ -1,5 +1,6 @@
 package com.automation.remarks.video;
 
+import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.recorder.*;
 
 /**
