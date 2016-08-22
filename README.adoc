@@ -213,4 +213,8 @@ public class TestNgRemoteVideonTest {
 }
 ----
 
+## License
+
+See LICENSE.txt[LICENSE].
+
 more http://automation-remarks.com/remote-recorder/[details] by http://automation-remarks.com/[automation-remarks.com]
