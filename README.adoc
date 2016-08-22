@@ -215,6 +215,6 @@ public class TestNgRemoteVideonTest {
 
 ## License
 
-See LICENSE.txt[LICENSE].
+See https://github.com/SergeyPirogov/video-recorder-java/blob/master/LICENSE.txt/[LICENSE].
 
 more http://automation-remarks.com/remote-recorder/[details] by http://automation-remarks.com/[automation-remarks.com]
