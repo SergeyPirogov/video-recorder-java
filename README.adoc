@@ -80,7 +80,7 @@ public class JUnitVideoTest {
 </dependency>
 ----
 
-By default recorder will include testng dependency 6.9.10. If you want to place other version of TestNG use this declaration:
+By default recorder will include testng dependency 6.9.9. If you want to place other version of TestNG use this declaration:
 
 .maven
 [source,java]
@@ -88,7 +88,7 @@ By default recorder will include testng dependency 6.9.10. If you want to place 
 <dependency>
    <groupId>com.automation-remarks</groupId>
    <artifactId>video-recorder-testng</artifactId>
-   <version>1.0.2</version>
+   <version>1.0.+</version>
    <exclusions>
       <exclusion>
          <groupId>org.testng</groupId>
@@ -145,13 +145,12 @@ You are able to set some configuration parameters for Video Recorder:
 
 [source,java]
 ----
- // Default video folder is ${user.dir}/video. Could be changed by:
-        VideoRecorder.conf().withVideoFolder("custom_folder")
-                // Video could be disabled globally. Set to "true"
-                .videoEnabled(true)
-                // There is two recording modes ANNOTATED AND ALL
-                // Annotated is default and works only with methods annotated by @Video
-                .withRecordMode(RecordingMode.ANNOTATED);
+  VideoRecorder.conf()
+                .withVideoFolder("custom_folder")                // Default video folder is ${user.dir}/video.
+                .videoEnabled(true)                              // Video could be disabled globally. Set to "true"
+                .withVideoSaveMode(VideoSaveMode.ALL)            // Save videos for passed and failed tests
+                .withRecorderType(RecorderType.FFMPEG)           // Monte is Default recorder
+                .withRecordMode(RecordingMode.ANNOTATED);        // Record video only for test methods annotated by @Video
 ----
 
 == Remote Video Recording:
