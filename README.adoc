@@ -1,7 +1,7 @@
 = Video Recorder
 :toc: left
 
-image:https://travis-ci.org/SergeyPirogov/VideoRecorder.svg?branch=master["Build Status", link="https://travis-ci.org/SergeyPirogov/VideoRecorder"]
+image:https://travis-ci.org/SergeyPirogov/video-recorder-java.svg?branch=master["Build Status", link="https://travis-ci.org/SergeyPirogov/video-recorder-java"]
 
 This library allows easily record video of your UI tests by just putting couple annotations.
 
