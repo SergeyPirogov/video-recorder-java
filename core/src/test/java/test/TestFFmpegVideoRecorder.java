@@ -3,8 +3,6 @@ package test;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.ffmpeg.FFMpegRecorder;
-import com.automation.remarks.video.recorder.ffmpeg.MacFFmpegRecorder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,6 +22,7 @@ public class TestFFmpegVideoRecorder extends BaseTest {
 
     private static final String VIDEO_FILE_NAME = "video_test";
     private static final String VIDEO_FOLDER_NAME = "video";
+
 
     @BeforeClass
     public static void setUpRecorder() {
@@ -53,12 +52,14 @@ public class TestFFmpegVideoRecorder extends BaseTest {
 
     @Test
     public void shouldBeExactVideoFileName() throws Exception {
-        String fileName = recordVideo().getName();
-        assertThat(fileName, startsWith(VIDEO_FILE_NAME));
+        File video = recordVideo();
+        waitWhileVideoComplete(video);
+        assertTrue("File doesn't exists " + video.getAbsolutePath(), video.exists());
+        assertThat(video.getName(), startsWith(VIDEO_FILE_NAME));
     }
 
     private void waitWhileVideoComplete(File video) {
-        await().atMost(100, TimeUnit.SECONDS)
+        await().atMost(120, TimeUnit.SECONDS)
                 .pollDelay(10, TimeUnit.MILLISECONDS)
                 .ignoreExceptions()
                 .until(() -> video.exists());

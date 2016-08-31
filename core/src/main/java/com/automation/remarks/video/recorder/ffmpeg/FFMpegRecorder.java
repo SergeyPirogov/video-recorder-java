@@ -24,14 +24,8 @@ public abstract class FFMpegRecorder extends VideoRecorder {
 
     @Override
     public File stopAndSave(final String filename) {
-        File outputFile = ffmpegWrapper.getTemporaryFile();
-        File destFile = ffmpegWrapper.getResultFile(filename);
-        ffmpegWrapper.stopFFmpeg().whenCompleteAsync((out, errors) -> {
-            outputFile.renameTo(destFile);
-            log.debug("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
-            log.debug("Recording finished to: " + destFile.getAbsolutePath());
-        });
-        setLastVideo(destFile);
-        return destFile;
+        File file = getFfmpegWrapper().stopFFmpegAndSave(filename);
+        setLastVideo(file);
+        return file;
     }
 }

@@ -11,9 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static com.automation.remarks.video.SystemUtils.getPidOf;
-import static com.automation.remarks.video.SystemUtils.getScreenSize;
-import static com.automation.remarks.video.SystemUtils.runCommand;
+import static com.automation.remarks.video.SystemUtils.*;
 import static com.automation.remarks.video.recorder.VideoRecorder.conf;
 
 /**
@@ -27,10 +25,15 @@ public class FFmpegWrapper {
     private static final String TEM_FILE_NAME = "temporary";
     private static final String EXTENSION = ".mp4";
     private CompletableFuture<String> future;
+    private File temporaryFile;
 
     public void startFFmpeg(String display, String recorder, int bitrate, String... args) {
-        File temporaryFile = getTemporaryFile();
-        temporaryFile.mkdirs();
+        File videoFolder = conf().getVideoFolder();
+        if (!videoFolder.exists()) {
+            videoFolder.mkdirs();
+        }
+
+        temporaryFile = getTemporaryFile();
         final String[] commandsSequence = new String[]{
                 FFmpegWrapper.RECORDING_TOOL, "-y",
                 "-video_size", getScreenSize(),
@@ -44,13 +47,21 @@ public class FFmpegWrapper {
         List<String> command = new ArrayList<>();
         command.addAll(Arrays.asList(commandsSequence));
         command.addAll(Arrays.asList(args));
-        future = CompletableFuture.supplyAsync(() -> runCommand(command));
+        this.future = CompletableFuture.supplyAsync(() -> runCommand(command));
     }
 
-    public CompletableFuture<String> stopFFmpeg() {
+    public File stopFFmpegAndSave(String filename) {
         String killLog = killFFmpeg();
         log.info("Process kill output: " + killLog);
-        return future;
+        File destFile = getResultFile(filename);
+        this.future.whenCompleteAsync((out, errors) -> {
+            log.debug("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+        });
+        boolean renameTo = temporaryFile.renameTo(destFile);
+        if (renameTo) {
+            log.debug("Recording finished to: " + destFile.getAbsolutePath());
+        }
+        return destFile;
     }
 
     private String killFFmpeg() {
