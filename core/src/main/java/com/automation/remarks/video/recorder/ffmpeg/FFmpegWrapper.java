@@ -53,14 +53,13 @@ public class FFmpegWrapper {
     public File stopFFmpegAndSave(String filename) {
         String killLog = killFFmpeg();
         log.info("Process kill output: " + killLog);
+
         File destFile = getResultFile(filename);
         this.future.whenCompleteAsync((out, errors) -> {
+            temporaryFile.renameTo(destFile);
             log.debug("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+            log.info("Recording finished to: " + destFile.getAbsolutePath());
         });
-        boolean renameTo = temporaryFile.renameTo(destFile);
-        if (renameTo) {
-            log.debug("Recording finished to: " + destFile.getAbsolutePath());
-        }
         return destFile;
     }
 
