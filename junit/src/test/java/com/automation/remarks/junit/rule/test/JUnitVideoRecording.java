@@ -70,7 +70,7 @@ public class JUnitVideoRecording {
     @Test
     public void shouldPassOnSuccessTestWithVideoIfSaveModeAll() {
         String methodName = "successWithVideo";
-        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.ALL);
+        MonteRecorder.conf().withVideoSaveMode(VideoSaveMode.ALL);
         VideoRule videoRule = new VideoRule();
         TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileExistsWithName(methodName);
@@ -79,7 +79,7 @@ public class JUnitVideoRecording {
     @Test
     public void shouldPassOnSuccessTestWithoutVideoIfSaveModeFailedOnly() {
         String methodName = "successWithVideo";
-        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.FAILED_ONLY);
+        MonteRecorder.conf().withVideoSaveMode(VideoSaveMode.FAILED_ONLY);
         VideoRule videoRule = new VideoRule();
         TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileNotExists();

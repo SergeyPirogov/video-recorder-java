@@ -65,7 +65,7 @@ public class TestNGVideoListenerTest extends BaseTest {
     @Test
     @Video()
     public void shouldBeRecordingForSuccessfulTestAndSaveModeAll() {
-        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.ALL);
+        MonteRecorder.conf().withVideoSaveMode(VideoSaveMode.ALL);
         ITestResult result = prepareMock(testMethod);
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
@@ -78,7 +78,7 @@ public class TestNGVideoListenerTest extends BaseTest {
     @Test
     @Video()
     public void shouldBeRecordingForFailedTestAndSaveModeFailOnly() {
-        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.FAILED_ONLY);
+        MonteRecorder.conf().withVideoSaveMode(VideoSaveMode.FAILED_ONLY);
         ITestResult result = prepareMock(testMethod);
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
@@ -91,7 +91,7 @@ public class TestNGVideoListenerTest extends BaseTest {
     @Test
     @Video()
     public void shouldNotBeRecordingForSuccessfulTestAndSaveModeFailOnly() {
-        MonteRecorder.conf().withVideoSaveMove(VideoSaveMode.FAILED_ONLY);
+        MonteRecorder.conf().withVideoSaveMode(VideoSaveMode.FAILED_ONLY);
         ITestResult result = prepareMock(testMethod);
         VideoListener listener = new VideoListener();
         listener.onTestStart(result);
