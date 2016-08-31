@@ -1,7 +1,10 @@
 package test;
 
+import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.enums.RecorderType;
-import com.automation.remarks.video.recorder.FFMpegRecorder;
+import com.automation.remarks.video.recorder.IVideoRecorder;
+import com.automation.remarks.video.recorder.ffmpeg.FFMpegRecorder;
+import com.automation.remarks.video.recorder.ffmpeg.MacFFmpegRecorder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,13 +25,6 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     private static final String VIDEO_FILE_NAME = "video_test";
     private static final String VIDEO_FOLDER_NAME = "video";
 
-    private File recordVideo() throws InterruptedException {
-        FFMpegRecorder recorder = new FFMpegRecorder();
-        recorder.start();
-        Thread.sleep(5000);
-        return recorder.stopAndSave(VIDEO_FILE_NAME);
-    }
-
     @BeforeClass
     public static void setUpRecorder() {
         conf().withRecorderType(RecorderType.FFMPEG);
@@ -39,13 +35,6 @@ public class TestFFmpegVideoRecorder extends BaseTest {
         File video = recordVideo();
         waitWhileVideoComplete(video);
         assertTrue("File doesn't exists " + video.getAbsolutePath(), video.exists());
-    }
-
-    private void waitWhileVideoComplete(File video){
-        await().atMost(3, TimeUnit.SECONDS)
-                .pollDelay(10, TimeUnit.MILLISECONDS)
-                .ignoreExceptions()
-                .until(() -> video.exists());
     }
 
     @Test
@@ -66,5 +55,19 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     public void shouldBeExactVideoFileName() throws Exception {
         String fileName = recordVideo().getName();
         assertThat(fileName, startsWith(VIDEO_FILE_NAME));
+    }
+
+    private void waitWhileVideoComplete(File video) {
+        await().atMost(100, TimeUnit.SECONDS)
+                .pollDelay(10, TimeUnit.MILLISECONDS)
+                .ignoreExceptions()
+                .until(() -> video.exists());
+    }
+
+    private File recordVideo() throws InterruptedException {
+        IVideoRecorder recorder = RecorderFactory.getRecorder();
+        recorder.start();
+        Thread.sleep(5000);
+        return recorder.stopAndSave(VIDEO_FILE_NAME);
     }
 }
