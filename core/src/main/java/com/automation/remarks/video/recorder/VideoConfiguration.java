@@ -51,7 +51,7 @@ public class VideoConfiguration {
         return this;
     }
 
-    public VideoConfiguration withVideoSaveMove(VideoSaveMode mode) {
+    public VideoConfiguration withVideoSaveMode(VideoSaveMode mode) {
         saveMode = mode;
         return this;
     }
