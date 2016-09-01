@@ -4,7 +4,7 @@ import com.automation.remarks.junit.VideoRule;
 import com.automation.remarks.junit.rule.test.util.TestUtils;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.enums.VideoSaveMode;
-import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;

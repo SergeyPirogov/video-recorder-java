@@ -1,8 +1,5 @@
 package com.automation.remarks.video.recorder;
 
-import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.VideoConfiguration;
-
 import java.io.File;
 
 /**

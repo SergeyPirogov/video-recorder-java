@@ -1,6 +1,6 @@
 package com.automation.remarks.remote.node;
 
-import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.apache.http.HttpStatus;
 
 import javax.servlet.ServletException;

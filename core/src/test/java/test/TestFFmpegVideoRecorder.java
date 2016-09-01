@@ -40,6 +40,7 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     public void shouldBeVideoInRecordingsFolder() throws IOException, InterruptedException {
         conf().withVideoFolder(VIDEO_FOLDER_NAME);
         File video = recordVideo();
+        waitWhileVideoComplete(video);
         String folderName = video.getParentFile().getName();
         assertEquals(folderName, VIDEO_FOLDER_NAME);
     }
@@ -47,6 +48,7 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     @Test
     public void shouldBeAbsoluteRecordingPath() throws Exception {
         File video = recordVideo();
+        waitWhileVideoComplete(video);
         assertThat(video.getAbsolutePath(), startsWith(conf().getVideoFolder().getAbsolutePath() + File.separator + VIDEO_FILE_NAME));
     }
 

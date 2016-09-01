@@ -1,16 +1,13 @@
 package test;
 
 import com.automation.remarks.video.exception.RecordingException;
-import com.automation.remarks.video.recorder.MonteRecorder;
-import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 
-import static com.automation.remarks.video.recorder.MonteRecorder.conf;
+import static com.automation.remarks.video.recorder.monte.MonteRecorder.conf;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.*;
 

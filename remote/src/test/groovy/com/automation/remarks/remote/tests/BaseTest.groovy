@@ -1,7 +1,7 @@
 package com.automation.remarks.remote.tests
 
 import com.automation.remarks.remote.StartGrid
-import com.automation.remarks.video.recorder.MonteRecorder
+import com.automation.remarks.video.recorder.monte.MonteRecorder
 import spock.lang.Specification
 
 import static java.lang.Thread.sleep

@@ -1,6 +1,6 @@
 package com.automation.remarks.remote.tests
 
-import com.automation.remarks.video.recorder.MonteRecorder
+import com.automation.remarks.video.recorder.monte.MonteRecorder
 
 import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest
 /**

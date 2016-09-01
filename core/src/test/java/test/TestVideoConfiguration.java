@@ -1,7 +1,7 @@
 package test;
 
 import com.automation.remarks.video.recorder.VideoConfiguration;
-import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 

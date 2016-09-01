@@ -3,7 +3,7 @@ package com.automation.remarks.testng.test;
 import com.automation.remarks.testng.RemoteVideoListener;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.openqa.grid.selenium.GridLauncher;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;

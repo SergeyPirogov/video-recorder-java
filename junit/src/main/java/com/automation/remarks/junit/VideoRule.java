@@ -3,7 +3,7 @@ package com.automation.remarks.junit;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;

@@ -1,6 +1,8 @@
-package com.automation.remarks.video.recorder;
+package com.automation.remarks.video.recorder.monte;
 
 import com.automation.remarks.video.exception.RecordingException;
+import com.automation.remarks.video.recorder.VideoConfiguration;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
 import org.monte.media.math.Rational;

@@ -3,7 +3,7 @@ package com.automation.remarks.testng.test;
 import com.automation.remarks.testng.VideoListener;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.enums.VideoSaveMode;
-import com.automation.remarks.video.recorder.MonteRecorder;
+import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 

@@ -1,4 +1,4 @@
-package com.automation.remarks.video.recorder;
+package com.automation.remarks.video.recorder.monte;
 
 import com.automation.remarks.video.exception.RecordingException;
 import org.monte.media.Format;
