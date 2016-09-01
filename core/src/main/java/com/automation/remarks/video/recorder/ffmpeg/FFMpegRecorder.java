@@ -10,8 +10,6 @@ import java.io.File;
  */
 public abstract class FFMpegRecorder extends VideoRecorder {
 
-    private static final Logger log = org.apache.log4j.Logger.getLogger(FFMpegRecorder.class);
-
     private FFmpegWrapper ffmpegWrapper;
 
     public FFMpegRecorder() {
