@@ -27,7 +27,7 @@ public class FFmpegWrapper {
     private CompletableFuture<String> future;
     private File temporaryFile;
 
-    public void startFFmpeg(String display, String recorder, int bitrate, String... args) {
+    public void startFFmpeg(String display, String recorder, String... args) {
         File videoFolder = conf().getVideoFolder();
         if (!videoFolder.exists()) {
             videoFolder.mkdirs();
@@ -40,7 +40,7 @@ public class FFmpegWrapper {
                 "-f", recorder,
                 "-i", display,
                 "-an",
-                "-r", String.valueOf(bitrate),
+                "-framerate", String.valueOf(conf().getFrameRate()),
                 temporaryFile.getAbsolutePath()
         };
 

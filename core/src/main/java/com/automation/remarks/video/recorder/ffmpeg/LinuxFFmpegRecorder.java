@@ -8,6 +8,6 @@ public class LinuxFFmpegRecorder extends FFMpegRecorder {
     public void start() {
         String display = ":0.0";
         String recorder = "x11grab";
-        getFfmpegWrapper().startFFmpeg(display, recorder, 24);
+        getFfmpegWrapper().startFFmpeg(display, recorder);
     }
 }

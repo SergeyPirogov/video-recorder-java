@@ -8,6 +8,6 @@ public class MacFFmpegRecorder extends FFMpegRecorder {
     public void start() {
         String display = "1:";
         String recorder = "avfoundation";
-        getFfmpegWrapper().startFFmpeg(display, recorder, 24, "-vsync", "2");
+        getFfmpegWrapper().startFFmpeg(display, recorder, "-vsync", "2");
     }
 }

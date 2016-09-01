@@ -1,5 +1,6 @@
 package com.automation.remarks.video.recorder;
 
+import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.enums.VideoSaveMode;
@@ -25,6 +26,12 @@ public class VideoConfiguration {
     private static String remoteUrl = getProperty("remote.video.hub", "http://localhost:4444");
     private static RecorderType recorderType = RecorderType.valueOf(getProperty("recorder.type", "MONTE"));
     private static VideoSaveMode saveMode = VideoSaveMode.valueOf(getProperty("video.save.mode", "FAILED_ONLY"));
+    private static int frameRate = Integer.valueOf(getProperty("video.frame.rate","24"));
+
+    public VideoConfiguration withFrameRate(int frameRate){
+        VideoConfiguration.frameRate = frameRate;
+        return this;
+    }
 
     public VideoConfiguration withVideoFolder(String dirPath) {
         videoFolder = dirPath;
@@ -78,6 +85,10 @@ public class VideoConfiguration {
 
     public RecorderType getRecorderType() {
         return recorderType;
+    }
+
+    public int getFrameRate() {
+        return frameRate;
     }
 
     public VideoConfiguration withDefaultFolder() {
