@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
