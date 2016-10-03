@@ -11,6 +11,7 @@ import org.testng.ITestResult;
 import java.io.File;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
+import static com.automation.remarks.testng.utils.ListenerUtils.videoEnabled;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.video.enums.RecordingMode.ALL;
 import static com.automation.remarks.video.enums.RecordingMode.ANNOTATED;
@@ -69,12 +70,6 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
         onTestFailure(result);
-    }
-
-    private boolean videoEnabled(Video video) {
-        return VideoRecorder.conf().isVideoEnabled()
-                && (VideoRecorder.conf().getMode().equals(ALL)
-                || video != null);
     }
 
     private File stopRecording(String filename) {
