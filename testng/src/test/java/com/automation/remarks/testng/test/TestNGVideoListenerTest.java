@@ -41,17 +41,6 @@ public class TestNGVideoListenerTest extends BaseTest {
     }
 
     @Test
-    @Video(enabled = false)
-    public void shouldNotBeRecordingIfVideoDisabled() {
-        ITestResult result = prepareMock(testMethod);
-        VideoListener listener = new VideoListener();
-        listener.onTestStart(result);
-        listener.onTestSuccess(result);
-        File file = MonteRecorder.getLastRecording();
-        assertFalse(file.exists());
-    }
-
-    @Test
     @Video(name = "new_recording")
     public void shouldBeRecordingWithCustomName() {
         ITestResult result = prepareMock(testMethod);

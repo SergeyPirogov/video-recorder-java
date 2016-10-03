@@ -62,17 +62,6 @@ public class TestNGRemoteListenerTest extends BaseTest {
     }
 
     @Test
-    @Video(enabled = false)
-    public void shouldNotBeRecordingIfVideoEnabledIsFalse() {
-        ITestResult result = prepareMock(testMethod);
-        RemoteVideoListener listener = new RemoteVideoListener();
-        listener.onTestStart(result);
-        listener.onTestFailure(result);
-        File file = MonteRecorder.getLastRecording();
-        assertFalse(file.exists(), "File " + file.getName());
-    }
-
-    @Test
     @Video
     public void shouldPassIfGridConfiguredWithCustomPorts() throws Exception {
         startGrid("4446","5556");

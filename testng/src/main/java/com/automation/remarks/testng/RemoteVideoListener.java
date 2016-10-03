@@ -70,6 +70,6 @@ public class RemoteVideoListener implements ITestListener {
     private boolean videoEnabled(Video video) {
         return VideoRecorder.conf().isVideoEnabled()
                 && (VideoRecorder.conf().getMode().equals(ALL)
-                || (video != null && video.enabled()));
+                || video != null);
     }
 }

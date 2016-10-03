@@ -34,11 +34,6 @@ public class JUnitVideoRecording {
         fail();
     }
 
-    @Video(enabled = false)
-    public void failWithoutVideo() {
-        fail();
-    }
-
     @Video
     public void successWithVideo(){}
 
@@ -57,14 +52,6 @@ public class JUnitVideoRecording {
         VideoRule videoRule = new VideoRule();
         TestUtils.runRule(videoRule, this, methodName);
         verifyVideoFileExistsWithName(video_name);
-    }
-
-    @Test
-    public void shouldPassOnMethodWithoutVideoIfVideoEnableFlagIsFalse() {
-        String methodName = "failWithoutVideo";
-        VideoRule videoRule = new VideoRule();
-        TestUtils.runRule(videoRule, this, methodName);
-        verifyVideoFileNotExists();
     }
 
     @Test
