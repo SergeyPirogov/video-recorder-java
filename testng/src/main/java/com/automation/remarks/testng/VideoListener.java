@@ -3,7 +3,6 @@ package com.automation.remarks.testng;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -13,8 +12,6 @@ import java.io.File;
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.ListenerUtils.videoEnabled;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
-import static com.automation.remarks.video.enums.RecordingMode.ALL;
-import static com.automation.remarks.video.enums.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
 /**
