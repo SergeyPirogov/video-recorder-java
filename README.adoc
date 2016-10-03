@@ -60,7 +60,7 @@ public class JUnitVideoTest {
     }
 
     @Test
-    @Video(name = "third_test", enabled = false)
+    @Video(name = "third_test")
     public void shouldFailWithoutRecording() {
         Thread.sleep(10000);
         assertTrue(false);
@@ -132,7 +132,7 @@ public class TestNgVideoTest {
     }
 
     @Test
-    @Video(name = "third_test", enabled = false)
+    @Video(name = "third_test")
     public void shouldFailWithoutRecording() {
         Thread.sleep(1000);
         assertTrue(false);
@@ -205,7 +205,7 @@ public class TestNgRemoteVideonTest {
     }
 
     @Test
-    @Video(name = "third_test", enabled = false)
+    @Video(name = "third_test")
     public void shouldFailWithoutRecording() {
         Thread.sleep(1000);
         assertTrue(false);
