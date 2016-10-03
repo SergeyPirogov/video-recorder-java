@@ -12,6 +12,7 @@ import java.io.File;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
+import static com.automation.remarks.video.enums.RecordingMode.ALL;
 import static com.automation.remarks.video.enums.RecordingMode.ANNOTATED;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 
@@ -35,7 +36,7 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (isVideoDisabled(video)) {
+        if (!videoEnabled(video)) {
             return;
         }
         recorder = RecorderFactory.getRecorder();
@@ -52,7 +53,7 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (isVideoDisabled(video)) {
+        if (!videoEnabled(video)) {
             return;
         }
         String fileName = getFileName(result);
@@ -70,8 +71,10 @@ public class VideoListener implements ITestListener {
         onTestFailure(result);
     }
 
-    private boolean isVideoDisabled(Video video){
-        return VideoRecorder.conf().getMode().equals(ANNOTATED) && (video == null || !video.enabled());
+    private boolean videoEnabled(Video video) {
+        return VideoRecorder.conf().isVideoEnabled()
+                && (VideoRecorder.conf().getMode().equals(ALL)
+                || (video != null && video.enabled()));
     }
 
     private File stopRecording(String filename) {
