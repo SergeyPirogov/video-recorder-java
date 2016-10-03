@@ -32,21 +32,16 @@ public class MonteRecorder extends VideoRecorder {
     }
 
     public void start() {
-        if (videoConfiguration.isVideoEnabled()) {
-            screenRecorder.start();
-        }
+        screenRecorder.start();
     }
 
     public File stopAndSave(String filename) {
-        File video = null;
-        if (videoConfiguration.isVideoEnabled()) {
-             video = writeVideo(filename);
-        }
+        File video = writeVideo(filename);
         setLastVideo(video);
         return video;
     }
 
-    private File writeVideo(String filename){
+    private File writeVideo(String filename) {
         try {
             return screenRecorder.saveAs(filename);
         } catch (IndexOutOfBoundsException ex) {

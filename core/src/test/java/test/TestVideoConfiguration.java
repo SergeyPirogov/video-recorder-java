@@ -15,16 +15,6 @@ import static org.junit.Assert.*;
 public class TestVideoConfiguration {
 
     @Test
-    public void shouldDisableVideoRecording() throws Exception {
-        MonteRecorder.conf().videoEnabled(false);
-        MonteRecorder recorder = new MonteRecorder();
-        recorder.start();
-        File test_video = recorder.stopAndSave("test_video");
-        assertNull(test_video);
-
-    }
-
-    @Test
     public void shouldBeVideoFileWithDefaultVideoFolderPath() throws Exception {
         VideoConfiguration conf = MonteRecorder.conf();
         conf.videoEnabled(true);
