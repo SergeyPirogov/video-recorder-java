@@ -104,4 +104,36 @@ public class TestNGVideoListenerTest extends BaseTest {
         File file = MonteRecorder.getLastRecording();
         assertNotEquals(file.getName(), "shouldNotBeVideoIfDisabledAndRecordModeAll.avi");
     }
+
+    @Test
+    @Video()
+    public void shouldNotBeRecordingForSuccessTestWithFfmpegAndSaveModeFailOnly() throws InterruptedException {
+        MonteRecorder.conf()
+                .withVideoSaveMode(VideoSaveMode.FAILED_ONLY)
+                .withRecorderType(RecorderType.FFMPEG);
+
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        Thread.sleep(5000);
+        listener.onTestSuccess(result);
+        File file = MonteRecorder.getLastRecording();
+        assertFalse(file.exists());
+    }
+
+    @Test
+    @Video()
+    public void shouldBeRecordingForFailTestWithFfmpegAndSaveModeFailOnly() throws InterruptedException {
+        MonteRecorder.conf()
+                .withVideoSaveMode(VideoSaveMode.FAILED_ONLY)
+                .withRecorderType(RecorderType.FFMPEG);
+
+        ITestResult result = prepareMock(testMethod);
+        VideoListener listener = new VideoListener();
+        listener.onTestStart(result);
+        Thread.sleep(5000);
+        listener.onTestFailure(result);
+        File file = MonteRecorder.getLastRecording();
+        assertTrue(file.exists());
+    }
 }
