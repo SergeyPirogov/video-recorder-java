@@ -56,15 +56,17 @@ public class MonteRecorder extends VideoRecorder {
     }
 
     private MonteScreenRecorder getScreenRecorder() {
+        int frameRate = conf().getFrameRate();
+
         Format fileFormat = new Format(MediaTypeKey, MediaType.VIDEO, MimeTypeKey, FormatKeys.MIME_AVI);
         Format screenFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey,
                 ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
                 CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
-                DepthKey, 24, FrameRateKey, Rational.valueOf(15),
+                DepthKey, 24, FrameRateKey, Rational.valueOf(frameRate),
                 QualityKey, 1.0f,
                 KeyFrameIntervalKey, 15 * 60);
         Format mouseFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
-                FrameRateKey, Rational.valueOf(30));
+                FrameRateKey, Rational.valueOf(frameRate));
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
