@@ -3,6 +3,7 @@ package test;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.recorder.IVideoRecorder;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -68,7 +69,7 @@ public class TestFFmpegVideoRecorder extends BaseTest {
     }
 
     private File recordVideo() throws InterruptedException {
-        IVideoRecorder recorder = RecorderFactory.getRecorder();
+        IVideoRecorder recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
         recorder.start();
         Thread.sleep(5000);
         return recorder.stopAndSave(VIDEO_FILE_NAME);

@@ -3,6 +3,7 @@ package com.automation.remarks.junit;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -10,8 +11,8 @@ import org.junit.runners.model.Statement;
 
 import java.io.File;
 
-import static com.automation.remarks.video.enums.RecordingMode.ALL;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
+import static com.automation.remarks.video.enums.RecordingMode.ALL;
 
 
 /**
@@ -35,7 +36,7 @@ public class VideoRule implements TestRule {
 
             private void recordVideo(String name, final Statement base) throws Throwable {
                 boolean successful = false;
-                IVideoRecorder recorder = RecorderFactory.getRecorder();
+                IVideoRecorder recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
                 recorder.start();
                 try {
                     base.evaluate();

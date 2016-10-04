@@ -3,6 +3,7 @@ package com.automation.remarks.testng;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -37,7 +38,7 @@ public class VideoListener implements ITestListener {
         if (!videoEnabled(video)) {
             return;
         }
-        recorder = RecorderFactory.getRecorder();
+        recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
         recorder.start();
     }
 
