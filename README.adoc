@@ -58,13 +58,6 @@ public class JUnitVideoTest {
         Thread.sleep(10000);
         assertTrue(false);
     }
-
-    @Test
-    @Video(name = "third_test")
-    public void shouldFailWithoutRecording() {
-        Thread.sleep(10000);
-        assertTrue(false);
-    }
 }
 ----
 
@@ -127,13 +120,6 @@ public class TestNgVideoTest {
     @Test
     @Video(name = "second_test")
     public void videoShouldHaveNameSecondTest(){
-        Thread.sleep(1000);
-        assertTrue(false);
-    }
-
-    @Test
-    @Video(name = "third_test")
-    public void shouldFailWithoutRecording() {
         Thread.sleep(1000);
         assertTrue(false);
     }
@@ -200,13 +186,6 @@ public class TestNgRemoteVideonTest {
     @Test
     @Video(name = "second_test")
     public void videoShouldHaveNameSecondTest(){
-        Thread.sleep(1000);
-        assertTrue(false);
-    }
-
-    @Test
-    @Video(name = "third_test")
-    public void shouldFailWithoutRecording() {
         Thread.sleep(1000);
         assertTrue(false);
     }
