@@ -15,7 +15,6 @@ before_install:
 
   - sudo add-apt-repository -y ppa:mc3man/trusty-media
   - sudo apt-get -qq update
-  - sudo apt-get dist-upgrade -y
 
   - sudo apt-get install -qqy ffmpeg
 
