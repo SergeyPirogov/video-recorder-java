@@ -8,10 +8,9 @@ services:
   - docker                  
 
 before_install:
-  - git clone https://github.com/razzbee/ffmpeg_installer.git
-  - cd ffmpeg_installer
-  - chmod +x ffmpeg_installer
-  - sudo ./ffmpeg_installer
+  - sudo add-apt-repository ppa:samrog131/ppa
+  - sudo apt-get update
+  - sudo apt-get install ffmpeg
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
   - chmod +x gradlew
