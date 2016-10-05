@@ -8,8 +8,18 @@ services:
   - docker                  
 
 before_install:
-  - sudo apt-get -qqy update
-  - sudo add-apt-repository ppa:mc3man/trusty-media
+  - sudo apt-get -qqy --purge remove ffmpeg
+  - sudo apt-get -qqy --purge autoremove
+
+  - sudo apt-get install -qqy ppa-purge
+  - sudo ppa-purge -qqy ppa:jon-severinsson/ffmpeg
+
+  - sudo add-apt-repository -y ppa:mc3man/trusty-media
+  - sudo apt-get update
+  - sudo apt-get dist-upgrade -y
+
+  - sudo apt-get install -qqy ffmpeg
+
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
   - chmod +x gradlew
