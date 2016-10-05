@@ -35,6 +35,6 @@ class HubServletTest extends BaseTest{
         when:
         def message = sendRecordingRequest(HUB_SERVLET_URL + "/stop?result=false&name=video_name&");
         then:
-        message.startsWith "http://localhost:5555 video command /stop recording stopped ${System.getProperty("user.dir")}/custom_folder/video_name_recording"
+        message.startsWith "http://localhost:5555 video command /stop recording stopped ${System.getProperty("user.dir")}${File.separator}custom_folder${File.separator}video_name_recording"
     }
 }
