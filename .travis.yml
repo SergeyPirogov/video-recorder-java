@@ -9,9 +9,7 @@ services:
 
 before_install:
   - sudo apt-get -qqy update
-  - sudo apt-get -qqy install software-properties-common python-software-properties
-  - sudo add-apt-repository ppa:djcj/vlc-stable -y
-  - sudo apt-get -qqy install ffmpeg
+  - sudo apt-get install -qqy libcairo2-dev libpixman-1-dev libpango1.0-dev libgif-dev libjpeg-dev libgtk2.0-dev vlc libvlc-dev portaudio19-dev libsqlite3-dev libcurl4-openssl-dev makeself curl
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
   - chmod +x gradlew
