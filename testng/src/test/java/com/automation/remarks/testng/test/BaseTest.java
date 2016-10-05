@@ -1,5 +1,6 @@
 package com.automation.remarks.testng.test;
 
+import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.apache.commons.io.FileUtils;
@@ -27,7 +28,9 @@ public class BaseTest {
     public void beforeMethod(Method method) throws IOException {
         this.testMethod = method;
         deleteVideoDir();
-        MonteRecorder.conf().withRecordMode(RecordingMode.ANNOTATED);
+        MonteRecorder.conf()
+                .withRecordMode(RecordingMode.ANNOTATED)
+                .withRecorderType(RecorderType.MONTE);
     }
 
     @AfterClass
