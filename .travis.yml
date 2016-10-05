@@ -8,9 +8,9 @@ services:
   - docker                  
 
 before_install:
-  - apt-get  -qqy update \
+  - apt-get  -qqy update
       && DEBIAN_FRONTEND=noninteractive apt-get -qqy install software-properties-common python-software-properties \
-      && DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:djcj/hybrid \
+      && DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:djcj/hybrid
       && apt-get -qqy install ffmpeg
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
