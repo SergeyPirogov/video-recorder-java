@@ -6,11 +6,14 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.ListenerUtils.videoEnabled;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
-import static com.automation.remarks.video.enums.RecordingMode.ALL;
 
 /**
  * Created by sergey on 12.05.16.
@@ -23,9 +26,20 @@ public class RemoteVideoListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/start?&folder=" + VideoRecorder.conf().getVideoFolder();
+            String folder_url = encodeFilePath(VideoRecorder.conf().getVideoFolder());
+            String url = REMOTE + "/grid/admin/Video/start?&folder=" + folder_url ;
             sendRecordingRequest(url);
         }
+    }
+
+    private String encodeFilePath(File file){
+        URL videoFolder = null;
+        try {
+            videoFolder = file.toURI().toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return videoFolder.toString().replace("file:/","");
     }
 
     @Override
@@ -33,7 +47,7 @@ public class RemoteVideoListener implements ITestListener {
         String testName = getFileName(result);
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/stop?result=true&name="+ testName;
+            String url = REMOTE + "/grid/admin/Video/stop?result=true&name=" + testName;
             sendRecordingRequest(url);
         }
     }
@@ -43,7 +57,7 @@ public class RemoteVideoListener implements ITestListener {
         String testName = getFileName(result);
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/stop?result=false&name="+testName;
+            String url = REMOTE + "/grid/admin/Video/stop?result=false&name=" + testName;
             sendRecordingRequest(url);
         }
     }
