@@ -10,7 +10,7 @@ services:
 before_install:
   - sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next -y
   - sudo apt-get update
-  - sudo apt-get install ffmpeg
+  - sudo apt-get install -qqy ffmpeg
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
   - chmod +x gradlew
@@ -18,7 +18,7 @@ before_install:
 script:
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output *.adoc      
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output *.adoc    
-  - ./gradlew clean build -x test
+  - ./gradlew clean test
 
 after_error: 
   - docker logs asciidoc-to-html
