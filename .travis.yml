@@ -12,7 +12,7 @@ before_install:
   - sudo apt-get -qqy --purge autoremove
 
   - sudo apt-get install -qqy ppa-purge
-  - sudo ppa-purge -qqy ppa:jon-severinsson/ffmpeg
+  - sudo ppa-purge ppa:jon-severinsson/ffmpeg -y
 
   - sudo add-apt-repository -y ppa:mc3man/trusty-media
   - sudo apt-get update
