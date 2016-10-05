@@ -49,6 +49,7 @@ public class BaseTest {
         ConstructorOrMethod cm = mock(ConstructorOrMethod.class);
         String methodName = testMethod.getName();
         when(result.getTestClass()).thenReturn(clazz);
+        when(result.getTestClass().getRealClass()).thenReturn(TestNgListenerTest.class);
         when(clazz.getName()).thenReturn(this.getClass().getName());
         when(result.getMethod()).thenReturn(testNGMethod);
         when(cm.getMethod()).thenReturn(testMethod);
