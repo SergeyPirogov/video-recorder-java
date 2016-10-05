@@ -8,21 +8,14 @@ services:
   - docker                  
 
 before_install:
-  - sudo apt-get -qqy update
-  - sudo apt-get install -qqy libcairo2-dev libpixman-1-dev libpango1.0-dev libgif-dev libjpeg-dev libgtk2.0-dev vlc libvlc-dev portaudio19-dev libsqlite3-dev libcurl4-openssl-dev makeself curl
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
   - chmod +x gradlew
 
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
-
 script:
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output *.adoc      
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output *.adoc    
-  - ./gradlew clean test
+  - ./gradlew clean build -x test
 
 after_error: 
   - docker logs asciidoc-to-html
