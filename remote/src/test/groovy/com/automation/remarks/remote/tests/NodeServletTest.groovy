@@ -1,7 +1,6 @@
 package com.automation.remarks.remote.tests
 
 import com.automation.remarks.video.recorder.monte.MonteRecorder
-import org.apache.commons.io.FileUtils
 import spock.lang.IgnoreIf
 import spock.lang.Shared
 import spock.lang.Stepwise
@@ -14,7 +13,8 @@ import static com.automation.remarks.remote.utils.RestUtils.sendRecordingRequest
 @Stepwise
 class NodeServletTest extends BaseTest {
 
-    @Shared String VIDEO_FOLDER = System.getProperty('user.dir')
+    @Shared
+    String VIDEO_FOLDER = System.getProperty('user.dir')
 
     def setup() {
         MonteRecorder.conf().videoFolder.deleteDir()
@@ -54,7 +54,7 @@ class NodeServletTest extends BaseTest {
         message.startsWith "recording stopped ${VIDEO_FOLDER}${File.separator}video${File.separator}video_recording"
     }
 
-    @IgnoreIf({isOsWindows()})
+    @IgnoreIf({ os.windows })
     def "shouldBeFileNameAsNameRequestParameter"() {
         def name = "video"
         given:
@@ -66,7 +66,7 @@ class NodeServletTest extends BaseTest {
         getVideoFiles().first().name =~ name
     }
 
-    @IgnoreIf({isOsWindows()})
+    @IgnoreIf({ os.windows })
     def "shouldNotCreateVideoFileIfSuccessTestKeyPassed"() {
         given:
         sendRecordingRequest(NODE_SERVLET_URL + "/start")
