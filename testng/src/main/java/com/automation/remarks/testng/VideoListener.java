@@ -4,8 +4,6 @@ import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.VideoRecorder;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
@@ -18,24 +16,14 @@ import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 /**
  * Created by sergey on 18.06.16.
  */
-public class VideoListener implements ITestListener {
+public class VideoListener extends TestNgListener {
 
     private IVideoRecorder recorder;
 
     @Override
-    public void onStart(ITestContext context) {
-
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
-
-    }
-
-    @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (!videoEnabled(video)) {
+        if (!videoEnabled(video) || !shouldIntercept(result)) {
             return;
         }
         recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
@@ -52,7 +40,7 @@ public class VideoListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         Video video = getVideoAnnotation(result);
-        if (!videoEnabled(video)) {
+        if (!videoEnabled(video) || !shouldIntercept(result)) {
             return;
         }
         String fileName = getFileName(result);
@@ -60,14 +48,8 @@ public class VideoListener implements ITestListener {
         doVideoProcessing(false, file);
     }
 
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        onTestFailure(result);
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        onTestFailure(result);
+    public boolean shouldIntercept(ITestResult result) {
+        return shouldIntercept(result.getTestClass().getRealClass(), this.getClass());
     }
 
     private File stopRecording(String filename) {
