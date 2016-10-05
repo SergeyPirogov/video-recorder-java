@@ -8,7 +8,7 @@ services:
   - docker                  
 
 before_install:
-  - sudo add-apt-repository ppa:samrog131/ppa
+  - sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next
   - sudo apt-get update
   - sudo apt-get install ffmpeg
   - mkdir -p output
