@@ -76,6 +76,7 @@ class NodeServletTest extends BaseTest {
         getVideoFiles().size() == 0
     }
 
+    @IgnoreIf({ os.windows })
     def "shouldCreateVideoFileIfFailTestKeyPassed"() {
         given:
         sendRecordingRequest(NODE_SERVLET_URL + "/start")
