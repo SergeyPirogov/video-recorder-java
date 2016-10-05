@@ -8,6 +8,10 @@ services:
   - docker                  
 
 before_install:
+  - git clone https://github.com/razzbee/ffmpeg_installer.git
+  - cd ffmpeg_installer
+  - chmod +x ffmpeg_installer
+  - ./ffmpeg_installer
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
   - chmod +x gradlew
