@@ -1,15 +1,26 @@
 sudo: required
 
+language: java
+jdk:
+  - oraclejdk8
+
 services:
   - docker                  
 
-before_install:            
+before_install:
+  - apt-get update -qqy \
+      && DEBIAN_FRONTEND=noninteractive apt-get -qqy install software-properties-common python-software-properties \
+      && DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:djcj/hybrid \
+      && apt-get -qqy install ffmpeg
+
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
+  - chmod +x gradlew
 
 script:
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output *.adoc      
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output *.adoc    
+  - ./gradlew clean test
 
 after_error: 
   - docker logs asciidoc-to-html
@@ -26,3 +37,9 @@ after_success:
   - git config user.email "{GH_USER_EMAIL}"
   - git add . ; git commit -m "Deploy to GitHub Pages"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+
+notifications:
+  email:
+    recipients:
+      - sergio_89@ukr.net
+    on_failure: always
