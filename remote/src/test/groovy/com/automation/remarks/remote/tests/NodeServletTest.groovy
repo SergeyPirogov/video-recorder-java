@@ -2,6 +2,7 @@ package com.automation.remarks.remote.tests
 
 import com.automation.remarks.video.recorder.monte.MonteRecorder
 import org.apache.commons.io.FileUtils
+import spock.lang.IgnoreIf
 import spock.lang.Shared
 import spock.lang.Stepwise
 
@@ -17,6 +18,10 @@ class NodeServletTest extends BaseTest {
 
     def setup() {
         MonteRecorder.conf().videoFolder.deleteDir()
+    }
+
+    private static boolean isOsWindows() {
+        System.properties['os.name'] == 'windows'
     }
 
     def "shouldBeOkMessageOnStartWithoutParameters"() {
@@ -49,6 +54,7 @@ class NodeServletTest extends BaseTest {
         message.startsWith "recording stopped ${VIDEO_FOLDER}${File.separator}video${File.separator}video_recording"
     }
 
+    @IgnoreIf({isOsWindows()})
     def "shouldBeFileNameAsNameRequestParameter"() {
         def name = "video"
         given:
@@ -57,9 +63,10 @@ class NodeServletTest extends BaseTest {
         def message = sendRecordingRequest(NODE_SERVLET_URL + "/stop")
         then:
         message.startsWith "recording stopped ${VIDEO_FOLDER}${File.separator}video${File.separator}video_recording"
-        //getVideoFiles().first().name =~ name
+        getVideoFiles().first().name =~ name
     }
 
+    @IgnoreIf({isOsWindows()})
     def "shouldNotCreateVideoFileIfSuccessTestKeyPassed"() {
         given:
         sendRecordingRequest(NODE_SERVLET_URL + "/start")
