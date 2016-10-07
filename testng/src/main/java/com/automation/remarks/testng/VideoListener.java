@@ -7,6 +7,7 @@ import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.util.List;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
 import static com.automation.remarks.testng.utils.ListenerUtils.videoEnabled;
@@ -49,7 +50,8 @@ public class VideoListener extends TestNgListener {
     }
 
     public boolean shouldIntercept(ITestResult result) {
-        return shouldIntercept(result.getTestClass().getRealClass(), this.getClass());
+        List<String> listeners = result.getTestContext().getCurrentXmlTest().getSuite().getListeners();
+        return listeners.contains(this.getClass().getName()) || shouldIntercept(result.getTestClass().getRealClass(), this.getClass());
     }
 
     private File stopRecording(String filename) {

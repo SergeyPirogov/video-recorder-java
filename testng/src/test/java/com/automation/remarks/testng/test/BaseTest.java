@@ -1,18 +1,23 @@
 package com.automation.remarks.testng.test;
 
+import com.automation.remarks.testng.VideoListener;
 import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.testng.IClass;
+import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.internal.ConstructorOrMethod;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -55,6 +60,13 @@ public class BaseTest {
         when(cm.getMethod()).thenReturn(testMethod);
         when(result.getMethod().getConstructorOrMethod()).thenReturn(cm);
         when(testNGMethod.getMethodName()).thenReturn(methodName);
+        ITestContext context = mock(ITestContext.class);
+        when(result.getTestContext()).thenReturn(context);
+        XmlTest xmlTest = new XmlTest();
+        XmlSuite suite = new XmlSuite();
+        xmlTest.setXmlSuite(suite);
+        suite.setListeners(Arrays.asList(VideoListener.class.getName()));
+        when(context.getCurrentXmlTest()).thenReturn(xmlTest);
         return result;
     }
 }
