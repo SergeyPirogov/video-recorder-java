@@ -9,3 +9,8 @@ import org.testng.annotations.Listeners;
 @Listeners({VideoListener.class})
 public class TestNgListenerTest {
 }
+
+@Listeners({CustomVideoListener.class})
+class TestNgCustomVideoListenerTest {
+
+}

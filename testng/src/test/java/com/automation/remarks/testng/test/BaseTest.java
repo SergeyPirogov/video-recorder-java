@@ -40,24 +40,24 @@ public class BaseTest {
 
     @AfterClass
     public static void tearDown() throws Exception {
-        deleteVideoDir();
+        // deleteVideoDir();
     }
 
     private static void deleteVideoDir() throws IOException {
         FileUtils.deleteDirectory(MonteRecorder.conf().getVideoFolder());
     }
 
-    protected ITestResult prepareMock(Method testMethod) {
+    protected ITestResult prepareMock(Class<?> tClass, Method method) {
         ITestResult result = mock(ITestResult.class);
         IClass clazz = mock(IClass.class);
         ITestNGMethod testNGMethod = mock(ITestNGMethod.class);
         ConstructorOrMethod cm = mock(ConstructorOrMethod.class);
-        String methodName = testMethod.getName();
+        String methodName = method.getName();
         when(result.getTestClass()).thenReturn(clazz);
-        when(result.getTestClass().getRealClass()).thenReturn(TestNgListenerTest.class);
+        when(result.getTestClass().getRealClass()).thenReturn(tClass);
         when(clazz.getName()).thenReturn(this.getClass().getName());
         when(result.getMethod()).thenReturn(testNGMethod);
-        when(cm.getMethod()).thenReturn(testMethod);
+        when(cm.getMethod()).thenReturn(method);
         when(result.getMethod().getConstructorOrMethod()).thenReturn(cm);
         when(testNGMethod.getMethodName()).thenReturn(methodName);
         ITestContext context = mock(ITestContext.class);
@@ -68,5 +68,9 @@ public class BaseTest {
         suite.setListeners(Arrays.asList(VideoListener.class.getName()));
         when(context.getCurrentXmlTest()).thenReturn(xmlTest);
         return result;
+    }
+
+    protected ITestResult prepareMock(Method testMethod) {
+        return prepareMock(TestNgListenerTest.class, testMethod);
     }
 }

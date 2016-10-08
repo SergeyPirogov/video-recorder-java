@@ -6,6 +6,7 @@ import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.enums.VideoSaveMode;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
@@ -136,4 +137,32 @@ public class TestNGVideoListenerTest extends BaseTest {
         File file = MonteRecorder.getLastRecording();
         assertTrue(file.exists());
     }
+
+    @Test
+    @Video()
+    public void shouldBeRecordingIfCustomVideoAnnotation() {
+        MonteRecorder.conf()
+                .withVideoSaveMode(VideoSaveMode.FAILED_ONLY)
+                .withRecorderType(RecorderType.FFMPEG);
+
+        ITestResult result = prepareMock(TestNgCustomVideoListenerTest.class, testMethod);
+        ITestListener listener = new CustomVideoListener();
+        listener.onTestStart(result);
+        sleep(5);
+        listener.onTestFailure(result);
+        File file = MonteRecorder.getLastRecording();
+        assertTrue(file.exists());
+    }
+
+    static void sleep(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class CustomVideoListener extends VideoListener {
+
 }
