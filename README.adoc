@@ -132,11 +132,11 @@ You are able to set some configuration parameters for Video Recorder:
 [source,java]
 ----
   VideoRecorder.conf()
-                .withVideoFolder("custom_folder")         // Default video folder is ${user.dir}/video.
-                .videoEnabled(true)                       // Video could be disabled globally. Set to "true"
+                .withVideoFolder("custom_folder")         // Default is ${user.dir}/video.
+                .videoEnabled(true)                       // Disabled video globally
                 .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
-                .withRecordMode(RecordingMode.ANNOTATED); // Record video only for test methods annotated by @Video
+                .withRecordMode(RecordingMode.ANNOTATED); // Record video only for tests with @Video
 ----
 
 or with maven
