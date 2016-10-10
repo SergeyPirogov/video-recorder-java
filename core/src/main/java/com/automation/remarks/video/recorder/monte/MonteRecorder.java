@@ -3,6 +3,8 @@ package com.automation.remarks.video.recorder.monte;
 import com.automation.remarks.video.exception.RecordingException;
 import com.automation.remarks.video.recorder.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
+import com.automation.remarks.video.recorder.ffmpeg.FFMpegRecorder;
+import org.apache.log4j.Logger;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
 import org.monte.media.math.Rational;
@@ -23,6 +25,8 @@ import static org.monte.media.VideoFormatKeys.*;
  */
 public class MonteRecorder extends VideoRecorder {
 
+    private static final Logger log = org.apache.log4j.Logger.getLogger(MonteRecorder.class);
+
     private MonteScreenRecorder screenRecorder;
     private VideoConfiguration videoConfiguration;
 
@@ -33,11 +37,13 @@ public class MonteRecorder extends VideoRecorder {
 
     public void start() {
         screenRecorder.start();
+        log.info("Recording started");
     }
 
     public File stopAndSave(String filename) {
         File video = writeVideo(filename);
         setLastVideo(video);
+        log.info("Recording finished to " + video.getAbsolutePath());
         return video;
     }
 
