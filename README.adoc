@@ -214,7 +214,7 @@ log4j.appender.FA.File=ffmpeg.log
 log4j.appender.FA.layout=org.apache.log4j.PatternLayout
 log4j.appender.FA.layout.ConversionPattern=[%-5p] %d %c - %m%n
 
-# Set the logger level of File Appender to WARN
+# Set the logger level of File Appender to DEBUG
 log4j.logger.com.automation.remarks.video.recorder=DEBUG, FA
 log4j.additivity.com.automation.remarks.video.recorder=false
 ----
