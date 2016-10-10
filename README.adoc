@@ -192,6 +192,33 @@ public class TestNgRemoteVideonTest {
 }
 ----
 
+=== Recorder logging
+
+You can log recorder events using log4j.
+
+Just need to set DEBUG level fot *package com.automation.remarks.video.recorder*
+
+Log4j settings example: with Console and File appenders.
+
+----
+log4j.rootLogger=INFO, CA, FA
+
+#Console Appender
+log4j.appender.CA=org.apache.log4j.ConsoleAppender
+log4j.appender.CA.layout=org.apache.log4j.PatternLayout
+log4j.appender.CA.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+
+#File Appender
+log4j.appender.FA=org.apache.log4j.FileAppender
+log4j.appender.FA.File=ffmpeg.log
+log4j.appender.FA.layout=org.apache.log4j.PatternLayout
+log4j.appender.FA.layout.ConversionPattern=[%-5p] %d %c - %m%n
+
+# Set the logger level of File Appender to WARN
+log4j.logger.com.automation.remarks.video.recorder=DEBUG, FA
+log4j.additivity.com.automation.remarks.video.recorder=false
+----
+
 ## License
 
 See https://github.com/SergeyPirogov/video-recorder-java/blob/master/LICENSE.txt/[LICENSE].
