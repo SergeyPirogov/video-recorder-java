@@ -129,7 +129,6 @@ public class TestNgVideoTest {
 
 You are able to set some configuration parameters for Video Recorder:
 
-[source,java]
 ----
   VideoRecorder.conf()
                 .withVideoFolder("custom_folder")         // Default is ${user.dir}/video.
