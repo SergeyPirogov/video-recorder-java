@@ -203,7 +203,7 @@ public class TestNgRemoteVideonTest {
 }
 ----
 
-=== Recorder logging
+== Recorder logging
 
 You can log recorder events using log4j.
 
