@@ -11,6 +11,11 @@ dependencies {
     testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.6'
 }
 
+processResources{
+    exclude 'log4j.properties'
+    exclude 'SendSignalCtrlC.exe'
+}
+
 jar{
     from {
         configurations.compile.findAll {it.name.contains('MonteScreenRecorder')}
