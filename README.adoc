@@ -139,6 +139,17 @@ You are able to set some configuration parameters for Video Recorder:
                 .withRecordMode(RecordingMode.ANNOTATED);        // Record video only for test methods annotated by @Video
 ----
 
+or with maven
+
+----
+ mvn test -Dvideo.folder=custom_folder // default video
+          -Dvideo.enabled=false        // default true
+          -Dvideo.mode=ALL             // default ANNOTATED
+          -Drecorder.type=FFMPEG       // default MONTE
+          -Dvideo.save.mode=ALL        // default FAILED_ONLY
+          -Dvideo.frame.rate=1         // default 24
+----
+
 == Remote Video Recording:
 
 Build remote module:
