@@ -1,7 +1,6 @@
 package com.automation.remarks.testng;
 
 import com.automation.remarks.video.RecorderFactory;
-import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.testng.ITestResult;
@@ -23,8 +22,7 @@ public class VideoListener extends TestNgListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        Video video = getVideoAnnotation(result);
-        if (!videoEnabled(video) || !shouldIntercept(result)) {
+        if (videoDisabled(result) || !shouldIntercept(result)) {
             return;
         }
         recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
@@ -40,13 +38,16 @@ public class VideoListener extends TestNgListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        Video video = getVideoAnnotation(result);
-        if (!videoEnabled(video) || !shouldIntercept(result)) {
+        if (videoDisabled(result) || !shouldIntercept(result)) {
             return;
         }
         String fileName = getFileName(result);
         File file = stopRecording(fileName);
         doVideoProcessing(false, file);
+    }
+
+    private boolean videoDisabled(ITestResult result){
+        return !videoEnabled(getVideoAnnotation(result));
     }
 
     public boolean shouldIntercept(ITestResult result) {

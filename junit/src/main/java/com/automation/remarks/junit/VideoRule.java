@@ -24,8 +24,7 @@ public class VideoRule extends TestWatcher {
 
     @Override
     protected void starting(Description description) {
-        Video video = description.getAnnotation(Video.class);
-        if (!videoEnabled(video)) {
+        if (videoDisabled(description)) {
             return;
         }
         recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
@@ -41,8 +40,7 @@ public class VideoRule extends TestWatcher {
 
     @Override
     protected void failed(Throwable e, Description description) {
-        Video video = description.getAnnotation(Video.class);
-        if (!videoEnabled(video)) {
+        if (videoDisabled(description)) {
             return;
         }
         String fileName = getFileName(description);
@@ -53,6 +51,10 @@ public class VideoRule extends TestWatcher {
     @Override
     protected void skipped(AssumptionViolatedException e, Description description) {
         failed(e, description);
+    }
+
+    private boolean videoDisabled(Description description){
+        return !videoEnabled(description.getAnnotation(Video.class));
     }
 
     private String getFileName(Description description) {

@@ -11,9 +11,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
-import static com.automation.remarks.testng.utils.ListenerUtils.videoEnabled;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
+import static com.automation.remarks.video.RecordingUtils.videoEnabled;
 
 /**
  * Created by sergey on 12.05.16.
@@ -27,19 +27,19 @@ public class RemoteVideoListener implements ITestListener {
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
             String folder_url = encodeFilePath(VideoRecorder.conf().getVideoFolder());
-            String url = REMOTE + "/grid/admin/Video/start?&folder=" + folder_url ;
+            String url = REMOTE + "/grid/admin/Video/start?&folder=" + folder_url;
             sendRecordingRequest(url);
         }
     }
 
-    private String encodeFilePath(File file){
+    private String encodeFilePath(File file) {
         URL videoFolder = null;
         try {
             videoFolder = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return videoFolder.toString().replace("file:/","");
+        return videoFolder.toString().replace("file:/", "");
     }
 
     @Override
