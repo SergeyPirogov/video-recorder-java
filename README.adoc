@@ -188,7 +188,7 @@ The final result should be folder with *ffmpeg*, *SendSignalCtrlC.exe* utilities
 
 To be sure that everything works properly, open CMD and perform first command:
 
-*C:\Users\sepi>ffmpeg*
+*ffmpeg*
 
 The output shoul lopk like this:
 ----
@@ -212,7 +212,7 @@ Use -h to get full help or, even better, run 'man ffmpeg'
 
 Than execute in CMD another command:
 
-*C:\Users\sepi>SendSignalCtrlC*
+*SendSignalCtrlC*
 
 Output:
 ----
