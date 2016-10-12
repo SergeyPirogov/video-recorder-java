@@ -212,11 +212,14 @@ Than execute in CMD another command:
 
 *C:\Users\sepi>SendSignalCtrlC*
 
+Output:
 ----
 C:\Users\sepi>SendSignalCtrlC
 SendSignalCtrlC <pid>
   <pid> - send ctrl-c to process <pid> (hex ok)
 ----
+
+If no errors, that everything set properly. You can you FFMPEG recorder type in ypur tests
 
 == Remote Video Recording:
 
