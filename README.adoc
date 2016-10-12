@@ -180,6 +180,8 @@ Just download it and unzip to some folder on you PC. Example *C:\ffmpeg*
 
 Then set System variable path for ffmpeg. http://www.computerhope.com/issues/ch000549.htm[Example]
 
+Example: add to PATH variable *;C:\ffmpeg\bin*
+
 Also you need to https://github.com/SergeyPirogov/video-recorder-java/raw/master/core/src/main/resources/SendSignalCtrlC.exe[download SendSignalCtrlC.exe] utility and put into the same folder as ffmpeg.
 
 The final result should be folder with *ffmpeg*, *SendSignalCtrlC.exe* utilities and System variable that point to this folder.
