@@ -1,11 +1,14 @@
 package com.automation.remarks.video;
 
+import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.enums.VideoSaveMode;
 import com.automation.remarks.video.recorder.VideoConfiguration;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.log4j.Logger;
 
 import java.io.File;
 
+import static com.automation.remarks.video.enums.RecordingMode.ALL;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -28,6 +31,20 @@ public class RecordingUtils {
             logger.info("No video on success test");
         }
         return "";
+    }
+
+    public static boolean videoEnabled(Video video) {
+        return VideoRecorder.conf().isVideoEnabled()
+                && (VideoRecorder.conf().getMode().equals(ALL)
+                || video != null);
+    }
+
+    public static String getVideoFileName(Video annotation, String methodName) {
+        if (annotation == null) {
+            return methodName;
+        }
+        String name = annotation.name();
+        return name.length() > 1 ? name : methodName;
     }
 
     private static String formatVideoFilePath(File video) {

@@ -10,9 +10,9 @@ import java.io.File;
 import java.util.List;
 
 import static com.automation.remarks.testng.utils.ListenerUtils.getFileName;
-import static com.automation.remarks.testng.utils.ListenerUtils.videoEnabled;
 import static com.automation.remarks.testng.utils.MethodUtils.getVideoAnnotation;
 import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
+import static com.automation.remarks.video.RecordingUtils.videoEnabled;
 
 /**
  * Created by sergey on 18.06.16.
