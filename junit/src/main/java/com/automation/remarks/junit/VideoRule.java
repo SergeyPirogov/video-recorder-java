@@ -12,10 +12,6 @@ import org.junit.runner.Description;
 public class VideoRule extends TestWatcher {
 
     @Override
-    protected void finished(Description description) {
-    }
-
-    @Override
     protected void starting(Description description) {
     }
 
@@ -29,6 +25,7 @@ public class VideoRule extends TestWatcher {
 
     @Override
     protected void skipped(AssumptionViolatedException e, Description description) {
+        failed(e, description);
     }
 
     private String getFileName(Video video, Description description) {
