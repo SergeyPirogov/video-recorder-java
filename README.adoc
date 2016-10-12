@@ -149,6 +149,42 @@ or with maven
           -Dvideo.frame.rate=1         // default 24
 ----
 
+=== FFMPEG recorder configuration
+
+In order to use ffmpeg type recorder first you need to perform such steps:
+
+==== Linux or Mac
+
+Need to install https://www.ffmpeg.org/download.html[ffmpeg recorder]
+
+On ubuntu you can do it using such command:
+
+----
+sudo add-apt-repository ppa:mc3man/trusty-media
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install ffmpeg
+----
+
+For Mac just use brew:
+
+----
+brew install ffmpeg
+----
+
+==== Windows
+
+In case of Windows platform you need to download https://www.ffmpeg.org/download.html[ffmpeg]
+
+Just download it and unzip to some folder on you PC. Example *C:\ffmpeg*
+
+Then set System variable path for ffmpeg. http://www.computerhope.com/issues/ch000549.htm[Example]
+
+Also you need to https://github.com/SergeyPirogov/video-recorder-java/raw/master/core/src/main/resources/SendSignalCtrlC.exe[download SendSignalCtrlC.exe] utility and put into the same folder as ffmpeg.
+
+The final result should be folder with ffmpeg and SendSignalCtrlC.exe utilities and System variable that point to this folder.
+
+
 == Remote Video Recording:
 
 Build remote module:
