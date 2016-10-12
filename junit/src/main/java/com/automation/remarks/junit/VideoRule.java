@@ -1,62 +1,42 @@
 package com.automation.remarks.junit;
 
-import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.IVideoRecorder;
-import com.automation.remarks.video.recorder.VideoRecorder;
-import com.automation.remarks.video.recorder.monte.MonteRecorder;
-import org.junit.rules.TestRule;
+import org.junit.AssumptionViolatedException;
+import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
-
-import java.io.File;
-
-import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
-import static com.automation.remarks.video.enums.RecordingMode.ALL;
 
 
 /**
  * Created by sergey on 4/21/16.
  */
-public class VideoRule implements TestRule {
+public class VideoRule extends TestWatcher {
 
     @Override
-    public Statement apply(final Statement base, final Description description) {
-        return new Statement() {
-            @Override
-            public void evaluate() throws Throwable {
-                Video video = description.getAnnotation(Video.class);
-                String name = getFileName(video, description);
-                if (MonteRecorder.conf().getMode().equals(ALL) || video != null) {
-                    recordVideo(name, base);
-                } else {
-                    base.evaluate();
-                }
-            }
+    protected void finished(Description description) {
+    }
 
-            private void recordVideo(String name, final Statement base) throws Throwable {
-                boolean successful = false;
-                IVideoRecorder recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
-                recorder.start();
-                try {
-                    base.evaluate();
-                    successful = true;
-                } finally {
-                    File video = recorder.stopAndSave(name);
-                    if (description.isTest()) {
-                        doVideoProcessing(successful, video);
-                    }
-                }
-            }
+    @Override
+    protected void starting(Description description) {
+    }
 
-            private String getFileName(Video video, Description description) {
-                String methodName = description.getMethodName();
-                if (video == null) {
-                    return methodName;
-                }
-                String videoName = video.name();
-                return videoName.length() > 1 ? videoName : methodName;
-            }
-        };
+    @Override
+    protected void succeeded(Description description) {
+    }
+
+    @Override
+    protected void failed(Throwable e, Description description) {
+    }
+
+    @Override
+    protected void skipped(AssumptionViolatedException e, Description description) {
+    }
+
+    private String getFileName(Video video, Description description) {
+        String methodName = description.getMethodName();
+        if (video == null) {
+            return methodName;
+        }
+        String videoName = video.name();
+        return videoName.length() > 1 ? videoName : methodName;
     }
 }
