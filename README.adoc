@@ -186,8 +186,6 @@ Also you need to https://github.com/SergeyPirogov/video-recorder-java/raw/master
 
 The final result should be folder with *ffmpeg*, *SendSignalCtrlC.exe* utilities and System variable that point to this folder.
 
-Example: add to PATH variable such value *;C:\ffmpeg\bin*
-
 To be sure that everything works properly, open CMD and perform first command:
 
 *C:\Users\sepi>ffmpeg*
