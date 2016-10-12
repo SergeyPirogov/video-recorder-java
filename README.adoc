@@ -5,6 +5,8 @@ image:https://travis-ci.org/SergeyPirogov/video-recorder-java.svg?branch=master[
 
 This library allows easily record video of your UI tests by just putting couple annotations.
 
+http://sergeypirogov.github.io/video-recorder-java/#_ffmpeg_recorder_configuration[Documentation]
+
 Supports popular Java test frameworks: 
 
 * JUnit 
