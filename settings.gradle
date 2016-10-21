@@ -2,3 +2,5 @@ include 'core'
 include 'testng'
 include 'junit'
 include 'remote'
+include 'spock'
+
