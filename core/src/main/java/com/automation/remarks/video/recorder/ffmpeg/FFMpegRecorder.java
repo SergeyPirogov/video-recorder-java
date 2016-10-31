@@ -1,6 +1,9 @@
 package com.automation.remarks.video.recorder.ffmpeg;
 
+import com.automation.remarks.video.exception.RecordingException;
 import com.automation.remarks.video.recorder.VideoRecorder;
+import org.awaitility.constraint.WaitConstraint;
+import org.awaitility.core.ConditionTimeoutException;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -31,9 +34,13 @@ public abstract class FFMpegRecorder extends VideoRecorder {
     }
 
     private void waitForVideoCompleted(File video) {
-        await().atMost(5, TimeUnit.SECONDS)
-                .pollDelay(1, TimeUnit.SECONDS)
-                .ignoreExceptions()
-                .until(video::exists);
+        try {
+            await().atMost(5, TimeUnit.SECONDS)
+                    .pollDelay(1, TimeUnit.SECONDS)
+                    .ignoreExceptions()
+                    .until(video::exists);
+        } catch (ConditionTimeoutException ex) {
+            throw new RecordingException("Video was not fulfilled within 5 seconds " + ex);
+        }
     }
 }
