@@ -137,7 +137,8 @@ You are able to set some configuration parameters for Video Recorder:
                 .videoEnabled(true)                       // Disabled video globally
                 .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
-                .withRecordMode(RecordingMode.ANNOTATED); // Record video only for tests with @Video
+                .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
+                .withScreenSize(1024,768);                // Set screen size
 ----
 
 or with maven
@@ -149,6 +150,7 @@ or with maven
           -Drecorder.type=FFMPEG       // default MONTE
           -Dvideo.save.mode=ALL        // default FAILED_ONLY
           -Dvideo.frame.rate=1         // default 24
+          -Dvideo.screen.size=1024x768 // screen size
 ----
 
 === FFMPEG recorder configuration
