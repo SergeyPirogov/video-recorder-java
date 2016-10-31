@@ -4,6 +4,7 @@ import com.automation.remarks.video.DateUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Logger;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,4 +85,8 @@ public class FFmpegWrapper {
         return new File(movieFolder + File.separator + name + EXTENSION);
     }
 
+    private String getScreenSize() {
+        Dimension dimension = conf().getScreenSize();
+        return dimension.width + "x" + dimension.height;
+    }
 }

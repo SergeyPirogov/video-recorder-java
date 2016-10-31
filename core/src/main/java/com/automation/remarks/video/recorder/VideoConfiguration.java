@@ -1,10 +1,12 @@
 package com.automation.remarks.video.recorder;
 
-import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.SystemUtils;
 import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.enums.VideoSaveMode;
+import org.apache.commons.lang3.StringUtils;
 
+import java.awt.*;
 import java.io.File;
 
 import static com.automation.remarks.video.enums.RecordingMode.valueOf;
@@ -26,10 +28,16 @@ public class VideoConfiguration {
     private static String remoteUrl = getProperty("remote.video.hub", "http://localhost:4444");
     private static RecorderType recorderType = RecorderType.valueOf(getProperty("recorder.type", "MONTE"));
     private static VideoSaveMode saveMode = VideoSaveMode.valueOf(getProperty("video.save.mode", "FAILED_ONLY"));
-    private static int frameRate = Integer.valueOf(getProperty("video.frame.rate","24"));
+    private static int frameRate = Integer.valueOf(getProperty("video.frame.rate", "24"));
+    private static String screenSize = getProperty("video.screen.size", "");
 
-    public VideoConfiguration withFrameRate(int frameRate){
+    public VideoConfiguration withFrameRate(int frameRate) {
         VideoConfiguration.frameRate = frameRate;
+        return this;
+    }
+
+    public VideoConfiguration withScreenSize(int width, int height) {
+        VideoConfiguration.screenSize = width + "x" + height;
         return this;
     }
 
@@ -94,5 +102,13 @@ public class VideoConfiguration {
     public VideoConfiguration withDefaultFolder() {
         videoFolder = FOLDER;
         return this;
+    }
+
+    public Dimension getScreenSize() {
+        if (StringUtils.isBlank(screenSize)) {
+            return SystemUtils.getSystemScreenDimension();
+        }
+        String[] arr = screenSize.split("x");
+        return new Dimension(Integer.valueOf(arr[0]), Integer.valueOf(arr[1]));
     }
 }

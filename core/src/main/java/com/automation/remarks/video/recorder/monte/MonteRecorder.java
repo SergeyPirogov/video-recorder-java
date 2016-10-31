@@ -3,7 +3,6 @@ package com.automation.remarks.video.recorder.monte;
 import com.automation.remarks.video.exception.RecordingException;
 import com.automation.remarks.video.recorder.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
-import com.automation.remarks.video.recorder.ffmpeg.FFMpegRecorder;
 import org.apache.log4j.Logger;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
@@ -74,7 +73,7 @@ public class MonteRecorder extends VideoRecorder {
         Format mouseFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
                 FrameRateKey, Rational.valueOf(frameRate));
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = conf().getScreenSize();
         int width = screenSize.width;
         int height = screenSize.height;
 

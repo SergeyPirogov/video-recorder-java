@@ -40,7 +40,7 @@ public abstract class FFMpegRecorder extends VideoRecorder {
                     .ignoreExceptions()
                     .until(video::exists);
         } catch (ConditionTimeoutException ex) {
-            throw new RecordingException("Video was not fulfilled within 5 seconds " + ex);
+            throw new RecordingException(ex.getMessage());
         }
     }
 }

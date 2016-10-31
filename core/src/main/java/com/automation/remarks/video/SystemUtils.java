@@ -51,12 +51,7 @@ public class SystemUtils {
                 "\"') do @echo %i").trim();
     }
 
-    private static Dimension getScreenDimension() {
+    public static Dimension getSystemScreenDimension() {
         return Toolkit.getDefaultToolkit().getScreenSize();
-    }
-
-    public static String getScreenSize() {
-        Dimension screen = getScreenDimension();
-        return String.format("%sx%s", screen.width, screen.height);
     }
 }
