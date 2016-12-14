@@ -1,10 +1,10 @@
 package com.automation.remarks.testng.test;
 
 import com.automation.remarks.testng.RemoteVideoListener;
-import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
-import org.openqa.grid.selenium.GridLauncher;
+import org.openqa.grid.selenium.GridLauncherV3;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -114,14 +114,14 @@ public class TestNGRemoteListenerTest extends BaseTest {
                 "-host", "localhost",
                 "-role", "hub",
                 "-servlets", "com.automation.remarks.remote.hub.Video"};
-        GridLauncher.main(hub);
+        GridLauncherV3.main(hub);
 
         String[] node = {"-port", nodePort,
                 "-host", "localhost",
                 "-role", "node",
                 "-hub", "http://localhost:" + hubPort + "/grid/register",
                 "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
-        GridLauncher.main(node);
+        GridLauncherV3.main(node);
         Thread.sleep(1000);
     }
 }
