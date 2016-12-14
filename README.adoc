@@ -293,8 +293,6 @@ log4j.additivity.com.automation.remarks.video.recorder=false
 
 See https://github.com/SergeyPirogov/video-recorder-java/blob/master/LICENSE.txt/[LICENSE].
 
-## Release Notes
-
 include::CHANGELOG.adoc[]
 
 By http://automation-remarks.com/[automation-remarks.com]
