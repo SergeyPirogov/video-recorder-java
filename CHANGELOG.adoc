@@ -1,0 +1,20 @@
+= Java Video Recorder Changelog
+:uri-repo: https://github.com/SergeyPirogov/video-recorder-java
+:icons: font
+:star: icon:star[role=red]
+ifndef::icons[]
+:star: &#9733;
+endif::[]
+
+Java Video Recorder allows easily record video of your UI tests by just putting couple annotations.
+
+This document provides a high-level view of the changes introduced in Asciidoctor by release.
+For a detailed view of what has changed, refer to the {uri-repo}/commits/master[commit history] on GitHub.
+
+// tag::compact[]
+== 1.2 (2016-12-12) - @SergeyPirogov
+
+Improvements::
+  * Remote recorder updated to selenium version 3
+  * Video screen size option added
+  * JUnit test rule replaced by Junit test watcher
