@@ -3,6 +3,7 @@ package com.automation.remarks.testng.test;
 import com.automation.remarks.testng.RemoteVideoListener;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.enums.RecordingMode;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.openqa.grid.selenium.GridLauncherV3;
 import org.testng.ITestResult;
@@ -25,6 +26,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
     @BeforeClass
     public static void runGrid() throws Exception {
         startGrid("4444","5555");
+        VideoRecorder.conf().withRemoteGridHubUrl("http://localhost:5555");
     }
 
     @Test
