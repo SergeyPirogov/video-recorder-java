@@ -112,15 +112,14 @@ public class TestNGRemoteListenerTest extends BaseTest {
     private static void startGrid(String hubPort, String nodePort) throws Exception {
         String[] hub = {"-port", hubPort,
                 "-host", "localhost",
-                "-role", "hub",
-                "-servlets", "com.automation.remarks.remote.hub.Video"};
+                "-role", "hub"};
         GridLauncherV3.main(hub);
 
         String[] node = {"-port", nodePort,
                 "-host", "localhost",
                 "-role", "node",
                 "-hub", "http://localhost:" + hubPort + "/grid/register",
-                "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
+                "-servlets", "com.automation.remarks.remote.node.Video"};
         GridLauncherV3.main(node);
         Thread.sleep(1000);
     }

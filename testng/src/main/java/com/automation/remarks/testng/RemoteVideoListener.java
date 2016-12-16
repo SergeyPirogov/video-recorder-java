@@ -20,14 +20,14 @@ import static com.automation.remarks.video.RecordingUtils.videoEnabled;
  */
 public class RemoteVideoListener implements ITestListener {
 
-    private static final String REMOTE = VideoRecorder.conf().getRemoteUrl();
+    private static final String REMOTE = "http://localhost:5555";
 
     @Override
     public void onTestStart(ITestResult result) {
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
             String folder_url = encodeFilePath(VideoRecorder.conf().getVideoFolder());
-            String url = REMOTE + "/grid/admin/Video/start?&folder=" + folder_url;
+            String url = REMOTE + "/extra/Video/start?&folder=" + folder_url;
             sendRecordingRequest(url);
         }
     }
@@ -47,7 +47,7 @@ public class RemoteVideoListener implements ITestListener {
         String testName = getFileName(result);
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/stop?result=true&name=" + testName;
+            String url = REMOTE + "/extra/Video/stop?result=true&name=" + testName;
             sendRecordingRequest(url);
         }
     }
@@ -57,7 +57,7 @@ public class RemoteVideoListener implements ITestListener {
         String testName = getFileName(result);
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
-            String url = REMOTE + "/grid/admin/Video/stop?result=false&name=" + testName;
+            String url = REMOTE + "/extra/Video/stop?result=false&name=" + testName;
             sendRecordingRequest(url);
         }
     }

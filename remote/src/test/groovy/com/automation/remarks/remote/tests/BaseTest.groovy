@@ -11,8 +11,7 @@ import static java.lang.Thread.sleep
  */
 class BaseTest extends Specification {
 
-    final String HUB_SERVLET_URL = "http://localhost:4444/grid/admin/Video";
-    final String NODE_SERVLET_URL = "http://localhost:5555/extra/VideoServlet"
+    final String NODE_SERVLET_URL = "http://localhost:5555/extra/Video"
 
     def setupSpec() {
         runGrid()

@@ -10,15 +10,14 @@ public class StartGrid {
     public static void main(String[] args) throws Exception {
         String[] hub = {"-port", "4444",
                 "-host", "localhost",
-                "-role", "hub",
-                "-servlets", "com.automation.remarks.remote.hub.Video"};
+                "-role", "hub" };
         GridLauncherV3.main(hub);
 
         String[] node = {"-port", "5555",
                 "-host", "localhost",
                 "-role", "node",
                 "-hub", "http://localhost:4444/grid/register",
-                "-servlets", "com.automation.remarks.remote.node.VideoServlet"};
+                "-servlets", "com.automation.remarks.remote.node.Video"};
         GridLauncherV3.main(node);
     }
 }

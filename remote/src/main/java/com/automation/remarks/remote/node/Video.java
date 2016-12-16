@@ -16,7 +16,7 @@ import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
 /**
  * Created by Serhii_Pirohov on 10.05.2016.
  */
-public class VideoServlet extends HttpServlet {
+public class Video extends HttpServlet {
 
     private MonteRecorder videoRecorder;
 
