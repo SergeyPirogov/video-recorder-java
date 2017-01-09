@@ -38,7 +38,7 @@ public class RemoteVideoClient {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return videoFolder.toString().replace("file:/", "");
+        return videoFolder.toString().replace("file:", "");
     }
 
 }

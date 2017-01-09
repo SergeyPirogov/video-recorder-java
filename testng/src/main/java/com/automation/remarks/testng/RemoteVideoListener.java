@@ -15,12 +15,17 @@ import static com.automation.remarks.video.RecordingUtils.videoEnabled;
  */
 public class RemoteVideoListener implements ITestListener {
 
-    private static final String REMOTE = VideoRecorder.conf().getRemoteUrl();
+    private RemoteVideoClient videoClient;
 
-    private RemoteVideoClient videoClient = new RemoteVideoClient(REMOTE);
+    @Override
+    public void onStart(ITestContext context) {
+
+    }
 
     @Override
     public void onTestStart(ITestResult result) {
+        final String nodeUrl = VideoRecorder.conf().getRemoteUrl();
+        videoClient = new RemoteVideoClient(nodeUrl);
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {
             videoClient.videoStart();
@@ -55,10 +60,6 @@ public class RemoteVideoListener implements ITestListener {
         onTestFailure(result);
     }
 
-    @Override
-    public void onStart(ITestContext context) {
-
-    }
 
     @Override
     public void onFinish(ITestContext context) {

@@ -25,8 +25,8 @@ public class TestNGRemoteListenerTest extends BaseTest {
 
     @BeforeClass
     public static void runGrid() throws Exception {
-        startGrid("4444","5555");
-        VideoRecorder.conf().withRemoteGridHubUrl("http://localhost:5555");
+        startGrid("4444", "5555");
+        VideoRecorder.conf().withRemoteUrl("http://localhost:5555");
     }
 
     @Test
@@ -66,8 +66,8 @@ public class TestNGRemoteListenerTest extends BaseTest {
     @Test
     @Video
     public void shouldPassIfGridConfiguredWithCustomPorts() throws Exception {
-        startGrid("4446","5556");
-        MonteRecorder.conf().withRemoteGridHubUrl("http://localhost:4446");
+        startGrid("4446", "5556");
+        MonteRecorder.conf().withRemoteUrl("http://localhost:5556");
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
@@ -78,7 +78,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
     }
 
     @Test
-    public void shouldBeVideoForMethodWithoutAnnotationIfModeAll(){
+    public void shouldBeVideoForMethodWithoutAnnotationIfModeAll() {
         MonteRecorder.conf().withRecordMode(RecordingMode.ALL);
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
@@ -90,7 +90,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
 
     @Test
     @Video
-    public void shouldBeDefaultFolderForVideo(){
+    public void shouldBeDefaultFolderForVideo() {
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
         listener.onTestStart(result);
@@ -101,7 +101,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
 
     @Test
     @Video
-    public void shouldBeCustomFolderForVideo(){
+    public void shouldBeCustomFolderForVideo() {
         MonteRecorder.conf().withVideoFolder("custom_folder");
         ITestResult result = prepareMock(testMethod);
         RemoteVideoListener listener = new RemoteVideoListener();
@@ -111,7 +111,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
         assertThat(file.getParentFile().getName(), equalTo("custom_folder"));
     }
 
-    private static void startGrid(String hubPort, String nodePort) throws Exception {
+    public static void startGrid(String hubPort, String nodePort) throws Exception {
         String[] hub = {"-port", hubPort,
                 "-host", "localhost",
                 "-role", "hub"};

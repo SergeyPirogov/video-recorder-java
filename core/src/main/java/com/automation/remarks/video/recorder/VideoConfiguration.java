@@ -56,7 +56,7 @@ public class VideoConfiguration {
         return this;
     }
 
-    public VideoConfiguration withRemoteGridHubUrl(String url) {
+    public VideoConfiguration withRemoteUrl(String url) {
         VideoConfiguration.remoteUrl = url;
         return this;
     }

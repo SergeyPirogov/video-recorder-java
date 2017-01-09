@@ -5,6 +5,7 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
     testCompile project(':remote')
     testCompile 'junit:junit:4.12'
+    testCompile 'com.codeborne:selenide:4.2'
     testCompile group: 'com.google.inject', name: 'guice', version: '3.0'
 
 }
