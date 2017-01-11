@@ -14,5 +14,8 @@ jar {
         attributes 'Main-Class': 'org.openqa.grid.selenium.GridLauncherV3'
     }
 
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
     exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }
