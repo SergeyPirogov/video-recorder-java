@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Created by sergey on 4/13/16.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD,ElementType.ANNOTATION_TYPE})
 public @interface Video {
     String name() default "";
 }

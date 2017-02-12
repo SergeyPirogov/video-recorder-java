@@ -12,8 +12,9 @@ import java.lang.annotation.Target;
  * Created by sergey on 12.02.17.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD,ElementType.ANNOTATION_TYPE})
 @ExtendWith(VideoExtension.class)
+@com.automation.remarks.video.annotations.Video
 public @interface Video {
   String name() default "";
 }

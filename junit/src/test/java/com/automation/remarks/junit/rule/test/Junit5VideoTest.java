@@ -1,5 +1,6 @@
 package com.automation.remarks.junit.rule.test;
 
+import com.automation.remarks.junit.rule.test.util.FlakyTest;
 import com.automation.remarks.junit5.Video;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,15 @@ public class Junit5VideoTest {
   @Test
   @Video
   void testVideo() throws InterruptedException {
-     Thread.sleep(5000);
-     fail();
+    Thread.sleep(5000);
+    fail();
+  }
+
+  @FlakyTest
+  void testFlaky() throws InterruptedException {
+    Thread.sleep(5000);
+    fail();
   }
 }
+
+
