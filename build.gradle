@@ -1,7 +1,5 @@
 apply plugin: 'idea'
 
-sourceCompatibility = '1.8'
-
 buildscript {
     repositories {
         jcenter()
