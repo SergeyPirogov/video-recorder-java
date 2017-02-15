@@ -49,7 +49,11 @@ public class VideoExtension implements BeforeTestExecutionCallback, AfterTestExe
 
   private boolean videoDisabled(Method testMethod) {
     Optional<com.automation.remarks.video.annotations.Video> video = AnnotationUtils.findAnnotation(testMethod, com.automation.remarks.video.annotations.Video.class);
-    return video.isPresent() && !videoEnabled(video.get());
+
+    return video.map(v -> !videoEnabled(v))
+            .orElseGet(() -> true);
+
+    //return !video.isPresent() && !videoEnabled(video.get());
   }
 
   private String getFileName(Method testMethod) {
