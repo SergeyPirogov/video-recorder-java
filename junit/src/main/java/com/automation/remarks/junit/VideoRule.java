@@ -57,7 +57,7 @@ public class VideoRule extends TestWatcher {
         return !videoEnabled(description.getAnnotation(Video.class));
     }
 
-    private String getFileName(Description description) {
+    protected String getFileName(Description description) {
         String methodName = description.getMethodName();
         Video video = description.getAnnotation(Video.class);
         return RecordingUtils.getVideoFileName(video,methodName);
