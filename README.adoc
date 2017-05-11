@@ -63,6 +63,31 @@ public class JUnitVideoTest {
 }
 ----
 
+**JUnit 5**
+
+[source,java]
+
+import com.automation.remarks.junit5.Video;
+
+----
+public class JUnitVideoTest {
+
+    @Test
+    @Video
+    public void shouldFailAndCreateRecordWithTestName() {
+        Thread.sleep(5000);
+        assert false;
+    }
+
+    @Test
+    @Video(name = "second_test")
+    public void videoShouldHaveNameSecondTest() {
+        Thread.sleep(10000);
+        assertTrue(false);
+    }
+}
+----
+
 == TestNG:
 
 .maven

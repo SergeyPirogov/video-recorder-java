@@ -22,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by sergey on 4/21/16.
  */
-public class JUnitVideoRecording {
+public class JUnitVideoRecording extends BaseTest{
 
     @Video
     public void failWithVideo() throws Exception {
@@ -81,16 +81,4 @@ public class JUnitVideoRecording {
     public void tearDown() throws Exception {
         setUp();
     }
-
-    private void verifyVideoFileExistsWithName(String fileName) {
-        File file = MonteRecorder.getLastRecording();
-        assertTrue(file.exists());
-        assertThat(file.getName(), startsWith(fileName));
-    }
-
-    private void verifyVideoFileNotExists() {
-        assertFalse(MonteRecorder.getLastRecording().exists());
-    }
-
-
 }
