@@ -136,16 +136,17 @@ public class TestNgVideoTest {
 ----
 == Configuration
 
-You are able to set some configuration parameters for Video Recorder:
+You are able to set some configuration parameters for Video Recorder.
+
+Create properties file **video.properties** in classpath:
 
 ----
-  VideoRecorder.conf()
-                .withVideoFolder("custom_folder")         // Default is ${user.dir}/video.
-                .videoEnabled(true)                       // Disabled video globally
-                .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
-                .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
-                .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
-                .withScreenSize(1024,768);                // Set screen size
+video.folder= ${user home}/video
+video.enabled=false               //  default true
+video.mode=ALL                    // default ANNOTATED
+recorder.type=FFMPEG              // default MONTE
+video.save.mode=ALL               // default FAILED_ONLY
+video.frame.rate=1                // default 24
 ----
 
 or with maven
