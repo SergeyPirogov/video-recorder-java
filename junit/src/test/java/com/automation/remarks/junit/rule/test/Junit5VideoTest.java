@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.TestExtensionContext;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class Junit5VideoTest extends BaseTest {
 
   @BeforeEach
   public void setUp() throws IOException {
-    FileUtils.deleteDirectory(MonteRecorder.conf().getVideoFolder());
+    FileUtils.deleteDirectory(new File(MonteRecorder.conf().folder()));
   }
 
   @Video
