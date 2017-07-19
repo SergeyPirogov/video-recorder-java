@@ -61,7 +61,7 @@ public class MonteRecorder extends VideoRecorder {
     }
 
     private MonteScreenRecorder getScreenRecorder() {
-        int frameRate = conf().getFrameRate();
+        int frameRate = videoConfiguration.frameRate();
 
         Format fileFormat = new Format(MediaTypeKey, MediaType.VIDEO, MimeTypeKey, FormatKeys.MIME_AVI);
         Format screenFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey,
@@ -73,7 +73,7 @@ public class MonteRecorder extends VideoRecorder {
         Format mouseFormat = new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black",
                 FrameRateKey, Rational.valueOf(frameRate));
 
-        Dimension screenSize = conf().getScreenSize();
+        Dimension screenSize = videoConfiguration.screenSize();
         int width = screenSize.width;
         int height = screenSize.height;
 
@@ -85,7 +85,7 @@ public class MonteRecorder extends VideoRecorder {
                 .setRectangle(captureSize)
                 .setFileFormat(fileFormat)
                 .setScreenFormat(screenFormat)
-                .setFolder(videoConfiguration.getVideoFolder())
+                .setFolder(new File(videoConfiguration.folder()))
                 .setMouseFormat(mouseFormat).build();
     }
 }

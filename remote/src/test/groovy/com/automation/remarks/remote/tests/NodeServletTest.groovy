@@ -17,7 +17,7 @@ class NodeServletTest extends BaseTest {
     String VIDEO_FOLDER = System.getProperty('user.dir')
 
     def setup() {
-        MonteRecorder.conf().videoFolder.deleteDir()
+        new File(MonteRecorder.conf().folder()).deleteDir()
     }
 
     private static boolean isOsWindows() {
@@ -88,7 +88,7 @@ class NodeServletTest extends BaseTest {
 
 
     def "shouldBeCustomFolderForVideo"() {
-        def folderName = "custom_folder"
+        def folderName = "video"
         given:
         sendRecordingRequest(NODE_SERVLET_URL + "/start?name=video&folder=${folderName}")
         when:

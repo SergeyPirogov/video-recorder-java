@@ -3,8 +3,8 @@ package com.automation.remarks.testng.test;
 import com.automation.remarks.testng.GridInfoExtractor;
 import com.automation.remarks.testng.RemoteVideoListener;
 import com.automation.remarks.video.annotations.Video;
-import com.automation.remarks.video.recorder.VideoRecorder;
 import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeClass;
@@ -22,36 +22,35 @@ import static org.testng.Assert.fail;
 @Listeners(RemoteVideoListener.class)
 public class IntegrationTest {
 
-    RemoteWebDriver driver;
+  RemoteWebDriver driver;
 
-    @BeforeClass
-    public void setUp() throws Exception {
-        startGrid("4444", "5555");
-        Configuration.browser = "chrome";
+  @BeforeClass
+  public void setUp() throws Exception {
+    startGrid("4444", "5555");
+    Configuration.browser = "chrome";
 
-        System.setProperty("webdriver.gecko.driver", "/home/sergey/geckodriver");
-        URL hubUrl = new URL("http://localhost:4444/wd/hub");
+    ChromeDriverManager.getInstance().setup();
+    URL hubUrl = new URL("http://localhost:4444/wd/hub");
 
-        driver = new RemoteWebDriver(hubUrl, DesiredCapabilities.firefox());
+    driver = new RemoteWebDriver(hubUrl, DesiredCapabilities.chrome());
 
-        String nodeIp = GridInfoExtractor.getNodeIp(hubUrl, driver.getSessionId().toString());
+    String nodeIp = GridInfoExtractor.getNodeIp(hubUrl, driver.getSessionId().toString());
 
-        VideoRecorder.conf()
-                .withRemoteUrl(nodeIp);
-    }
+    System.setProperty("remote.video.hub", nodeIp);
+  }
 
-    @Test
-    @Video
-    public void test() throws InterruptedException {
-        driver.get("http://automation-remarks.com");
-        Thread.sleep(5000);
-        fail();
-    }
+  @Test
+  @Video
+  public void test() throws InterruptedException {
+    driver.get("http://automation-remarks.com");
+    Thread.sleep(5000);
+    fail();
+  }
 
-    @Test
-    @Video
-    public void test2() throws InterruptedException {
-        driver.get("http://spirogov.github.io");
-        Thread.sleep(5000);
-    }
+  @Test
+  @Video
+  public void test2() throws InterruptedException {
+    driver.get("http://spirogov.github.io");
+    Thread.sleep(5000);
+  }
 }

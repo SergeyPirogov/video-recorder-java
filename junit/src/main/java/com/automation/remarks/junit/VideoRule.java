@@ -27,7 +27,7 @@ public class VideoRule extends TestWatcher {
         if (videoDisabled(description)) {
             return;
         }
-        recorder = RecorderFactory.getRecorder(VideoRecorder.conf().getRecorderType());
+        recorder = RecorderFactory.getRecorder(VideoRecorder.conf().recorderType());
         recorder.start();
     }
 

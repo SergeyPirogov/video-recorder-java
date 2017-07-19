@@ -18,62 +18,62 @@ import static com.automation.remarks.video.RecordingUtils.doVideoProcessing;
  */
 public class Video extends HttpServlet {
 
-    private MonteRecorder videoRecorder;
+  private MonteRecorder videoRecorder;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doPost(req, resp);
+  }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
-    }
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    process(req, resp);
+  }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String path = req.getPathInfo();
-        MonteRecorder.conf().withDefaultFolder();
-        try {
-            switch (path) {
-                case "/start":
-                    String folder = req.getParameter("folder");
-                    if(folder != null){
-                        MonteRecorder.conf().withVideoFolder(folder);
-                    }
-                    videoRecorder = new MonteRecorder();
-                    videoRecorder.start();
-                    updateResponse(resp, HttpStatus.SC_OK, "recording started");
-                    break;
-                case "/stop":
-                    if (videoRecorder == null) {
-                        updateResponse(resp, HttpStatus.SC_METHOD_NOT_ALLOWED, "Wrong Action! First, start recording");
-                        break;
-                    }
-                    String fileName = getFileName(req);
-                    File video = videoRecorder.stopAndSave(fileName);
-                    String filePath = doVideoProcessing(isSuccess(req), video);
-                    updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + filePath);
-                    break;
-            }
-        } catch (Exception ex) {
-            updateResponse(resp, HttpStatus.SC_INTERNAL_SERVER_ERROR,
-                    "Internal server error occurred while trying to start / stop recording: " + ex);
-        }
+  private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String path = req.getPathInfo();
+    MonteRecorder.conf().folder();
+    try {
+      switch (path) {
+        case "/start":
+          String folder = req.getParameter("folder");
+          if (folder != null) {
+            System.setProperty("video.folder", folder);
+          }
+          videoRecorder = new MonteRecorder();
+          videoRecorder.start();
+          updateResponse(resp, HttpStatus.SC_OK, "recording started");
+          break;
+        case "/stop":
+          if (videoRecorder == null) {
+            updateResponse(resp, HttpStatus.SC_METHOD_NOT_ALLOWED, "Wrong Action! First, start recording");
+            break;
+          }
+          String fileName = getFileName(req);
+          File video = videoRecorder.stopAndSave(fileName);
+          String filePath = doVideoProcessing(isSuccess(req), video);
+          updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + filePath);
+          break;
+      }
+    } catch (Exception ex) {
+      updateResponse(resp, HttpStatus.SC_INTERNAL_SERVER_ERROR,
+          "Internal server error occurred while trying to start / stop recording: " + ex);
     }
+  }
 
-    private String getFileName(HttpServletRequest req) {
-        String name = req.getParameter("name");
-        if (name == null || "null".equalsIgnoreCase(name)) {
-            return "video";
-        }
-        return name;
+  private String getFileName(HttpServletRequest req) {
+    String name = req.getParameter("name");
+    if (name == null || "null".equalsIgnoreCase(name)) {
+      return "video";
     }
+    return name;
+  }
 
-    private boolean isSuccess(HttpServletRequest req) {
-        String result = req.getParameter("result");
-        if (result == null) {
-            return false;
-        }
-        return Boolean.valueOf(result);
+  private boolean isSuccess(HttpServletRequest req) {
+    String result = req.getParameter("result");
+    if (result == null) {
+      return false;
     }
+    return Boolean.valueOf(result);
+  }
 }

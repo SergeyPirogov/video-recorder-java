@@ -8,6 +8,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.codeborne:selenide:4.2'
     testCompile group: 'com.google.inject', name: 'guice', version: '3.0'
+    testCompile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '1.7.1'
 
 }
 

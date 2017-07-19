@@ -29,7 +29,7 @@ public class FFmpegWrapper {
     private File temporaryFile;
 
     public void startFFmpeg(String display, String recorder, String... args) {
-        File videoFolder = conf().getVideoFolder();
+        File videoFolder = new File(conf().folder());
         if (!videoFolder.exists()) {
             videoFolder.mkdirs();
         }
@@ -41,7 +41,7 @@ public class FFmpegWrapper {
                 "-f", recorder,
                 "-i", display,
                 "-an",
-                "-framerate", String.valueOf(conf().getFrameRate()),
+                "-framerate", String.valueOf(conf().frameRate()),
                 temporaryFile.getAbsolutePath()
         };
 
@@ -80,13 +80,13 @@ public class FFmpegWrapper {
     }
 
     private File getFile(final String filename) {
-        File movieFolder = conf().getVideoFolder();
+        File movieFolder = new File(conf().folder());
         final String name = filename + "_recording_" + DateUtils.formatDate(new Date(), "yyyy_dd_MM_HH_mm_ss");
         return new File(movieFolder + File.separator + name + EXTENSION);
     }
 
     private String getScreenSize() {
-        Dimension dimension = conf().getScreenSize();
+        Dimension dimension = conf().screenSize();
         return dimension.width + "x" + dimension.height;
     }
 }

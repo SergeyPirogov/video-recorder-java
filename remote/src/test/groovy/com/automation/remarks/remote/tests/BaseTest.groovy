@@ -18,13 +18,13 @@ class BaseTest extends Specification {
     }
 
     def runGrid(){
-        String[] args = [];
-        StartGrid.main(args);
-        sleep(1000);
+        String[] args = []
+        StartGrid.main(args)
+        sleep(1000)
     }
 
     def getVideoFiles(){
-        MonteRecorder.conf().videoFolder.listFiles()
+        new File(MonteRecorder.conf().folder()).listFiles()
     }
 
 }

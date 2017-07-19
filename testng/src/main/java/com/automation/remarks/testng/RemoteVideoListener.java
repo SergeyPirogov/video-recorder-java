@@ -24,7 +24,7 @@ public class RemoteVideoListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        final String nodeUrl = VideoRecorder.conf().getRemoteUrl();
+        final String nodeUrl = VideoRecorder.conf().remoteUrl();
         videoClient = new RemoteVideoClient(nodeUrl);
         Video video = getVideoAnnotation(result);
         if (videoEnabled(video)) {

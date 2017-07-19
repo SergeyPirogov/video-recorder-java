@@ -2,7 +2,6 @@ package com.automation.remarks.video;
 
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.enums.VideoSaveMode;
-import com.automation.remarks.video.recorder.VideoConfiguration;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.apache.log4j.Logger;
 
@@ -23,7 +22,7 @@ public class RecordingUtils {
 
     public static String doVideoProcessing(boolean successfulTest, File video) {
         String filePath = formatVideoFilePath(video);
-        if (!successfulTest || VideoConfiguration.saveMode().equals(VideoSaveMode.ALL)) {
+        if (!successfulTest || VideoRecorder.conf().saveMode().equals(VideoSaveMode.ALL)) {
             logger.info("Video recording: " + filePath);
             return filePath;
         } else if (video != null) {
@@ -34,8 +33,8 @@ public class RecordingUtils {
     }
 
     public static boolean videoEnabled(Video video) {
-        return VideoRecorder.conf().isVideoEnabled()
-                && (VideoRecorder.conf().getMode().equals(ALL)
+        return VideoRecorder.conf().videoEnabled()
+                && (VideoRecorder.conf().mode().equals(ALL)
                 || video != null);
     }
 

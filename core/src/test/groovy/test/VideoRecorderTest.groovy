@@ -6,6 +6,7 @@ import com.automation.remarks.video.recorder.monte.MonteRecorder
 import spock.lang.Unroll
 
 import static com.automation.remarks.video.recorder.VideoRecorder.conf
+
 /**
  * Created by sergey on 09.10.16.
  */
@@ -14,7 +15,7 @@ class VideoRecorderTest extends SpockBaseTest {
 
     def "should be video file in folder with #type"() {
         given:
-        conf().withRecorderType(type)
+        System.getProperty("recorder.type", type.toString())
 
         when:
         File video = recordVideo()
@@ -27,7 +28,8 @@ class VideoRecorderTest extends SpockBaseTest {
 
     def "should be video in #name folder with #type"() {
         given:
-        conf().withVideoFolder(name).withRecorderType(type)
+        System.setProperty("recorder.type", type.toString())
+        System.setProperty("video.folder", name)
 
         when:
         File video = recordVideo()
@@ -35,18 +37,18 @@ class VideoRecorderTest extends SpockBaseTest {
         video.parentFile.name == name
 
         where:
-        name = "videos"
+        name = "video"
         type << [RecorderType.FFMPEG, RecorderType.MONTE]
     }
 
     def "should be absolute recording path with #type"() {
         given:
-        conf().withRecorderType(type)
+        System.setProperty("recorder.type", type.toString())
 
         when:
-        File video = recordVideo();
+        File video = recordVideo()
         then:
-        video.absolutePath.startsWith(conf().getVideoFolder().getAbsolutePath() + File.separator + VIDEO_FILE_NAME)
+        video.absolutePath.startsWith(new File(conf().folder()).getAbsolutePath() + File.separator + VIDEO_FILE_NAME)
 
         where:
         type << [RecorderType.FFMPEG, RecorderType.MONTE]
@@ -54,10 +56,10 @@ class VideoRecorderTest extends SpockBaseTest {
 
     def "should be exact video file name for #type"() {
         given:
-        conf().withRecorderType(type)
+        System.setProperty("recorder.type", type.toString())
 
         when:
-        File video = recordVideo();
+        File video = recordVideo()
         then:
         video.exists()
         video.getName().startsWith(VIDEO_FILE_NAME)

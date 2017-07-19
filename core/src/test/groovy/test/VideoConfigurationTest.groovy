@@ -1,6 +1,9 @@
 package test
 
+import com.automation.remarks.video.SystemUtils
 import com.automation.remarks.video.enums.RecorderType
+import com.automation.remarks.video.enums.RecordingMode
+import com.automation.remarks.video.enums.VideoSaveMode
 import com.automation.remarks.video.recorder.VideoRecorder
 import spock.lang.Unroll
 
@@ -10,39 +13,19 @@ import spock.lang.Unroll
 @Unroll
 class VideoConfigurationTest extends SpockBaseTest {
 
-    def "should be video file with default video folder path for #type"() {
+    def "default config should be loaded"() {
         given:
-        final String path = "${System.getProperty("user.dir")}${File.separator}video";
-
-        VideoRecorder.conf()
-                .videoEnabled(true)
-                .withVideoFolder(path)
-                .withRecorderType(type)
 
         when:
-        File video = recordVideo()
+        def conf = VideoRecorder.conf()
 
         then:
-        video.canonicalPath.startsWith(path)
-
-        where:
-        type << [RecorderType.FFMPEG, RecorderType.MONTE]
+        conf.folder() == System.getProperty("user.dir") + "/video"
+        conf.frameRate() == 24
+        conf.mode() == RecordingMode.ANNOTATED
+        conf.recorderType() == RecorderType.MONTE
+        conf.saveMode() == VideoSaveMode.FAILED_ONLY
+        conf.videoEnabled()
+        conf.screenSize() == SystemUtils.systemScreenDimension
     }
-
-    def "should be video screen size for #type"() {
-        given:
-        VideoRecorder.conf()
-                .videoEnabled(true)
-                .withScreenSize(640, 480)
-                .withRecorderType(type);
-        when:
-        File video = recordVideo()
-
-        then:
-        video.exists()
-
-        where:
-        type << [RecorderType.FFMPEG, RecorderType.MONTE]
-    }
-
 }
