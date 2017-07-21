@@ -1,4 +1,4 @@
-package com.automation.remarks.junit.rule.test.util;
+package com.automation.remarks.junit5.test;
 
 /**
  * Created by sergey on 12.02.17.
