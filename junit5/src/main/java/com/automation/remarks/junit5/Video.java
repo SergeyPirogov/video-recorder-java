@@ -1,6 +1,5 @@
 package com.automation.remarks.junit5;
 
-import com.automation.remarks.junit.VideoExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.lang.annotation.ElementType;

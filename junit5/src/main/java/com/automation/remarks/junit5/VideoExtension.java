@@ -1,12 +1,11 @@
-package com.automation.remarks.junit;
+package com.automation.remarks.junit5;
 
-import com.automation.remarks.junit5.Video;
 import com.automation.remarks.video.RecorderFactory;
 import com.automation.remarks.video.recorder.IVideoRecorder;
 import com.automation.remarks.video.recorder.VideoRecorder;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
-import org.junit.jupiter.api.extension.TestExtensionContext;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.commons.util.AnnotationUtils;
 
 import java.io.File;
@@ -24,7 +23,7 @@ public class VideoExtension implements BeforeTestExecutionCallback, AfterTestExe
   private IVideoRecorder recorder;
 
   @Override
-  public void beforeTestExecution(TestExtensionContext context) throws Exception {
+  public void beforeTestExecution(ExtensionContext context) throws Exception {
     if (videoDisabled(context.getTestMethod().get())) {
       return;
     }
@@ -33,14 +32,14 @@ public class VideoExtension implements BeforeTestExecutionCallback, AfterTestExe
   }
 
   @Override
-  public void afterTestExecution(TestExtensionContext context) throws Exception {
+  public void afterTestExecution(ExtensionContext context) throws Exception {
     if (videoDisabled(context.getTestMethod().get())) {
       return;
     }
 
     String fileName = getFileName(context.getTestMethod().get());
     File video = stopRecording(fileName);
-    if (context.getTestException().isPresent()) {
+    if (context.getExecutionException().isPresent()) {
       doVideoProcessing(false, video);
     } else {
       doVideoProcessing(true, video);

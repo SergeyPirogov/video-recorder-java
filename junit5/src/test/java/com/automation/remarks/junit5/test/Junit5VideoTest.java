@@ -1,21 +1,21 @@
-package com.automation.remarks.junit.rule.test;
+package com.automation.remarks.junit5.test;
 
-import com.automation.remarks.junit.VideoExtension;
 import com.automation.remarks.junit5.Video;
+import com.automation.remarks.junit5.VideoExtension;
 import com.automation.remarks.video.recorder.monte.MonteRecorder;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.TestExtensionContext;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
-import static junit.framework.TestCase.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 /**
  * Created by sergey on 12.02.17.
@@ -31,12 +31,12 @@ public class Junit5VideoTest extends BaseTest {
   @Video
   public void testVideo() throws InterruptedException {
     Thread.sleep(5000);
-    fail();
+    fail("");
   }
 
   public void testWithoutAnnotation() throws InterruptedException {
     Thread.sleep(5000);
-    fail();
+    fail("");
   }
 
   @Video
@@ -46,7 +46,7 @@ public class Junit5VideoTest extends BaseTest {
 
   @Test
   void shouldBeVideoForAnnotatedMethod() throws Exception {
-    TestExtensionContext context = prepareMock("testVideo", new AssertionError());
+    ExtensionContext context = prepareMock("testVideo", new AssertionError());
 
     VideoExtension ext = new VideoExtension();
     ext.beforeTestExecution(context);
@@ -56,7 +56,7 @@ public class Junit5VideoTest extends BaseTest {
 
   @Test
   void shouldNotBeVideoForMethodWithoutAnnotation() throws Exception {
-    TestExtensionContext context = prepareMock("testWithoutAnnotation", new AssertionError());
+    ExtensionContext context = prepareMock("testWithoutAnnotation", new AssertionError());
 
     VideoExtension ext = new VideoExtension();
     ext.beforeTestExecution(context);
@@ -66,7 +66,7 @@ public class Junit5VideoTest extends BaseTest {
 
   @Test
   void shouldNotBeVideoForSuccessTest() throws Exception {
-    TestExtensionContext context = prepareMock("successTest");
+    ExtensionContext context = prepareMock("successTest");
 
     VideoExtension ext = new VideoExtension();
     ext.beforeTestExecution(context);
@@ -74,16 +74,16 @@ public class Junit5VideoTest extends BaseTest {
     verifyVideoFileNotExists();
   }
 
-  private TestExtensionContext prepareMock(String testMethodName, Throwable ex) throws NoSuchMethodException {
+  private ExtensionContext prepareMock(String testMethodName, Throwable ex) throws NoSuchMethodException {
     Method method = this.getClass().getMethod(testMethodName);
-    TestExtensionContext context = mock(TestExtensionContext.class);
+    ExtensionContext context = Mockito.mock(ExtensionContext.class);
 
-    when(context.getTestMethod()).thenReturn(Optional.ofNullable(method));
-    when(context.getTestException()).thenReturn(Optional.ofNullable(ex));
+    Mockito.when(context.getTestMethod()).thenReturn(Optional.ofNullable(method));
+    Mockito.when(context.getExecutionException()).thenReturn(Optional.ofNullable(ex));
     return context;
   }
 
-  private TestExtensionContext prepareMock(String testMethodName) throws NoSuchMethodException {
+  private ExtensionContext prepareMock(String testMethodName) throws NoSuchMethodException {
     return prepareMock(testMethodName, null);
   }
 }
