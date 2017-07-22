@@ -65,6 +65,13 @@ public class JUnitVideoTest {
 
 **JUnit 5**
 
+.gradle 
+[source,java]
+----
+compile group: 'com.automation-remarks', name: 'video-recorder-junit5', version: '1.+'
+----
+
+
 [source,java]
 
 import com.automation.remarks.junit5.Video;
