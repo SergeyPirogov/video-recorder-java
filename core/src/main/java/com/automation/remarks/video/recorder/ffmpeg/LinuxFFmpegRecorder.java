@@ -6,7 +6,7 @@ package com.automation.remarks.video.recorder.ffmpeg;
 public class LinuxFFmpegRecorder extends FFMpegRecorder {
     @Override
     public void start() {
-        String display = System.setProperty("recorder.display", ":0.0");
+        String display = System.getProperty("recorder.display", ":0.0");
         String recorder = "x11grab";
         getFfmpegWrapper().startFFmpeg(display, recorder);
     }
