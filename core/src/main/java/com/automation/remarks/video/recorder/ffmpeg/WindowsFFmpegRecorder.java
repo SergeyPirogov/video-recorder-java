@@ -7,8 +7,6 @@ public class WindowsFFmpegRecorder extends FFMpegRecorder {
 
     @Override
     public void start() {
-        String display = "desktop";
-        String recorder = "gdigrab";
-        getFfmpegWrapper().startFFmpeg(display, recorder);
+        getFfmpegWrapper().startFFmpeg();
     }
 }

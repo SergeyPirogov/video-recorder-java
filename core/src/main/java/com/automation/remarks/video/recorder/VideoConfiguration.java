@@ -5,6 +5,9 @@ import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.enums.VideoSaveMode;
 import org.aeonbits.owner.Config;
+import org.aeonbits.owner.Config.LoadPolicy;
+import org.aeonbits.owner.Config.LoadType;
+import org.aeonbits.owner.Config.Sources;
 
 import java.awt.*;
 import java.io.File;
@@ -12,7 +15,9 @@ import java.io.File;
 /**
  * Created by sergey on 4/13/16.
  */
-@Config.Sources("classpath:video.properties")
+@LoadPolicy(LoadType.MERGE)
+@Sources({ "classpath:video.properties",
+           "classpath:ffmpeg-${os.type}.properties" })
 public interface VideoConfiguration extends Config {
 
   @Key("video.folder")
@@ -48,4 +53,10 @@ public interface VideoConfiguration extends Config {
   default Dimension screenSize() {
     return SystemUtils.getSystemScreenDimension();
   }
+
+  @Key("ffmpeg.format")
+  String ffmpegFormat();
+
+  @Key("ffmpeg.display")
+  String ffmpegDisplay();
 }

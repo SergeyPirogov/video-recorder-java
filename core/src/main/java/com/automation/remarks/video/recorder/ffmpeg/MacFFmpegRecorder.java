@@ -6,8 +6,6 @@ package com.automation.remarks.video.recorder.ffmpeg;
 public class MacFFmpegRecorder extends FFMpegRecorder {
     @Override
     public void start() {
-        String display = "1:";
-        String recorder = "avfoundation";
-        getFfmpegWrapper().startFFmpeg(display, recorder, "-vsync", "2");
+        getFfmpegWrapper().startFFmpeg("-vsync", "2");
     }
 }
