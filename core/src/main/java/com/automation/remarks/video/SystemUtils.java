@@ -1,5 +1,6 @@
 package com.automation.remarks.video;
 
+import com.automation.remarks.video.enums.OsType;
 import com.automation.remarks.video.exception.RecordingException;
 import com.automation.remarks.video.recorder.ffmpeg.FFMpegRecorder;
 import org.apache.log4j.Logger;
@@ -10,6 +11,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+
+import static org.apache.commons.lang3.SystemUtils.IS_OS_MAC;
+import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
 
 /**
  * Created by sepi on 31.08.16.
@@ -53,5 +57,14 @@ public class SystemUtils {
 
     public static Dimension getSystemScreenDimension() {
         return Toolkit.getDefaultToolkit().getScreenSize();
+    }
+
+    public static String getOsType() {
+        if (IS_OS_WINDOWS) {
+            return OsType.windows.name();
+        } else if (IS_OS_MAC) {
+            return OsType.mac.name();
+        }
+        return OsType.linux.name();
     }
 }

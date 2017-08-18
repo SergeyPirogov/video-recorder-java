@@ -28,7 +28,7 @@ public class FFmpegWrapper {
     private CompletableFuture<String> future;
     private File temporaryFile;
 
-    public void startFFmpeg(String display, String recorder, String... args) {
+    public void startFFmpeg(String... args) {
         File videoFolder = new File(conf().folder());
         if (!videoFolder.exists()) {
             videoFolder.mkdirs();
@@ -36,10 +36,11 @@ public class FFmpegWrapper {
 
         temporaryFile = getTemporaryFile();
         final String[] commandsSequence = new String[]{
-                FFmpegWrapper.RECORDING_TOOL, "-y",
+                FFmpegWrapper.RECORDING_TOOL,
+                "-y",
                 "-video_size", getScreenSize(),
-                "-f", recorder,
-                "-i", display,
+                "-f", conf().ffmpegFormat(),
+                "-i", conf().ffmpegDisplay(),
                 "-an",
                 "-framerate", String.valueOf(conf().frameRate()),
                 temporaryFile.getAbsolutePath()
