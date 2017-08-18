@@ -148,12 +148,14 @@ You are able to set some configuration parameters for Video Recorder.
 Create properties file **video.properties** in classpath:
 
 ----
-video.folder= ${user home}/video
-video.enabled=false               //  default true
+video.folder=${user home}/video
+video.enabled=false               // default true
 video.mode=ALL                    // default ANNOTATED
 recorder.type=FFMPEG              // default MONTE
 video.save.mode=ALL               // default FAILED_ONLY
 video.frame.rate=1                // default 24
+ffmpeg.format=x11grab             // default value depends on OS platform
+ffmpeg.display=:0.0               // default value depends on OS platform
 ----
 
 or with maven
@@ -165,7 +167,8 @@ or with maven
           -Drecorder.type=FFMPEG       // default MONTE
           -Dvideo.save.mode=ALL        // default FAILED_ONLY
           -Dvideo.frame.rate=1         // default 24
-          -Dvideo.screen.size=1024x768 // screen size
+          -Dvideo.screen.size=1024x768 // custom screen size
+          -Dffmpeg.display=:1.0+10,20  // custom display configuration for ffmpeg
 ----
 
 === FFMPEG recorder configuration
