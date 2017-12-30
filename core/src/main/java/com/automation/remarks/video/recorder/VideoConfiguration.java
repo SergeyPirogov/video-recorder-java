@@ -22,7 +22,8 @@ public interface VideoConfiguration extends Config {
 
   @Key("video.folder")
   default String folder() {
-    return System.getProperty("user.dir") + File.separator + "video";
+    final String defaultFolder = System.getProperty("user.dir") + File.separator + "video";
+    return System.getProperty("video.folder", defaultFolder);
   }
 
   @Key("video.enabled")
