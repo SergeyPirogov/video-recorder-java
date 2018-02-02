@@ -214,7 +214,7 @@ To be sure that everything works properly, open CMD and perform first command:
 
 *ffmpeg*
 
-The output shoul lopk like this:
+The output should look like this:
 ----
 C:\Users\sepi>ffmpeg
 ffmpeg version N-81234-ge1be80a Copyright (c) 2000-2016 the FFmpeg developers
