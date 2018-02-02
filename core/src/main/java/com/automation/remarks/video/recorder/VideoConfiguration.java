@@ -60,4 +60,8 @@ public interface VideoConfiguration extends Config {
 
   @Key("ffmpeg.display")
   String ffmpegDisplay();
+
+  @DefaultValue("yuv420p")
+  @Key("ffmpeg.pixelFormat")
+  String ffmpegPixelFormat();
 }

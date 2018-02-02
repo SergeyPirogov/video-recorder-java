@@ -77,4 +77,18 @@ class VideoRecorderTest extends SpockBaseTest {
         // Alternative syntax: def ex = thrown(InvalidDeviceException)
         ex.message == "Video recording wasn't started"
     }
+
+    def "should record video with custom pixel format for #type"() {
+        given:
+        System.setProperty("recorder.type", type.toString())
+        System.setProperty("ffmpeg.pixelFormat", "yuv444p")
+
+        when:
+        File video = recordVideo()
+        then:
+        video.exists()
+
+        where:
+        type << [RecorderType.FFMPEG, RecorderType.MONTE]
+    }
 }

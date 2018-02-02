@@ -43,6 +43,7 @@ public class FFmpegWrapper {
                 "-i", conf().ffmpegDisplay(),
                 "-an",
                 "-framerate", String.valueOf(conf().frameRate()),
+                "-pix_fmt", conf().ffmpegPixelFormat(),
                 temporaryFile.getAbsolutePath()
         };
 
