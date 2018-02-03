@@ -156,6 +156,7 @@ video.save.mode=ALL               // default FAILED_ONLY
 video.frame.rate=1                // default 24
 ffmpeg.format=x11grab             // default value depends on OS platform
 ffmpeg.display=:0.0               // default value depends on OS platform
+ffmpeg.pixelFormat=yuv444p        // default yuv420p (for Apple QuickTime player compatibility)
 ----
 
 or with maven
@@ -169,6 +170,7 @@ or with maven
           -Dvideo.frame.rate=1         // default 24
           -Dvideo.screen.size=1024x768 // custom screen size
           -Dffmpeg.display=:1.0+10,20  // custom display configuration for ffmpeg
+          -Dffmpeg.pixelFormat=yuv444p // default yuv420p
 ----
 
 === FFMPEG recorder configuration
@@ -212,7 +214,7 @@ To be sure that everything works properly, open CMD and perform first command:
 
 *ffmpeg*
 
-The output shoul lopk like this:
+The output should look like this:
 ----
 C:\Users\sepi>ffmpeg
 ffmpeg version N-81234-ge1be80a Copyright (c) 2000-2016 the FFmpeg developers
