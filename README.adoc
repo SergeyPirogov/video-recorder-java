@@ -291,7 +291,7 @@ import static com.automation.remarks.testng.test.TestNGRemoteListenerTest.startG
 import static org.testng.Assert.fail;
 
 
-@Listeners(RemoteVideoListener.class)
+@Listeners(UniversalVideoListener.class)
 public class IntegrationTest {
 
     RemoteWebDriver driver;
@@ -301,8 +301,8 @@ public class IntegrationTest {
         URL hubUrl = new URL("http://localhost:4444/wd/hub");
         driver = new RemoteWebDriver(hubUrl, DesiredCapabilities.firefox());
         String nodeIp = GridInfoExtractor.getNodeIp(hubUrl, driver.getSessionId().toString());
-        VideoRecorder.conf()
-                .withRemoteUrl(nodeIp);
+        System.setProperty("video.remote", "true");
+        System.setProperty("remote.video.hub", nodeIp);
     }
 
     @Test

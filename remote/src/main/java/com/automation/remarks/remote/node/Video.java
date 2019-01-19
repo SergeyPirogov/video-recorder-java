@@ -26,7 +26,7 @@ public class Video extends HttpServlet {
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     process(req, resp);
   }
 
@@ -52,7 +52,7 @@ public class Video extends HttpServlet {
           String fileName = getFileName(req);
           File video = videoRecorder.stopAndSave(fileName);
           String filePath = doVideoProcessing(isSuccess(req), video);
-          updateResponse(resp, HttpStatus.SC_OK, "recording stopped " + filePath);
+          updateResponse(resp, HttpStatus.SC_OK, filePath);
           break;
       }
     } catch (Exception ex) {

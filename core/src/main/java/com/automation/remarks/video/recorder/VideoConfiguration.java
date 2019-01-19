@@ -38,6 +38,13 @@ public interface VideoConfiguration extends Config {
   @Key("remote.video.hub")
   String remoteUrl();
 
+  @DefaultValue("false")
+  @Key("video.remote")
+  Boolean isRemote();
+
+  @Key("video.name")
+  String fileName();
+
   @Key("recorder.type")
   @DefaultValue("MONTE")
   RecorderType recorderType();
