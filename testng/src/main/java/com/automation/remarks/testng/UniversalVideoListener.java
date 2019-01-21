@@ -18,11 +18,6 @@ public class UniversalVideoListener extends TestNgListener {
   private IVideoRecordClient videoRecordClient;
 
   @Override
-  public void onStart(ITestContext context) {
-
-  }
-
-  @Override
   public void onTestStart(ITestResult result) {
     if (videoDisabled(result) || !shouldIntercept(result)) {
       return;
@@ -52,21 +47,6 @@ public class UniversalVideoListener extends TestNgListener {
     }
     String fileName = getFileName(result);
     videoRecordClient.stopAndSave(fileName, false);
-  }
-
-  @Override
-  public void onTestSkipped(ITestResult result) {
-    onTestFailure(result);
-  }
-
-  @Override
-  public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-    onTestFailure(result);
-  }
-
-  @Override
-  public void onFinish(ITestContext context) {
-
   }
 
   private boolean videoDisabled(ITestResult result) {

@@ -27,5 +27,7 @@ class VideoConfigurationTest extends SpockBaseTest {
         conf.saveMode() == VideoSaveMode.FAILED_ONLY
         conf.videoEnabled()
         conf.screenSize() == SystemUtils.systemScreenDimension
+        !conf.isRemote()
+        conf.fileName() == null
     }
 }
