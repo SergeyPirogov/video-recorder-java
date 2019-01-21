@@ -39,7 +39,7 @@ public class RecordingUtils {
   }
 
   public static String getVideoFileName(Video annotation, String methodName) {
-    if (annotation == null && VideoRecorder.conf().fileName() != null) {
+    if ((annotation == null || annotation.name().isEmpty()) && VideoRecorder.conf().fileName() != null) {
       return VideoRecorder.conf().fileName();
     } else if (annotation == null) {
       return methodName;
