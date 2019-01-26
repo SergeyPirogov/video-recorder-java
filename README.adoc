@@ -340,7 +340,7 @@ log4j.logger.com.automation.remarks.video.recorder=DEBUG, FA
 log4j.additivity.com.automation.remarks.video.recorder=false
 ----
 
-## License
+== License
 
 See https://github.com/SergeyPirogov/video-recorder-java/blob/master/LICENSE.txt/[LICENSE].
 

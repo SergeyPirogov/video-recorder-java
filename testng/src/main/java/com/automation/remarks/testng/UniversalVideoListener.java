@@ -1,7 +1,6 @@
 package com.automation.remarks.testng;
 
 import com.automation.remarks.video.recorder.VideoRecorder;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class UniversalVideoListener extends TestNgListener {
 
   @Override
   public void onTestStart(ITestResult result) {
-    if (videoDisabled(result) || !shouldIntercept(result)) {
+    if (videoDisabled(result) || shouldNotIntercept(result)) {
       return;
     }
     if (VideoRecorder.conf().isRemote()) {
@@ -33,7 +32,7 @@ public class UniversalVideoListener extends TestNgListener {
 
   @Override
   public void onTestSuccess(ITestResult result) {
-    if (videoDisabled(result) || !shouldIntercept(result)) {
+    if (videoDisabled(result) || shouldNotIntercept(result)) {
       return;
     }
     String fileName = getFileName(result);
@@ -42,7 +41,7 @@ public class UniversalVideoListener extends TestNgListener {
 
   @Override
   public void onTestFailure(ITestResult result) {
-    if (videoDisabled(result) || !shouldIntercept(result)) {
+    if (videoDisabled(result) || shouldNotIntercept(result)) {
       return;
     }
     String fileName = getFileName(result);
@@ -53,8 +52,8 @@ public class UniversalVideoListener extends TestNgListener {
     return !videoEnabled(getVideoAnnotation(result));
   }
 
-  public boolean shouldIntercept(ITestResult result) {
+  public boolean shouldNotIntercept(ITestResult result) {
     List<String> listeners = result.getTestContext().getCurrentXmlTest().getSuite().getListeners();
-    return listeners.contains(this.getClass().getName()) || shouldIntercept(result.getTestClass().getRealClass(), this.getClass());
+    return !listeners.contains(this.getClass().getName()) && !shouldIntercept(result.getTestClass().getRealClass(), this.getClass());
   }
 }

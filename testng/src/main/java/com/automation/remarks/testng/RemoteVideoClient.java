@@ -13,32 +13,32 @@ import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest
  */
 public class RemoteVideoClient {
 
-    private String servletUrl;
+  private String servletUrl;
 
-    public RemoteVideoClient(String nodeUrl) {
-        String servletPath = "/extra/Video";
-        this.servletUrl = nodeUrl + servletPath;
-    }
+  public RemoteVideoClient(String nodeUrl) {
+    String servletPath = "/extra/Video";
+    this.servletUrl = nodeUrl + servletPath;
+  }
 
-    public void videoStart() {
-        String folder_url = encodeFilePath(new File(VideoRecorder.conf().folder()));
-        String url = servletUrl + "/start?&folder=" + folder_url;
-        sendRecordingRequest(url);
-    }
+  public void videoStart() {
+    String folderUrl = encodeFilePath(new File(VideoRecorder.conf().folder()));
+    String url = servletUrl + "/start?&folder=" + folderUrl;
+    sendRecordingRequest(url);
+  }
 
-    public void videoStop(String testName, boolean isSuccess) {
-        String url = servletUrl + "/stop?result=" + isSuccess + "&name=" + testName;
-        sendRecordingRequest(url);
-    }
+  public void videoStop(String testName, boolean isSuccess) {
+    String url = servletUrl + "/stop?result=" + isSuccess + "&name=" + testName;
+    sendRecordingRequest(url);
+  }
 
-    private String encodeFilePath(File file) {
-        URL videoFolder = null;
-        try {
-            videoFolder = file.toURI().toURL();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return videoFolder.toString().replace("file:", "");
+  private String encodeFilePath(File file) {
+    URL videoFolder = null;
+    try {
+      videoFolder = file.toURI().toURL();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
     }
+    return videoFolder != null ? videoFolder.toString().replace("file:", "") : null;
+  }
 
 }
