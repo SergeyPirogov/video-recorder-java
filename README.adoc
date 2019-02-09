@@ -121,9 +121,9 @@ import com.automation.remarks.video.testng.VideoListener;
 import org.testng.annotations.Listeners;  
 import org.testng.annotations.Test;
 
-import static junit.framework.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
-@Listeners(VideoListener.class)
+@Listeners(UniversalVideoListener.class)
 public class TestNgVideoTest {
 
     @Test

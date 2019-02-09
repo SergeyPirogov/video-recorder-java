@@ -40,5 +40,4 @@ public class RemoteVideoClient {
     }
     return videoFolder != null ? videoFolder.toString().replace("file:", "") : null;
   }
-
 }
