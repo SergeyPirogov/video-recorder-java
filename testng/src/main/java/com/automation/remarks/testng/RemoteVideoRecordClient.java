@@ -8,27 +8,30 @@ import java.net.URL;
 
 import static com.automation.remarks.testng.utils.RestUtils.sendRecordingRequest;
 
-/**
- * Created by sepi on 16.12.16.
- */
-public class RemoteVideoClient {
+public class RemoteVideoRecordClient implements IVideoRecordClient {
 
   private String servletUrl;
 
-  public RemoteVideoClient(String nodeUrl) {
+  public RemoteVideoRecordClient(String nodeUrl) {
     String servletPath = "/extra/Video";
-    this.servletUrl = nodeUrl + servletPath;
+    servletUrl = nodeUrl + servletPath;
   }
 
-  public void videoStart() {
+  @Override
+  public void start() {
     String folderUrl = encodeFilePath(new File(VideoRecorder.conf().folder()));
     String url = servletUrl + "/start?&folder=" + folderUrl;
     sendRecordingRequest(url);
   }
 
-  public void videoStop(String testName, boolean isSuccess) {
+  @Override
+  public String stopAndSave(String testName, boolean isSuccess) {
     String url = servletUrl + "/stop?result=" + isSuccess + "&name=" + testName;
-    sendRecordingRequest(url);
+    return getFilePathFromResponse(url);
+  }
+
+  private String getFilePathFromResponse(String url) {
+    return sendRecordingRequest(url).replace("recording stopped ", "");
   }
 
   private String encodeFilePath(File file) {
@@ -40,4 +43,5 @@ public class RemoteVideoClient {
     }
     return videoFolder != null ? videoFolder.toString().replace("file:", "") : null;
   }
+
 }

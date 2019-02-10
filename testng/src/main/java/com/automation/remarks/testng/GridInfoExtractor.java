@@ -2,7 +2,8 @@ package com.automation.remarks.testng;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ public class GridInfoExtractor {
         final String hubIp = hubUrl.getHost();
         final int hubPort = hubUrl.getPort();
         HttpHost host = new HttpHost(hubIp, hubPort);
-        DefaultHttpClient client = new DefaultHttpClient();
+        HttpClient client = HttpClientBuilder.create().build();
         URL testSessionApi = new URL("http://" + hubIp + ":" + hubPort + "/grid/api/testsession?session=" + sessionId);
         BasicHttpEntityEnclosingRequest r = new
                 BasicHttpEntityEnclosingRequest("POST", testSessionApi.toExternalForm());

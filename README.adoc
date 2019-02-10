@@ -121,9 +121,9 @@ import com.automation.remarks.video.testng.VideoListener;
 import org.testng.annotations.Listeners;  
 import org.testng.annotations.Test;
 
-import static junit.framework.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
-@Listeners(VideoListener.class)
+@Listeners(UniversalVideoListener.class)
 public class TestNgVideoTest {
 
     @Test
@@ -291,7 +291,7 @@ import static com.automation.remarks.testng.test.TestNGRemoteListenerTest.startG
 import static org.testng.Assert.fail;
 
 
-@Listeners(RemoteVideoListener.class)
+@Listeners(UniversalVideoListener.class)
 public class IntegrationTest {
 
     RemoteWebDriver driver;
@@ -301,8 +301,8 @@ public class IntegrationTest {
         URL hubUrl = new URL("http://localhost:4444/wd/hub");
         driver = new RemoteWebDriver(hubUrl, DesiredCapabilities.firefox());
         String nodeIp = GridInfoExtractor.getNodeIp(hubUrl, driver.getSessionId().toString());
-        VideoRecorder.conf()
-                .withRemoteUrl(nodeIp);
+        System.setProperty("video.remote", "true");
+        System.setProperty("remote.video.hub", nodeIp);
     }
 
     @Test
@@ -340,7 +340,7 @@ log4j.logger.com.automation.remarks.video.recorder=DEBUG, FA
 log4j.additivity.com.automation.remarks.video.recorder=false
 ----
 
-## License
+== License
 
 See https://github.com/SergeyPirogov/video-recorder-java/blob/master/LICENSE.txt/[LICENSE].
 
