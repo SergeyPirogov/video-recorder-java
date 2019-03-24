@@ -31,6 +31,12 @@ public class TestNGRemoteListenerTest extends BaseTest {
     System.setProperty("remote.video.hub", "http://localhost:" + port);
   }
 
+  @BeforeMethod
+  @AfterMethod
+  public void resetConfig() {
+    System.clearProperty("video.folder");
+  }
+
   @Test
   @Video
   public void shouldBeOneRecordingOnTestFail() {
@@ -111,7 +117,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
     listener.onTestStart(result);
     listener.onTestFailure(result);
     File file = MonteRecorder.getLastRecording();
-    assertThat(file.getParentFile().getName(), equalTo("video"));
+    assertThat(file.getParentFile().getName(), equalTo("custom_folder"));
   }
 
   private static void startGrid(int hubPort, int nodePort) throws Exception {
