@@ -9,7 +9,7 @@ import static java.lang.Thread.sleep
 /**
  * Created by sergey on 5/14/16.
  */
-class BaseTest extends Specification {
+abstract class BaseTest extends Specification {
 
     final String NODE_SERVLET_URL = "http://localhost:5555/extra/Video"
 
