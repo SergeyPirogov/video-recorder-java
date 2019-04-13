@@ -347,3 +347,5 @@ See https://github.com/SergeyPirogov/video-recorder-java/blob/master/LICENSE.txt
 include::CHANGELOG.adoc[]
 
 By http://automation-remarks.com/[automation-remarks.com]
+
+Released at https://oss.sonatype.org
