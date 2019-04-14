@@ -349,3 +349,5 @@ include::CHANGELOG.adoc[]
 By http://automation-remarks.com/[automation-remarks.com]
 
 Released at https://oss.sonatype.org
+
+https://blog.sonatype.com/2010/01/how-to-generate-pgp-signatures-with-maven/
