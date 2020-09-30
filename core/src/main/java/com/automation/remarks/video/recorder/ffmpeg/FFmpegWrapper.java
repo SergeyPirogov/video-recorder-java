@@ -1,7 +1,7 @@
 package com.automation.remarks.video.recorder.ffmpeg;
 
 import com.automation.remarks.video.DateUtils;
-import org.apache.commons.lang3.SystemUtils;
+import com.automation.remarks.video.exception.RecordingException;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ForkJoinPool;
 
 import static com.automation.remarks.video.SystemUtils.*;
 import static com.automation.remarks.video.recorder.VideoRecorder.conf;
@@ -25,8 +25,8 @@ public class FFmpegWrapper {
     public static final String RECORDING_TOOL = "ffmpeg";
     private static final String TEM_FILE_NAME = "temporary";
     private static final String EXTENSION = ".mp4";
-    private CompletableFuture<String> future;
     private File temporaryFile;
+    private Process process;
 
     public void startFFmpeg(String... args) {
         File videoFolder = new File(conf().folder());
@@ -50,27 +50,29 @@ public class FFmpegWrapper {
         List<String> command = new ArrayList<>();
         command.addAll(Arrays.asList(commandsSequence));
         command.addAll(Arrays.asList(args));
-        this.future = CompletableFuture.supplyAsync(() -> runCommand(command));
+        process = runCommand(command).getProcess();
     }
 
     public File stopFFmpegAndSave(String filename) {
-        String killLog = killFFmpeg();
-        log.info("Process kill output: " + killLog);
+        stopFFmpeg();
 
         File destFile = getResultFile(filename);
-        this.future.whenCompleteAsync((out, errors) -> {
-            temporaryFile.renameTo(destFile);
-            log.debug("Recording output log: " + out + (errors != null ? "; ex: " + errors : ""));
+        ForkJoinPool.commonPool().execute(() -> {
+            try {
+                String out = waitForProcessToFinish(process);
+                temporaryFile.renameTo(destFile);
+                log.debug("Recording output log: " + out);
+            } catch (RecordingException e) {
+                log.debug("Recording finished with errors:" + e.getMessage());
+            }
             log.info("Recording finished to: " + destFile.getAbsolutePath());
         });
+
         return destFile;
     }
 
-    private String killFFmpeg() {
-        final String SEND_CTRL_C_TOOL_NAME = "SendSignalCtrlC.exe";
-        return SystemUtils.IS_OS_WINDOWS ?
-                runCommand(SEND_CTRL_C_TOOL_NAME, getPidOf(RECORDING_TOOL)) :
-                runCommand("pkill", "-INT", RECORDING_TOOL);
+    private void stopFFmpeg() {
+        sendCommandToProcess(process, "q\n");
     }
 
     public File getTemporaryFile() {
