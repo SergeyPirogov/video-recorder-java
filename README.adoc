@@ -278,7 +278,6 @@ import com.automation.remarks.testng.GridInfoExtractor;
 import com.automation.remarks.testng.RemoteVideoListener;
 import com.automation.remarks.video.annotations.Video;
 import com.automation.remarks.video.recorder.VideoRecorder;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeClass;

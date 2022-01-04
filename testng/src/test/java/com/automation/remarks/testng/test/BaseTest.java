@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,7 +55,7 @@ public class BaseTest {
     ConstructorOrMethod cm = mock(ConstructorOrMethod.class);
     String methodName = method.getName();
     when(result.getTestClass()).thenReturn(clazz);
-    when(result.getTestClass().getRealClass()).thenReturn(tClass);
+    doReturn(tClass).when(clazz).getRealClass();
     when(clazz.getName()).thenReturn(this.getClass().getName());
     when(result.getMethod()).thenReturn(testNGMethod);
     when(cm.getMethod()).thenReturn(method);

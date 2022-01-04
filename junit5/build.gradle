@@ -1,6 +1,6 @@
 dependencies {
     compile project(':core')
-    compile group: 'org.junit.jupiter', name:'junit-jupiter-api', version:'5.4.1'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.25.1', transitive: false
-    testRuntime 'net.bytebuddy:byte-buddy:1.9.11'
+    compile group: 'org.junit.jupiter', name:'junit-jupiter-api', version:'5.8.2'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '4.2.0', transitive: false
+    testRuntime 'net.bytebuddy:byte-buddy:1.12.6'
 }
