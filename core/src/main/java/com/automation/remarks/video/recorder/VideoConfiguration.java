@@ -8,6 +8,7 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.LoadPolicy;
 import org.aeonbits.owner.Config.LoadType;
 import org.aeonbits.owner.Config.Sources;
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.io.File;
@@ -59,7 +60,12 @@ public interface VideoConfiguration extends Config {
 
   @Key("video.screen.size")
   default Dimension screenSize() {
-    return SystemUtils.getSystemScreenDimension();
+    final String screenSize = System.getProperty("video.screen.size", "");
+    if (StringUtils.isBlank(screenSize)) {
+      return SystemUtils.getSystemScreenDimension();
+    }
+    String[] arr = screenSize.split("x");
+    return new Dimension(Integer.valueOf(arr[0]), Integer.valueOf(arr[1]));
   }
 
   @Key("ffmpeg.format")
